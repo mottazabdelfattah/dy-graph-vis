@@ -1,0 +1,47 @@
+.control-panel {
+    font-family: 'Roboto', sans-serif;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-weight: 500;
+    /* Medium weight for labels */
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-group input[type="range"] {
+    width: 100%;
+}
+
+.form-group span {
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.settings-group {
+    margin-top: 32px;
+}
+
+.settings-group h3 {
+    font-weight: 700;
+    /* Bold weight for headings */
+    margin-bottom: 16px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 8px;
+}

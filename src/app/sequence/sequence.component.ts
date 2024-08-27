@@ -7,12 +7,16 @@ import {
 } from '@angular/core';
 import { SubSequenceComponent } from './sub-sequence/sub-sequence.component';
 import {
+  LINE_RENDERING_MODE,
   PARTITIONING_METHOD,
   SEQUENCE_ORDERING_METHOD,
   SubSequence,
+  VIS_TECHNIQUE,
 } from './sub-sequence/sub-sequence.model';
 import { SequenceService } from './sequence.service';
 import { Vertex } from './sub-sequence/graph/graph.model';
+import { DataService } from '../data.services';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-sequence',
@@ -22,45 +26,125 @@ import { Vertex } from './sub-sequence/graph/graph.model';
   styleUrl: './sequence.component.css',
 })
 export class SequenceComponent implements OnChanges, OnInit {
-  @Input({ required: true }) jsonVertices!: any;
-  @Input({ required: true }) jsonEdges!: any;
-  @Input({ required: true }) jsonProps!: any;
-  @Input() partitioningThreshold = -1;
-  @Input() partitioningMethod = PARTITIONING_METHOD.UNIFORM;
-  @Input() sequenceOrderMethod = SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED;
-  @Input() uniformIntervals = 1;
+  @Input() settings: any;
+
+  jsonVertices: any;
+  jsonEdges: any;
+  jsonProps: any;
+  partitioningThreshold = -1;
+  partitioningMethod = PARTITIONING_METHOD.UNIFORM;
+  sequenceOrderMethod = SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED;
+  uniformIntervals = 1;
+
+
+  visTechnique = VIS_TECHNIQUE.MSV;
+  stripeWidth = 1;
+  vertexHeight = 1;
+  lineWidth= 1;
+  renderingMode = LINE_RENDERING_MODE.SPLATTING;
+  blendingFactor = 0.5;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
   vertexList: Vertex[] = [];
 
-  constructor(private sequenceService: SequenceService) {}
-  ngOnInit(): void {  }
+  constructor(
+    private sequenceService: SequenceService,
+    private dataService: DataService
+  ) {}
+  ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['partitioningThreshold'] || changes['partitioningMethod']) {
-      this.repartition();
-    
-    }else if(changes['sequenceOrderMethod']){
-      this.sort();
-      this.repartition();
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
+    if (changes['settings'] && changes['settings'].currentValue) {
+      const currentSettings = changes['settings'].currentValue;
+      const previousSettings = changes['settings'].previousValue;
 
-    }else if(changes['jsonVertices'] || changes['jsonEdges'] || changes['jsonProps']){
-      this.updateInitialSub();
-      this.sort();
-      this.repartition();
+      // which changes trigger loadDataset & updateInitialSub
+      if (previousSettings?.dataset !== currentSettings.dataset) {
+        try {
+          // Await the dataset load to complete before proceeding
+          await this.loadDataset(currentSettings.dataset);
+          console.log('Dataset loaded successfully');
+          this.updateInitialSub();
+        } catch (error) {
+          console.error('Error loading dataset:', error);
+          return; // Optionally halt further execution if dataset loading fails
+        }
+        
+      }
+
+      // which changes trigger sort
+      if (
+        previousSettings?.dataset !== currentSettings.dataset ||
+        previousSettings?.sequenceOrder !==
+          currentSettings.sequenceOrder
+      ) {
+        this.sort(currentSettings.sequenceOrder);
+      }
+
+      // which changes trigger repartition
+      if (
+        previousSettings?.dataset !== currentSettings.dataset ||
+        previousSettings?.partitioning !== currentSettings.partitioning ||
+        (previousSettings?.intervals !== currentSettings.intervals &&
+          this.partitioningMethod === PARTITIONING_METHOD.UNIFORM) ||
+        previousSettings?.sequenceOrder !==
+          currentSettings.sequenceOrder
+      ) {
+        this.repartition(currentSettings.partitioning, currentSettings.intervals);
+      }
+
+
+      // update other settings
+      this.visTechnique = currentSettings.visualization;
+      this.stripeWidth = currentSettings.stripeWidth;
+      this.vertexHeight = currentSettings.vertexHeight;
+      this.lineWidth= currentSettings.lineWidth;
+      this.renderingMode = currentSettings.lineRendering;
+      this.blendingFactor = currentSettings.blendingFactor;
+
+      
     }
   }
 
-
-  private sort(){
-    if(this.initialSub.graphs.length>0){
-      this.sequenceService.sortSubSequence(this.initialSub, this.sequenceOrderMethod);
+  private async loadDataset(datasetName: string): Promise<void> {
+    try {
+      const data = await firstValueFrom(this.dataService.getData(datasetName));
+      this.jsonEdges = data.edges;
+      this.jsonVertices = data.vertices;
+      this.jsonProps = data.props;
+    } catch (error) {
+      console.error('Error loading dataset:', error);
+      throw error; // Re-throw the error to handle it in the calling method
     }
   }
 
-  private repartition(){
-    if(this.initialSub.graphs.length>0){
+  private updateInitialSub() {
+    if (this.jsonEdges && this.jsonVertices && this.jsonProps) {
+      this.initialSub = this.sequenceService.getInitialSubSequence(
+        this.jsonEdges,
+        this.jsonProps
+      );
+      this.vertexList = this.sequenceService.getVertexList(this.jsonVertices);
+      console.log(this.initialSub);
+      console.log(this.subList);
+    }
+  }
+
+  private sort(sortingMethod: SEQUENCE_ORDERING_METHOD) {
+    this.sequenceOrderMethod = sortingMethod;
+    if (this.initialSub.graphs.length > 0) {
+      this.sequenceService.sortSubSequence(
+        this.initialSub,
+        this.sequenceOrderMethod
+      );
+    }
+  }
+
+  private repartition(partitioningMethod: PARTITIONING_METHOD, intervals:number) {
+    this.partitioningMethod = partitioningMethod;
+    this.uniformIntervals = intervals;
+    if (this.initialSub.graphs.length > 0) {
       this.subList = this.sequenceService.getSubSequences(
         this.initialSub,
         this.partitioningMethod,
@@ -68,15 +152,11 @@ export class SequenceComponent implements OnChanges, OnInit {
         this.uniformIntervals
       );
     }
-    
   }
 
-  private updateInitialSub(){
-    if (this.jsonEdges && this.jsonVertices && this.jsonProps) {
-      this.initialSub = this.sequenceService.getInitialSubSequence(this.jsonEdges, this.jsonProps);
-      this.vertexList = this.sequenceService.getVertexList(this.jsonVertices);
-      console.log(this.initialSub);
-      console.log(this.subList);
-    }
+  private updateVISSetting(){
+
   }
+
+  
 }

@@ -1,1 +1,8 @@
-<app-sequence [jsonVertices]="gVertices" [jsonEdges]="gEdges" [jsonProps]="gProps"></app-sequence>
+<div class="app-container">
+    <div class="control-panel-container">
+      <app-control-panel (settingsChanged)="onSettingsChanged($event)"></app-control-panel>
+    </div>
+    <div class="sequence-container">
+        <app-sequence [settings]="sequenceSettings"></app-sequence>
+    </div>
+  </div>

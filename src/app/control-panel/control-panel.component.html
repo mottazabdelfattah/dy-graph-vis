@@ -1,0 +1,94 @@
+<div class="control-panel">
+    <form [formGroup]="controlForm">
+  
+      <!-- Dataset Selection -->
+      <div class="form-group">
+        <label for="dataset">Dataset:</label>
+        <select id="dataset" formControlName="dataset">
+          <option *ngFor="let dataset of datasets" [value]="dataset">{{ dataset }}</option>
+        </select>
+      </div>
+  
+      <!-- Visualization Technique -->
+      <div class="form-group">
+        <label for="visualization">Visualization Technique:</label>
+        <select id="visualization" formControlName="visualization">
+          <option *ngFor="let technique of visualizationTechniques" [value]="technique">{{ technique }}</option>
+        </select>
+      </div>
+  
+      <!-- Sequence Ordering -->
+      <div class="form-group">
+        <label for="sequenceOrder">Sequence Ordering:</label>
+        <select id="sequenceOrder" formControlName="sequenceOrder">
+            <option *ngFor="let method of sequenceOrderingMethods" [value]="method">{{ method }}</option>
+          </select>
+        <!-- <input type="text" id="sequenceOrder" formControlName="sequenceOrderMethod" placeholder="Sequence Order Method"> -->
+      </div>
+  
+      <!-- Partitioning -->
+      <div class="form-group">
+        <label for="partitioning">Partitioning:</label>
+        <select id="partitioning" formControlName="partitioning">
+          <option *ngFor="let partition of partitioningMethods" [value]="partition">{{ partition }}</option>
+        </select>
+      </div>
+  
+      <!-- Number of Intervals -->
+      <div class="form-group" *ngIf="controlForm.get('partitioning')?.value === PARTITIONING_METHOD.UNIFORM">
+        <label for="intervals">No. of Intervals:</label>
+        <input type="range" id="intervals" formControlName="intervals" min="1" max="100">
+        <span>{{ controlForm.get('intervals')?.value }}</span>
+      </div>
+  
+      <!-- Vertex Ordering -->
+      <div class="form-group">
+        <label for="vertexOrdering">Vertex Ordering:</label>
+        <select id="vertexOrdering" formControlName="vertexOrdering">
+          <option *ngFor="let ordering of vertexOrderingMethods" [value]="ordering">{{ ordering }}</option>
+        </select>
+      </div>
+  
+      <!-- Visualization Settings Group -->
+      <div class="settings-group">
+        <h3>Visualization Settings</h3>
+  
+        <!-- Line Rendering -->
+        <div class="form-group">
+          <label for="lineRendering">Line Rendering:</label>
+          <select id="lineRendering" formControlName="lineRendering">
+            <option *ngFor="let rendering of lineRenderingMethods" [value]="rendering">{{ rendering }}</option>
+          </select>
+        </div>
+  
+        <!-- Blending Factor -->
+        <div class="form-group" *ngIf="controlForm.get('lineRendering')?.value === LINE_RENDERING_MODE.BLENDING">
+          <label for="blendingFactor">Blending Factor (Alpha):</label>
+          <input type="range" id="blendingFactor" formControlName="blendingFactor" min="0" max="1" step="0.01">
+          <span>{{ controlForm.get('blendingFactor')?.value }}</span>
+        </div>
+  
+        <!-- Line Width -->
+        <div class="form-group">
+          <label for="lineWidth">Line Width:</label>
+          <input type="range" id="lineWidth" formControlName="lineWidth" min="1" max="10">
+          <span>{{ controlForm.get('lineWidth')?.value }}</span>
+        </div>
+  
+        <!-- Stripe Width -->
+        <div class="form-group">
+          <label for="stripeWidth">Stripe Width:</label>
+          <input type="range" id="stripeWidth" formControlName="stripeWidth" min="1" max="20">
+          <span>{{ controlForm.get('stripeWidth')?.value }}</span>
+        </div>
+  
+        <!-- Vertex Height -->
+        <div class="form-group">
+          <label for="vertexHeight">Vertex Height:</label>
+          <input type="range" id="vertexHeight" formControlName="vertexHeight" min="1" max="10">
+          <span>{{ controlForm.get('vertexHeight')?.value }}</span>
+        </div>
+      </div>
+    </form>
+  </div>
+  

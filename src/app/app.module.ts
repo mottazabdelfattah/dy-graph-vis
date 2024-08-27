@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DataService } from './data.services'; // Import your service
 import { SequenceComponent } from './sequence/sequence.component';
 import { RouterOutlet } from '@angular/router';
+import { ControlPanelComponent } from "./control-panel/control-panel.component";
 
 @NgModule({
   declarations: [
@@ -14,8 +15,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     BrowserModule,
     HttpClientModule, // Add HttpClientModule here
-    RouterOutlet, SequenceComponent
-  ],
+    RouterOutlet, SequenceComponent,
+    ControlPanelComponent
+],
   providers: [DataService], // Ensure your service is provided
   bootstrap: [AppComponent]
 })

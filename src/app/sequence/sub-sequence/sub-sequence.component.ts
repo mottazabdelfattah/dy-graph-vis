@@ -42,6 +42,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
   private subSeqService = inject(SubSequenceService);
+  private resizeObserver!: ResizeObserver;
 
   G_RATIO = 1.0 / 1.618;
   sWidth = 100;
@@ -53,11 +54,21 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
+      changes['subSeq'] ||
       changes['visTechnique'] ||
       changes['stripeWidth'] ||
       changes['vertexHeight']
     ) {
       this.updateCanvasSize();
+      this.RedrawCanvas();
+    }
+
+    else if (
+      changes['lineWidth'] ||
+      changes['renderingMode'] ||
+      changes['blendingFactor']
+    ) {
+      this.RedrawCanvas();
     }
   }
 
@@ -65,7 +76,18 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.canvasDrawerService = new CanvasDrawerService(this.canvas, this.http);
-    this.RedrawCanvas();
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.target === this.canvas.nativeElement) {
+          this.handleCanvasResize();
+        }
+      }
+    });
+
+    // Observe the canvas element
+    if (this.canvas) {
+      this.resizeObserver.observe(this.canvas.nativeElement);
+    }
   }
 
   private RedrawCanvas() {
@@ -80,24 +102,37 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     );
 
     // draw lines
-    this.canvasDrawerService.drawLinesBackEnd(
-      lines,
-      this.lineWidth,
-      this.renderingMode,
-      this.blendingFactor
-    );
+    if (this.canvasDrawerService) {
+      this.canvasDrawerService.drawLinesBackEnd(
+        lines,
+        this.lineWidth,
+        this.renderingMode,
+        this.blendingFactor
+      );
 
-    // labels
-    const minDist = Math.max(5, this.stripeWidth);
-    this.subSeq.graphs.forEach((g: Graph, idx) => {
-      //if (idx % minDist === 0) {
+      // labels
+      this.labels = [];
+      this.subSeq.graphs.forEach((g: Graph, idx) => {
+        //if (idx % minDist === 0) {
         this.labels.push({
           text: g.id + '',
           positionX: idx * this.stripeWidth,
           positionY: this.sHeight,
         });
-      //}
-    });
+        //}
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Clean up the observer
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  private handleCanvasResize() {
+    this.RedrawCanvas(); // Call your method to update the canvas
   }
 
   private updateCanvasSize() {

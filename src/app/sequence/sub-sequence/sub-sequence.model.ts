@@ -2,28 +2,27 @@ import { Graph } from './graph/graph.model';
 
 
 export enum SEQUENCE_ORDERING_METHOD {
-  TIME,
-  TOPOLOGY_BASED,
-  TOPOLOGY_WEIGHTED_BASED,
+  TIME = 'TIME',
+  TOPOLOGY_BASED = 'TOPOLOGY_BASED',
+  TOPOLOGY_WEIGHTED_BASED = 'TOPOLOGY_WEIGHTED_BASED',
 }
 
 export enum PARTITIONING_METHOD {
-  NONE,
-  UNIFORM,
-  DISTANCE_BASED,
+  UNIFORM = 'UNIFORM',
+  DISTANCE_BASED = 'DISTANCE_BASED',
 }
 
 export enum LINE_RENDERING_MODE{
-    NONE,
-    BLENDING,
-    SPLATTING
+    NONE = 'NONE',
+    BLENDING = 'BLENDING',
+    SPLATTING = 'SPLATTING'
 }
 
 export enum VIS_TECHNIQUE {
-    MSV,
-    IES,
-    SEP,
-    TEP,
+    MSV = 'MSV',
+    IES = 'IES',
+    SEP = 'SEP',
+    TEP = 'TEP'
   }
 
 export interface DataItem {
