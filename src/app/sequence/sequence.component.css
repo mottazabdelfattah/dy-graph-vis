@@ -1,0 +1,12 @@
+.sequence-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 10px; /* Optional: space between items */
+    overflow-x: auto; /* Enables horizontal scrolling if content overflows */
+    position: relative; /* Ensures positioning context for child elements */
+  }
+  
+  .sub-sequence-item {
+    position: relative; /* Required for absolute positioning of children */
+    margin: 5px;
+  }

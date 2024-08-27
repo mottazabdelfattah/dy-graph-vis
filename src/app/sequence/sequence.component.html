@@ -1,0 +1,15 @@
+<div>
+  @for(sub of subList; track $index){
+  <app-sub-sequence
+    [subSeq]="sub"
+    [vertexList]="vertexList"
+    [stripeWidth]="3"
+    [vertexHeight]="2"
+    [visTechnique]="3"
+    [lineWidth]="1"
+    [renderingMode]="2"
+    [blendingFactor]="0.1"
+    class="sub-sequence-item"
+  ></app-sub-sequence>
+  }
+</div>

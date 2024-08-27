@@ -1,0 +1,19 @@
+.canvas-container {
+    position: relative;
+  }
+  
+  .labels-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Allows clicks to pass through labels */
+  }
+  
+  .label {
+    position: absolute;
+    font-size: 12px; /* Adjust font size as needed */
+    
+    /* padding: 2px 4px; */
+    border-radius: 3px;
+  }
+  
