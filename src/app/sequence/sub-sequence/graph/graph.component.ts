@@ -3,7 +3,7 @@ import { Edge, Graph, Vertex } from './graph.model';
 import { Line } from './line.model';
 import { CanvasDrawerService } from '../../../common/canvas-drawer.service';
 import { HttpClient } from '@angular/common/http';
-import { LINE_RENDERING_MODE } from '../sub-sequence.model';
+import { COLOR_SCHEME, LINE_COLOR_ENCODING, LINE_RENDERING_MODE } from '../sub-sequence.model';
 
 
 @Component({
@@ -36,7 +36,9 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy  {
       this.graph.lines,
       this.lineWidth,
       this.renderingMode,
-      this.blendingFactor
+      LINE_COLOR_ENCODING.DENSITY,
+      this.blendingFactor,
+      COLOR_SCHEME.GRAY_SCALE
     );
 
   }

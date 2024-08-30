@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { SubSequenceComponent } from './sub-sequence/sub-sequence.component';
 import {
+  COLOR_SCHEME,
+  LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   PARTITIONING_METHOD,
   SEQUENCE_ORDERING_METHOD,
@@ -43,6 +45,8 @@ export class SequenceComponent implements OnChanges, OnInit {
   lineWidth= 1;
   renderingMode = LINE_RENDERING_MODE.SPLATTING;
   blendingFactor = 0.5;
+  colorScheme = COLOR_SCHEME.GRAY_SCALE;
+  colorEncoding = LINE_COLOR_ENCODING.DENSITY;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
@@ -102,7 +106,8 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.lineWidth= currentSettings.lineWidth;
       this.renderingMode = currentSettings.lineRendering;
       this.blendingFactor = currentSettings.blendingFactor;
-
+      this.colorScheme = currentSettings.colorScheme;
+      this.colorEncoding=currentSettings.colorEncoding;
       
     }
   }
@@ -154,9 +159,6 @@ export class SequenceComponent implements OnChanges, OnInit {
     }
   }
 
-  private updateVISSetting(){
-
-  }
 
   
 }

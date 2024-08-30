@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
-import { SubSequence, VIS_TECHNIQUE } from './sub-sequence.model';
+import {
+  LINE_COLOR_ENCODING,
+  SubSequence,
+  VIS_TECHNIQUE,
+} from './sub-sequence.model';
 import { Edge, Graph, Vertex } from './graph/graph.model';
 import { Line } from './graph/line.model';
+import { UtilService } from '../../common/util.service';
 
 @Injectable({ providedIn: 'root' })
 export class SubSequenceService {
+  constructor(private utilService: UtilService) {}
+
   updateGraphLines(
     visTechnique: VIS_TECHNIQUE,
     subSeq: SubSequence,
@@ -12,103 +19,69 @@ export class SubSequenceService {
     bpWidth: number,
     vertexHeight: number,
     stripeWidth: number,
-    lineWidth: number
+    lineWidth: number,
+    colorEncodingOp: LINE_COLOR_ENCODING
   ): Line[] {
     // how may buckets wthin each stripe
     const MSVBucketsPerStripe = Math.floor(stripeWidth / lineWidth);
     const lines: Line[] = [];
+    const seqLength = subSeq.graphs.length;
+    const maxSlope =
+      visTechnique === VIS_TECHNIQUE.MSV
+        ? subSeq.height
+        : subSeq.height / bpWidth;
+    const maxEdgeWeight = subSeq.maxEdgeWeight;
 
     subSeq.graphs.forEach((g: Graph, idx) => {
       g.gWidth = stripeWidth;
       g.gHeight = vertexHeight * vertexList.length;
-      const seqLength = subSeq.graphs.length;
 
-      // adjusting the line coordinates based on the technique
-      switch (visTechnique) {
-        case VIS_TECHNIQUE.MSV:
-          // Initialize stripesSubspace to zeros
-          let MSVStripeBuckets: number[] = new Array(MSVBucketsPerStripe).fill(
-            0
-          );
-          g.edges.forEach((e: Edge) => {
-            const line = this.getLine(
-              e,
-              vertexList,
-              idx * stripeWidth,
-              bpWidth,
-              vertexHeight
-            );
+      
+
+      // Initialize stripesSubspace to zeros
+      let MSVStripeBuckets: number[] = new Array(MSVBucketsPerStripe).fill(0);
+      g.edges.forEach((e: Edge) => {
+        const line = this.getLine(
+          e,
+          vertexList,
+          idx * stripeWidth,
+          bpWidth,
+          vertexHeight
+        );
+
+        switch (visTechnique) {
+          case VIS_TECHNIQUE.MSV:
             this.getLinesMSV(line, MSVStripeBuckets);
-            lines.push(line);
-          });
-
-          break;
-        case VIS_TECHNIQUE.IES:
-          // if (idx === seqLength - 1){
-          //   g.gWidth = bpWidth;
-          // }
-          // in case of IES each line will be broken into seq of segemented lines
-          g.edges.forEach((e: Edge) => {
-            const l = this.getLine(
-              e,
-              vertexList,
-              idx * stripeWidth,
-              bpWidth,
-              vertexHeight
-            );
-            lines.push(l);
-            // let k = idx;
-            // for (let currentX = l.x1; currentX < l.x2; currentX += stripeWidth,k++) {
-
-            //   const adjLine: Line = { x1: l.x1, y1: l.y1, x2: l.x2, y2: l.y2 };
-            //   const newX1 = currentX;
-            //   const newX2 = newX1 + stripeWidth;
-            //   this.getLinesTEP(adjLine, newX1, newX2, 0, bpWidth);
-            //   if(k > seqLength - 1){
-            //     const diff = k - seqLength - 1;
-            //     adjLine.x1+=diff*stripeWidth;
-            //     adjLine.x2+=diff*stripeWidth;
-            //     subSeq.graphs[seqLength - 1].lines.push(adjLine);
-            //   }else{
-            //     subSeq.graphs[k].lines.push(adjLine);
-            //   }
-
-            // }
-          });
-
-          break;
-        case VIS_TECHNIQUE.TEP:
-          g.edges.forEach((e: Edge) => {
-            const line = this.getLine(
-              e,
-              vertexList,
-              idx * stripeWidth,
-              bpWidth,
-              vertexHeight
-            );
+            break;
+          case VIS_TECHNIQUE.IES:
+            break;
+          case VIS_TECHNIQUE.TEP:
             const newX1 = idx * stripeWidth;
             const newX2 = newX1 + stripeWidth;
             const subSeqSart = 0;
             const subSeqWidth = seqLength * stripeWidth;
             this.getLinesTEP(line, newX1, newX2, subSeqSart, subSeqWidth);
-            lines.push(line);
-          });
-          break;
-        case VIS_TECHNIQUE.SEP:
-          g.edges.forEach((e: Edge) => {
-            const line = this.getLine(
-              e,
-              vertexList,
-              idx * stripeWidth,
-              bpWidth,
-              vertexHeight
-            );
+            break;
+          case VIS_TECHNIQUE.SEP:
             this.getLinesSEP(line, stripeWidth);
-            lines.push(line);
-          });
+            break;
+        }
 
-          break;
-      }
+        // normalize line weight
+        line.val = Math.log10(line.val + 1.0) / Math.log10(maxEdgeWeight + 1.0);
+
+        // normalize slope        
+        line.normalizedSlope = this.utilService.mapRange(
+          line.normalizedSlope,
+          -maxSlope,
+          maxSlope,
+          0.0,
+          1.0
+        );
+
+        //push the line
+        lines.push(line);
+      });
     });
 
     return lines;
@@ -136,7 +109,9 @@ export class SubSequenceService {
     l.x1 = subSeqSart;
     l.x2 = subSeqWidth;
 
+    // update the slope
     const slope = (l.y2 - l.y1) / (l.x2 - l.x1);
+    l.normalizedSlope = slope;
 
     // Calculate the new y1 and y2 based on the slope
     const newY1 = l.y1 + slope * (newX1 - l.x1);
@@ -153,6 +128,9 @@ export class SubSequenceService {
     let stripeBucketIdx = this.getColIndexWithLowestValue(stripeBuckets);
     l.x1 = l.x2 = l.x1 + stripeBucketIdx;
     stripeBuckets[stripeBucketIdx]++;
+    // in case of MSV the slope is encoded as direction
+    const length = l.y2 - l.y1;
+    l.normalizedSlope = length;
   }
 
   private getLine(
@@ -161,19 +139,23 @@ export class SubSequenceService {
     xOffset: number,
     gWidth: number,
     scaleY: number
-  ) {
+  ): Line {
     let src = vertexList.find((x) => x.id === e.src);
     let tar = vertexList.find((x) => x.id === e.target);
 
     const x1 = 0 + xOffset;
-    const y1 = src ? src.hcOrder : 0;
+    const y1 = src ? src.hcOrder* scaleY : 0;
     const x2 = gWidth + xOffset;
-    const y2 = tar ? tar.hcOrder : 0;
+    const y2 = tar ? tar.hcOrder* scaleY : 0;
+    const slope = (y2 - y1) / (x2 - x1);
+
     return {
       x1: x1,
-      y1: y1 * scaleY,
+      y1: y1,
       x2: x2,
-      y2: y2 * scaleY,
+      y2: y2,
+      val: e.weight,
+      normalizedSlope: slope,
     };
   }
 

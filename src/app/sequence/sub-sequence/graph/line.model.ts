@@ -3,4 +3,6 @@ export interface Line {
   y1: number;
   x2: number;
   y2: number;
+  val: number;
+  normalizedSlope:number;
 }

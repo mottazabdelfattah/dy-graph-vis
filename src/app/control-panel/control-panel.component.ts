@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { LINE_RENDERING_MODE, PARTITIONING_METHOD, SEQUENCE_ORDERING_METHOD, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { COLOR_SCHEME, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEQUENCE_ORDERING_METHOD, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 
 @Component({
   selector: 'app-control-panel',
@@ -21,6 +21,8 @@ export class ControlPanelComponent implements OnInit{
   partitioningMethods = Object.values(PARTITIONING_METHOD);
   vertexOrderingMethods = ['Order 1', 'Order 2', 'Order 3'];
   lineRenderingMethods = Object.values(LINE_RENDERING_MODE);
+  colorSchemeList = Object.values(COLOR_SCHEME);
+  colorEncodingList = Object.values(LINE_COLOR_ENCODING);
 
   PARTITIONING_METHOD = PARTITIONING_METHOD;
   LINE_RENDERING_MODE = LINE_RENDERING_MODE;
@@ -33,6 +35,8 @@ export class ControlPanelComponent implements OnInit{
       partitioning: [PARTITIONING_METHOD.UNIFORM],
       intervals: [1],
       vertexOrdering: ['Order 1'],
+      colorScheme: COLOR_SCHEME.GRAY_SCALE,
+      colorEncoding: LINE_COLOR_ENCODING.DENSITY,
       lineRendering: [LINE_RENDERING_MODE.BLENDING],
       blendingFactor: [0.5],
       lineWidth: [1],
@@ -48,11 +52,11 @@ export class ControlPanelComponent implements OnInit{
       }
     });
 
-    this.controlForm.get('lineRendering')?.valueChanges.subscribe(value => {
-      if (value !== LINE_RENDERING_MODE.BLENDING) {
-        this.controlForm.get('blendingFactor')?.setValue(0.5);
-      }
-    });
+    // this.controlForm.get('lineRendering')?.valueChanges.subscribe(value => {
+    //   if (value !== LINE_RENDERING_MODE.BLENDING) {
+    //     this.controlForm.get('blendingFactor')?.setValue(0.5);
+    //   }
+    // });
 
     // Emit changes whenever the form values change
     this.controlForm.valueChanges.subscribe((formValues) => {

@@ -10,6 +10,8 @@ import {
   inject,
 } from '@angular/core';
 import {
+  COLOR_SCHEME,
+  LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   SubSequence,
   VIS_TECHNIQUE,
@@ -37,7 +39,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) lineWidth!: number;
   @Input({ required: true }) visTechnique!: VIS_TECHNIQUE;
   @Input({ required: true }) renderingMode!: LINE_RENDERING_MODE;
-  @Input() blendingFactor: number = 0.5;
+  @Input({ required: true }) colorScheme!: COLOR_SCHEME;
+  @Input({ required: true }) blendingFactor!: number;
+  @Input({ required: true }) colorEncoding!: LINE_COLOR_ENCODING;
 
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
@@ -45,8 +49,6 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   private resizeObserver!: ResizeObserver;
 
   G_RATIO = 1.0 / 1.618;
-  sWidth = 100;
-  sHeight = 100;
   bpWidth = 100;
   labels: { text: string; positionX: number; positionY: number }[] = [];
 
@@ -66,7 +68,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     else if (
       changes['lineWidth'] ||
       changes['renderingMode'] ||
-      changes['blendingFactor']
+      changes['blendingFactor'] ||
+      changes['colorScheme'] ||
+      changes['colorEncoding']
     ) {
       this.RedrawCanvas();
     }
@@ -98,8 +102,16 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.bpWidth,
       this.vertexHeight,
       this.stripeWidth,
-      this.lineWidth
+      this.lineWidth, 
+      this.colorEncoding
     );
+
+    // sorting lines based on their length in ascending order
+    lines.sort((a, b) => {
+      const lengthA = Math.sqrt((a.x2 - a.x1) ** 2 + (a.y2 - a.y1) ** 2);
+      const lengthB = Math.sqrt((b.x2 - b.x1) ** 2 + (b.y2 - b.y1) ** 2);
+      return lengthB-lengthA;
+    });
 
     // draw lines
     if (this.canvasDrawerService) {
@@ -107,7 +119,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         lines,
         this.lineWidth,
         this.renderingMode,
-        this.blendingFactor
+        this.colorEncoding,
+        this.blendingFactor,
+        this.colorScheme
       );
 
       // labels
@@ -117,7 +131,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         this.labels.push({
           text: g.id + '',
           positionX: idx * this.stripeWidth,
-          positionY: this.sHeight,
+          positionY: this.subSeq.height,
         });
         //}
       });
@@ -136,18 +150,18 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private updateCanvasSize() {
-    this.sHeight = this.vertexHeight * this.vertexList.length;
-    this.bpWidth = this.sHeight * this.G_RATIO;
+    this.subSeq.height = this.vertexHeight * this.vertexList.length;
+    this.bpWidth = this.subSeq.height * this.G_RATIO;
     if (
       this.visTechnique === VIS_TECHNIQUE.IES ||
       this.visTechnique === VIS_TECHNIQUE.SEP
     ) {
-      this.sWidth = this.stripeWidth * this.subSeq.graphs.length + this.bpWidth;
+      this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length + this.bpWidth;
     } else if (
       this.visTechnique === VIS_TECHNIQUE.MSV ||
       this.visTechnique === VIS_TECHNIQUE.TEP
     ) {
-      this.sWidth = this.stripeWidth * this.subSeq.graphs.length;
+      this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length;
     }
   }
 }
