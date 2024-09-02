@@ -10,8 +10,23 @@ import { UtilService } from '../common/util.service';
 
 @Injectable({ providedIn: 'root' })
 export class SequenceService {
+  constructor(private utilService: UtilService) {}
 
-  constructor(private utilService: UtilService){}
+  filterSubSequenceAggregateEdges(
+    subseqList: SubSequence[],
+    aggEdgeMinFreq: number,
+    aggEdgeMaxFreq: number
+  ) {
+    // filter aggregated edges per subseq
+    subseqList.forEach((s) => {
+      // filterAggEdges
+      s.aggEdgesFiltered = s.aggEdges.filter(
+        (agg) =>
+          (agg.frq / s.graphs.length) * 100 >= aggEdgeMinFreq &&
+          (agg.frq / s.graphs.length) * 100 <= aggEdgeMaxFreq
+      );
+    });
+  }
 
   getSubSequences(
     rootSub: SubSequence,
@@ -19,15 +34,58 @@ export class SequenceService {
     partitioningThreshold: number,
     nIntervals: number
   ): SubSequence[] {
+    let subseqList: SubSequence[] = [];
     if (partitioningMethod === PARTITIONING_METHOD.UNIFORM && nIntervals > 0) {
-      return this.getUniformSubSequence(rootSub, nIntervals);
-    } else if (partitioningMethod === PARTITIONING_METHOD.DISTANCE_BASED) {
-      return [rootSub];
-    } else {
-      return [rootSub];
+      subseqList = this.getUniformSubSequence(rootSub, nIntervals);
+    } else if (partitioningMethod === PARTITIONING_METHOD.DISTANCE_TO_PREVIOUS_POINT) {
+      subseqList = this.getDistanceBasedSubSequences(rootSub, partitioningThreshold);
+    } else if (partitioningMethod === PARTITIONING_METHOD.AVERAGE_PAIRWISE_DISTANCE) {
+      subseqList = [rootSub];
     }
+
+    // update aggregated edges
+    subseqList.forEach((s) => {
+      s.aggEdges = this.getSubSequenceAggregateEdges(s);
+    });
+
+    return subseqList;
   }
 
+  
+  getDistanceBasedSubSequences(rootSub: SubSequence, threshold: number): SubSequence[]{
+    let subSequences: SubSequence[] = [];
+    let currentSub = new SubSequence();
+    currentSub.graphs.push(rootSub.graphs[0]);
+    
+    
+    for (let i = 1; i < rootSub.graphs.length; i++) {
+      const currentTimepoint = rootSub.graphs[i];
+      const previousTimepoint = rootSub.graphs[i-1];
+
+      // get the distance
+      const dist = currentTimepoint.dist[previousTimepoint.id-1];
+      if (dist > threshold){
+        //Start a new cluster
+        subSequences.push(currentSub);
+        const newSub = new SubSequence();
+        newSub.graphs.push(currentTimepoint);
+        currentSub = newSub;
+        
+      }else{
+        // Add the current time point to the existing cluster
+        currentSub.graphs.push(currentTimepoint)
+      }
+    }
+    subSequences.push(currentSub);
+
+    // update max edge weight
+    subSequences.forEach(sub=>{
+      sub.maxEdgeWeight = rootSub.maxEdgeWeight;
+    })
+
+    return subSequences;
+  }
+  
   getUniformSubSequence(
     rootSub: SubSequence,
     nIntervals: number
@@ -38,7 +96,6 @@ export class SequenceService {
     for (let i = 0; i < nIntervals; i++) {
       subSequences[i] = new SubSequence();
       subSequences[i].maxEdgeWeight = rootSub.maxEdgeWeight;
-      // subSequences[i].length= subSequences[i].start+subSize>rootSub.length?rootSub.length-subSequences[i].start: subSize;
     }
     for (let i = 0; i < rootSub.graphs.length; i++) {
       const subIndex = Math.floor(i / subSize);
@@ -51,12 +108,11 @@ export class SequenceService {
     const all = new SubSequence();
 
     const edgeWeights: Float32Array = new Float32Array(
-      edges.map((e:any) => parseFloat(e.weight))
+      edges.map((e: any) => parseFloat(e.weight))
     );
     // Find the maximum and minimum edge weights
     all.maxEdgeWeight = this.utilService.findMax(edgeWeights);
-    all.minEdgeWeight = this.utilService.findMin(edgeWeights);
-     
+    // all.minEdgeWeight = this.utilService.findMin(edgeWeights);
 
     // Convert and map each 'edge' to a properly typed DataItem
     const convertedEdges: DataItem[] = edges.map((e: any) => ({
@@ -84,6 +140,7 @@ export class SequenceService {
       // assign graph props
       const gProps = props.find((item: any) => item.g_id === g.id);
       g.hcOrder = gProps.hc_order;
+      g.dist = gProps.dist;
 
       items.forEach((item) => {
         g.edges.push({
@@ -95,14 +152,14 @@ export class SequenceService {
 
       all.graphs.push(g);
     }
-    
+
     return all;
   }
 
   getVertexList(vertices: any): Vertex[] {
     let vertList: Vertex[] = [];
     vertices.forEach((v: any) => {
-      vertList.push({ id: v.id, hcOrder: v.hc_order });
+      vertList.push({ id: v.id, hcOrder: v.hc_order, rndOrder: v.rnd_order });
     });
     return vertList;
   }
@@ -120,5 +177,34 @@ export class SequenceService {
         rootSub.graphs.sort((a, b) => a.hcOrder - b.hcOrder);
         break;
     }
+  }
+
+  getSubSequenceAggregateEdges(
+    sub: SubSequence
+  ): { edge: Edge; frq: number }[] {
+    const aggEdges: { edge: Edge; frq: number }[] = [];
+    sub.graphs.forEach((g) => {
+      g.edges.forEach((e) => {
+        let foundTuple = aggEdges.find(
+          (ae) => ae.edge.src === e.src && ae.edge.target === e.target
+        );
+        if (!foundTuple) {
+          foundTuple = {
+            edge: { src: e.src, target: e.target, weight: 0 },
+            frq: 0,
+          };
+          aggEdges.push(foundTuple);
+        }
+        foundTuple.frq++;
+        foundTuple.edge.weight += e.weight;
+      });
+    });
+
+    // average edge weights by thier frequency
+    aggEdges.forEach((tuple) => {
+      tuple.edge.weight /= tuple.frq;
+    });
+
+    return aggEdges;
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, ElementRef, inject } from '@angular/core';
 import { Line } from '../sequence/sub-sequence/graph/line.model';
 import {
   GRAY_SCALE_COLOR_SCHEME,
+  INFERNO_CROPPED_COLOR_SCHEME,
   MULTI_HUE_COLOR_SCHEME,
   PLASMA_CROPPED_COLOR_SCHEME,
   PLASMA_WHITE_BACKGROUND_COLOR_SCHEME,
@@ -51,7 +52,6 @@ export class CanvasDrawerService {
     lineWidth: number = 1.0,
     renderingMode: LINE_RENDERING_MODE,
     colorEncoding: LINE_COLOR_ENCODING,
-    blendingFactor: number = 0.5,
     colorSchemeName: COLOR_SCHEME
   ): void {
     const canvasWidth = this.canvas.width;
@@ -62,28 +62,22 @@ export class CanvasDrawerService {
       case COLOR_SCHEME.MULTI_HUE:
         colorScheme = MULTI_HUE_COLOR_SCHEME;
         break;
-      case COLOR_SCHEME.PLASMA_CROPPED:
-        colorScheme = PLASMA_CROPPED_COLOR_SCHEME;
-        break;
       case COLOR_SCHEME.PLASMA_WHITE_BACKGROUND:
         colorScheme = PLASMA_WHITE_BACKGROUND_COLOR_SCHEME;
         break;
-      default:
+      case COLOR_SCHEME.PLASMA_CROPPED:
+        colorScheme = PLASMA_CROPPED_COLOR_SCHEME;
+        break;
+      case COLOR_SCHEME.GRAY_SCALE:
         colorScheme = GRAY_SCALE_COLOR_SCHEME;
+        break;
+      default:
+        colorScheme = INFERNO_CROPPED_COLOR_SCHEME;
     }
 
     if (renderingMode === LINE_RENDERING_MODE.NONE) {
       this.drawLinesRaw(lines, lineWidth);
     } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
-      this.drawLinesBlended(
-        lines,
-        lineWidth,
-        blendingFactor,
-        colorEncoding,
-        colorScheme
-      );
-    } else if (renderingMode === LINE_RENDERING_MODE.SPLATTING) {
-      const alpha = blendingFactor;
       let batchSize = lines.length;
       const batches = this.createBatches(lines, batchSize);
       const requests = batches.map((batch) =>
@@ -93,7 +87,6 @@ export class CanvasDrawerService {
           canvasHeight,
           renderingMode,
           colorEncoding,
-          alpha,
           lineWidth
         )
       );
@@ -108,18 +101,20 @@ export class CanvasDrawerService {
           let pixelValMap = new Float32Array(arrayLength);
           let pixelOpacityMap = new Float32Array(arrayLength);
           let pixelHitCountMap = new Int32Array(arrayLength);
-          
 
           responses.forEach((response) => {
-            
-            console.log('response');
-            
+
             // Divide the response into three separate buffers
             const pixelDensityMapBuffer = response.slice(0, float32ArraySize);
-            const pixelValMapBuffer = response.slice(float32ArraySize, float32ArraySize * 2);
-            const pixelOpacityMapBuffer = response.slice(float32ArraySize * 2, float32ArraySize * 3);
+            const pixelValMapBuffer = response.slice(
+              float32ArraySize,
+              float32ArraySize * 2
+            );
+            const pixelOpacityMapBuffer = response.slice(
+              float32ArraySize * 2,
+              float32ArraySize * 3
+            );
             const pixelHitCountMapBuffer = response.slice(float32ArraySize * 3);
-            
 
             // Convert the buffers back to typed arrays
             pixelDensityMap = new Float32Array(pixelDensityMapBuffer);
@@ -134,12 +129,10 @@ export class CanvasDrawerService {
             //   pixelHitCountMap[i] += resPixelHitCountMap[i];
             // }
           });
-          const pixelMap = this.getFinalPixelMap(
-            pixelDensityMap,
-            pixelValMap,
-            pixelHitCountMap,
-            colorEncoding
-          );
+          const pixelMap =
+            colorEncoding === LINE_COLOR_ENCODING.DENSITY
+              ? pixelDensityMap
+              : this.averagePixelMap(pixelValMap, pixelHitCountMap);
           this.drawPixelMap(pixelMap, pixelOpacityMap, colorScheme);
         },
         (error) => {
@@ -149,83 +142,12 @@ export class CanvasDrawerService {
     }
   }
 
-  // drawLines(
-  //   lines: Line[],
-  //   lineWidth: number = 1.0,
-  //   renderingMode: LINE_RENDERING_MODE,
-  //   blendingFactor: number = 0.5,
-  //   lineColorEncoding: LINE_COLOR_ENCODING
-  // ): void {
-  //   const canvasWidth = this.canvas.width;
-  //   const canvasHeight = this.canvas.height;
-
-  //   if (renderingMode === LINE_RENDERING_MODE.NONE) {
-  //     this.drawLinesRaw(lines, lineWidth);
-  //   } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
-  //     console.log('blending mode');
-  //     this.drawLinesBlended(lines, lineWidth, blendingFactor);
-  //   } else if (renderingMode === LINE_RENDERING_MODE.SPLATTING) {
-  //     console.log(lines.length);
-  //     const pixelDensityMap = new Float32Array(canvasWidth * canvasHeight);
-
-  //     const batches = this.createBatches(lines, this.batchSize);
-  //     let remainingBatches = batches.length;
-
-  //     batches.forEach((batch, index) => {
-  //       const workerIndex = index % this.workerCount;
-  //       const worker = this.workers[workerIndex];
-  //       this.activeWorkers.add(workerIndex);
-
-  //       worker.postMessage({
-  //         lines: batch,
-  //         canvasWidth,
-  //         canvasHeight,
-  //         renderingMode,
-  //         blendingFactor,
-  //         lineWidth,
-  //       });
-
-  //       worker.onmessage = (event: MessageEvent) => {
-  //         const localMap = new Float32Array(event.data);
-
-  //         for (let i = 0; i < pixelDensityMap.length; i++) {
-  //           const existingValue = pixelDensityMap[i];
-  //           const newValue = localMap[i];
-
-  //           if (renderingMode === LINE_RENDERING_MODE.SPLATTING) {
-  //             // Simple addition for splatting
-  //             pixelDensityMap[i] += newValue;
-  //           } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
-  //             // Blending using the blending factor
-  //             pixelDensityMap[i] =
-  //               existingValue * (1 - blendingFactor) +
-  //               newValue * blendingFactor;
-  //           }
-  //         }
-
-  //         remainingBatches--;
-  //         this.activeWorkers.delete(workerIndex);
-
-  //         if (remainingBatches === 0 && this.activeWorkers.size === 0) {
-  //           this.drawPixelDensityMap(pixelDensityMap, lineColorEncoding);
-  //         }
-  //       };
-
-  //       worker.onerror = (error: ErrorEvent) => {
-  //         console.error(`Worker ${workerIndex} error:`, error.message);
-  //         this.activeWorkers.delete(workerIndex);
-  //       };
-  //     });
-  //   }
-  // }
-
   private getPixelDensityMap(
     lines: Line[],
     canvasWidth: number,
     canvasHeight: number,
     renderingMode: LINE_RENDERING_MODE,
     colorEncoding: LINE_COLOR_ENCODING,
-    alpha: number,
     lineWidth: number
   ): Observable<ArrayBuffer> {
     const url = 'http://localhost:3000/calculate-density';
@@ -238,7 +160,6 @@ export class CanvasDrawerService {
         canvasHeight,
         renderingMode,
         colorEncoding,
-        alpha,
         lineWidth,
       },
       { responseType: 'arraybuffer' }
@@ -258,51 +179,46 @@ export class CanvasDrawerService {
     });
   }
 
-  private drawLinesBlended(
-    lines: Line[],
-    lineWidth: number,
-    blendingFactor: number,
-    colorEncoding: LINE_COLOR_ENCODING,
-    colorScheme: any[]
-  ): void {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
-    this.context.globalAlpha = blendingFactor;
+  // private drawLinesBlended(
+  //   lines: Line[],
+  //   lineWidth: number,
+  //   blendingFactor: number,
+  //   colorEncoding: LINE_COLOR_ENCODING,
+  //   colorScheme: any[]
+  // ): void {
+  //   this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
+  //   this.context.globalAlpha = blendingFactor;
 
-    this.context.lineWidth = lineWidth;
+  //   this.context.lineWidth = lineWidth;
 
-    lines.forEach((line: Line) => {
-      const foreColor = this.mapDensityToColor(
-        line.normalizedSlope,
-        1.0,
-        colorScheme
-      );
-      this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`;
-      this.context.beginPath();
-      this.context.moveTo(line.x1, line.y1);
-      this.context.lineTo(line.x2, line.y2);
-      this.context.stroke();
-    });
+  //   lines.forEach((line: Line) => {
+  //     const foreColor = this.mapDensityToColor(
+  //       line.normalizedSlope,
+  //       1.0,
+  //       colorScheme
+  //     );
+  //     this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`;
+  //     this.context.beginPath();
+  //     this.context.moveTo(line.x1, line.y1);
+  //     this.context.lineTo(line.x2, line.y2);
+  //     this.context.stroke();
+  //   });
 
-    this.context.globalAlpha = 1.0; //reset
-  }
+  //   this.context.globalAlpha = 1.0; //reset
+  // }
 
-  private getFinalPixelMap(
-    pixelDensityMap: Float32Array,
+  private averagePixelMap(
     pixelValMap: Float32Array,
-    pixelHitCountMap: Int32Array,
-    colorEncoding: LINE_COLOR_ENCODING
+    pixelHitCountMap: Int32Array
   ): Float32Array {
-    let finalPixelMap = new Float32Array(pixelDensityMap.length);
-    if (colorEncoding === LINE_COLOR_ENCODING.DENSITY) {
-      finalPixelMap = pixelDensityMap;
-    } else {
-      for (let i = 0; i < pixelValMap.length; i++) {
-        finalPixelMap[i]  =
-          pixelHitCountMap[i] > 0 ? pixelValMap[i] / pixelHitCountMap[i] : 0;
-      }
+    let finalPixelMap = new Float32Array(pixelValMap.length);
+    for (let i = 0; i < pixelValMap.length; i++) {
+      finalPixelMap[i] =
+        pixelHitCountMap[i] > 0 ? pixelValMap[i] / pixelHitCountMap[i] : 0;
     }
     return finalPixelMap;
   }
+
   private drawPixelMap(
     pixelMap: Float32Array,
     pixeOpacityMap: Float32Array,
@@ -344,12 +260,12 @@ export class CanvasDrawerService {
     colorScheme: any[]
   ): { r: number; g: number; b: number } {
     let color = { r: 255, g: 255, b: 255 };
-    // if (density > 0) {
+    //if (density > 0) {
     //const normalized = density / maxDensity;
     const normalized = Math.log10(density + 1.0) / Math.log10(maxDensity + 1.0); // normalized pixel value
     const idx = Math.floor(normalized * 255);
     color = colorScheme[idx];
-    // }
+    //}
 
     return color;
   }
@@ -363,8 +279,6 @@ export class CanvasDrawerService {
     }
     return max;
   }
-
-  
 
   private createBatches(lines: Line[], batchSize: number): Line[][] {
     const batches: Line[][] = [];

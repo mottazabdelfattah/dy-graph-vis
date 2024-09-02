@@ -1,4 +1,4 @@
-import { Line } from "./line.model";
+import { Line } from './line.model';
 
 export interface Edge {
   src: number;
@@ -9,23 +9,25 @@ export interface Edge {
 export interface Vertex {
   id: number;
   hcOrder: number;
+  rndOrder: number;
 }
 export class Graph {
   id: number;
   edges: Edge[];
   lines: Line[];
   hcOrder: number;
-  hcOrderWeigted: number;
+  dist: number[];
   gWidth: number;
-  gHeight:number;
+  gHeight: number;
 
   constructor(id: number) {
     this.id = id;
     this.edges = [];
     this.lines = [];
+    this.dist = [];
     this.hcOrder = -1;
-    this.hcOrderWeigted = -1;
     this.gWidth = 0;
-    this.gHeight=0;
+    this.gHeight = 0;
+    
   }
 }

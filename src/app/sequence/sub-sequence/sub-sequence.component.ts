@@ -14,6 +14,7 @@ import {
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   SubSequence,
+  VERTEXT_ORDERING,
   VIS_TECHNIQUE,
 } from './sub-sequence.model';
 import { GraphComponent } from './graph/graph.component';
@@ -42,6 +43,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) colorScheme!: COLOR_SCHEME;
   @Input({ required: true }) blendingFactor!: number;
   @Input({ required: true }) colorEncoding!: LINE_COLOR_ENCODING;
+  @Input({ required: true }) vertexOrdering!: VERTEXT_ORDERING;
+  @Input({ required: true }) tepBackgroundOpacity!: number;
+  @Input({ required: true }) edgeFreqRangeMin!: number;
+  @Input({ required: true }) edgeFreqRangeMax!: number;
 
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
@@ -63,15 +68,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     ) {
       this.updateCanvasSize();
       this.RedrawCanvas();
-    }
-
-    else if (
-      changes['lineWidth'] ||
-      changes['renderingMode'] ||
-      changes['blendingFactor'] ||
-      changes['colorScheme'] ||
-      changes['colorEncoding']
-    ) {
+    } else {
       this.RedrawCanvas();
     }
   }
@@ -95,6 +92,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private RedrawCanvas() {
+    this.sortVertices();
+    this.sortEdges();
+
     const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
       this.subSeq,
@@ -102,16 +102,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.bpWidth,
       this.vertexHeight,
       this.stripeWidth,
-      this.lineWidth, 
-      this.colorEncoding
+      this.lineWidth,
+      this.blendingFactor,
+      this.tepBackgroundOpacity
     );
-
-    // sorting lines based on their length in ascending order
-    lines.sort((a, b) => {
-      const lengthA = Math.sqrt((a.x2 - a.x1) ** 2 + (a.y2 - a.y1) ** 2);
-      const lengthB = Math.sqrt((b.x2 - b.x1) ** 2 + (b.y2 - b.y1) ** 2);
-      return lengthB-lengthA;
-    });
 
     // draw lines
     if (this.canvasDrawerService) {
@@ -120,7 +114,6 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         this.lineWidth,
         this.renderingMode,
         this.colorEncoding,
-        this.blendingFactor,
         this.colorScheme
       );
 
@@ -152,16 +145,48 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   private updateCanvasSize() {
     this.subSeq.height = this.vertexHeight * this.vertexList.length;
     this.bpWidth = this.subSeq.height * this.G_RATIO;
-    if (
-      this.visTechnique === VIS_TECHNIQUE.IES ||
-      this.visTechnique === VIS_TECHNIQUE.SEP
-    ) {
-      this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length + this.bpWidth;
+    if (this.visTechnique === VIS_TECHNIQUE.SEP) {
+      const seqLength =
+        this.subSeq.graphs.length > 1 ? this.subSeq.graphs.length : 0;
+      this.subSeq.width = this.stripeWidth * seqLength + this.bpWidth;
+    } else if (this.visTechnique === VIS_TECHNIQUE.IES) {
+      this.subSeq.width =
+        this.stripeWidth * (this.subSeq.graphs.length - 1) + this.bpWidth;
     } else if (
       this.visTechnique === VIS_TECHNIQUE.MSV ||
       this.visTechnique === VIS_TECHNIQUE.TEP
     ) {
       this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length;
     }
+  }
+
+  private sortVertices() {
+    if (this.vertexOrdering === VERTEXT_ORDERING.HC) {
+      this.vertexList.sort((a, b) => {
+        return a.hcOrder - b.hcOrder;
+      });
+    } else {
+      this.vertexList.sort((a, b) => {
+        return a.rndOrder - b.rndOrder;
+      });
+    }
+  }
+
+  private sortEdges() {
+    this.subSeq.graphs.forEach((g) => {
+      g.edges.sort((a, b) => a.weight - b.weight);
+    });
+    this.subSeq.aggEdges.sort((a, b) => b.edge.weight - a.edge.weight);
+  }
+
+  exportCanvas(): void {
+    const canvasElement = this.canvas.nativeElement;
+    const dataURL = canvasElement.toDataURL('image/png');
+
+    // Create a link element to trigger download
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'canvas-image.png';
+    link.click();
   }
 }

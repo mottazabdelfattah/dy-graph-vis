@@ -1,19 +1,39 @@
 .canvas-container {
     position: relative;
+    display: inline-block; /* Ensures the container wraps around the canvas and labels */
+    margin-bottom: 40px;
+  }
+  
+  .export-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent; /* Remove background color */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    cursor: pointer;
+    z-index: 1000; /* Ensure the button stays on top of other elements */
+  }
+  
+  .export-button img {
+    width: 12px; /* Adjust the icon size */
+    height: 12px;
+  }
+  
+  .export-button:hover img {
+    opacity: 0.8; /* Slight opacity change on hover for a subtle effect */
   }
   
   .labels-container {
     position: absolute;
-    top: 0;
     left: 0;
     pointer-events: none; /* Allows clicks to pass through labels */
+    z-index: 500; /* Keeps labels above the canvas but below the button */
   }
   
   .label {
     position: absolute;
     font-size: 12px; /* Adjust font size as needed */
-    
-    /* padding: 2px 4px; */
     border-radius: 3px;
   }
   

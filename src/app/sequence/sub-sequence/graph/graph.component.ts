@@ -37,7 +37,6 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy  {
       this.lineWidth,
       this.renderingMode,
       LINE_COLOR_ENCODING.DENSITY,
-      this.blendingFactor,
       COLOR_SCHEME.GRAY_SCALE
     );
 

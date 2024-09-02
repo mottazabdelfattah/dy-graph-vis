@@ -1,27 +1,27 @@
 .control-panel {
     font-family: 'Roboto', sans-serif;
-    padding: 16px;
+    padding: 8px; /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 8px;
-    max-width: 400px;
+    max-width: 320px;
     margin: 0 auto;
 }
 
 .form-group {
-    margin-bottom: 6px;
+    margin-bottom: 2px; /* Reduced margin */
 }
 
 .form-group label {
     font-weight: 500;
-    /* Medium weight for labels */
     display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 4px; /* Reduced margin */
+    font-size: 12px; /* Reduced label font size */
 }
 
 .form-group input,
 .form-group select {
     font-family: 'Roboto', sans-serif;
+    font-size: 11px; /* Slightly smaller font size for inputs and selects */
 }
 
 .form-group input[type="range"] {
@@ -31,17 +31,33 @@
 .form-group span {
     display: block;
     text-align: right;
-    margin-top: 8px;
+    margin-top: 2px; /* Reduced margin */
+    font-size: 12px; /* Slightly smaller font size */
 }
 
 .settings-group {
-    margin-top: 32px;
+    margin-top: 16px; /* Reduced margin */
 }
 
 .settings-group h3 {
     font-weight: 700;
-    /* Bold weight for headings */
-    margin-bottom: 16px;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 8px;
+    margin-bottom: 8px; /* Reduced margin */
+    border-bottom: 1px solid #ccc; /* Thinner border */
+    padding-bottom: 4px; /* Reduced padding */
+    font-size: 12px; /* Slightly smaller font size */
 }
+
+.tep-settings {
+    border: 1px solid #888;
+    padding: 6px; /* Reduced padding */
+    margin-top: 6px; /* Reduced margin */
+    border-radius: 4px;
+}
+
+.tep-settings legend {
+    font-size: 11px; /* Slightly smaller font size */
+    font-weight: bold;
+    padding: 0 4px;
+    margin-bottom: 4px; /* Reduced margin */
+}
+

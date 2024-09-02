@@ -20,66 +20,120 @@ export class SubSequenceService {
     vertexHeight: number,
     stripeWidth: number,
     lineWidth: number,
-    colorEncodingOp: LINE_COLOR_ENCODING
+    foregroundAlpha: number,
+    backgroundAlpha: number
   ): Line[] {
-    // how may buckets wthin each stripe
-    const MSVBucketsPerStripe = Math.floor(stripeWidth / lineWidth);
-    const lines: Line[] = [];
-    const seqLength = subSeq.graphs.length;
-    const maxSlope =
-      visTechnique === VIS_TECHNIQUE.MSV
-        ? subSeq.height
-        : subSeq.height / bpWidth;
+    let lines: Line[] = [];
+
     const maxEdgeWeight = subSeq.maxEdgeWeight;
+    const maxSlope = this.getMaxSlope(visTechnique, subSeq, bpWidth);
 
+    switch (visTechnique) {
+      case VIS_TECHNIQUE.MSV:
+        lines = this.getMSVLines(
+          subSeq,
+          vertexList,
+          bpWidth,
+          vertexHeight,
+          stripeWidth,
+          lineWidth,
+          foregroundAlpha
+        );
+        break;
+      case VIS_TECHNIQUE.IES:
+        lines = this.getIESLines(
+          subSeq,
+          vertexList,
+          bpWidth,
+          vertexHeight,
+          stripeWidth,
+          foregroundAlpha
+        );
+        break;
+      case VIS_TECHNIQUE.SEP:
+        lines = this.getSEPLines(
+          subSeq,
+          vertexList,
+          bpWidth,
+          vertexHeight,
+          stripeWidth,
+          foregroundAlpha
+        );
+        break;
+      case VIS_TECHNIQUE.TEP:
+        lines = this.getTEPLines(
+          subSeq,
+          vertexList,
+          bpWidth,
+          vertexHeight,
+          stripeWidth,
+          foregroundAlpha,
+          backgroundAlpha
+        );
+        break;
+    }
+
+    // normalize lines weight and slope
+    lines.forEach((line: Line) => {
+      // weight
+      line.val = Math.log10(line.val + 1.0) / Math.log10(maxEdgeWeight + 1.0);
+
+      // normalize slope
+      line.normalizedSlope = this.utilService.mapRange(
+        line.normalizedSlope,
+        -maxSlope,
+        maxSlope,
+        0.0,
+        1.0
+      );
+    });
+
+    return lines;
+  }
+
+  private getTEPLines(
+    subSeq: SubSequence,
+    vertexList: Vertex[],
+    bpWidth: number,
+    vertexHeight: number,
+    stripeWidth: number,
+    foregroundAlpha: number,
+    backgroundAlpha: number
+  ): Line[] {
+    const lines: Line[] = [];
+    const subseqLength = subSeq.graphs.length;
     subSeq.graphs.forEach((g: Graph, idx) => {
-      g.gWidth = stripeWidth;
-      g.gHeight = vertexHeight * vertexList.length;
+      const newX1 = idx * stripeWidth;
+      const newX2 = newX1 + stripeWidth;
+      const subSeqSart = 0;
+      const subSeqWidth = subseqLength * stripeWidth;
 
-      
+      // background lines
+      subSeq.aggEdgesFiltered.forEach((tuple) => {
+        const line = this.getLine(
+          tuple.edge,
+          vertexList,
+          subSeq.graphs.length * stripeWidth,
+          bpWidth,
+          vertexHeight,
+          backgroundAlpha
+        );
+        this.cutOffLinesTEP(line, newX1, newX2, subSeqSart, subSeqWidth);
+        lines.push(line);
+      });
 
-      // Initialize stripesSubspace to zeros
-      let MSVStripeBuckets: number[] = new Array(MSVBucketsPerStripe).fill(0);
-      g.edges.forEach((e: Edge) => {
+      // forground lines
+      const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
+      filteredEdges.forEach((e: Edge) => {
         const line = this.getLine(
           e,
           vertexList,
           idx * stripeWidth,
           bpWidth,
-          vertexHeight
+          vertexHeight,
+          foregroundAlpha
         );
-
-        switch (visTechnique) {
-          case VIS_TECHNIQUE.MSV:
-            this.getLinesMSV(line, MSVStripeBuckets);
-            break;
-          case VIS_TECHNIQUE.IES:
-            break;
-          case VIS_TECHNIQUE.TEP:
-            const newX1 = idx * stripeWidth;
-            const newX2 = newX1 + stripeWidth;
-            const subSeqSart = 0;
-            const subSeqWidth = seqLength * stripeWidth;
-            this.getLinesTEP(line, newX1, newX2, subSeqSart, subSeqWidth);
-            break;
-          case VIS_TECHNIQUE.SEP:
-            this.getLinesSEP(line, stripeWidth);
-            break;
-        }
-
-        // normalize line weight
-        line.val = Math.log10(line.val + 1.0) / Math.log10(maxEdgeWeight + 1.0);
-
-        // normalize slope        
-        line.normalizedSlope = this.utilService.mapRange(
-          line.normalizedSlope,
-          -maxSlope,
-          maxSlope,
-          0.0,
-          1.0
-        );
-
-        //push the line
+        this.cutOffLinesTEP(line, newX1, newX2, subSeqSart, subSeqWidth);
         lines.push(line);
       });
     });
@@ -87,7 +141,123 @@ export class SubSequenceService {
     return lines;
   }
 
-  private getLinesSEP(l: Line, stripeWidth: number) {
+  private getMSVLines(
+    subSeq: SubSequence,
+    vertexList: Vertex[],
+    bpWidth: number,
+    vertexHeight: number,
+    stripeWidth: number,
+    lineWidth: number,
+    foregroundAlpha: number
+  ): Line[] {
+    const MSVBucketsPerStripe = Math.floor(stripeWidth / lineWidth);
+    const lines: Line[] = [];
+    subSeq.graphs.forEach((g: Graph, idx) => {
+      // Initialize stripesSubspace to zeros
+      let MSVStripeBuckets: number[] = new Array(MSVBucketsPerStripe).fill(0);
+      const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
+      filteredEdges.forEach((e: Edge) => {
+        const line = this.getLine(
+          e,
+          vertexList,
+          idx * stripeWidth,
+          bpWidth,
+          vertexHeight,
+          foregroundAlpha
+        );
+
+        let stripeBucketIdx = this.getColIndexWithLowestValue(MSVStripeBuckets);
+        line.x1 = line.x2 = line.x1 + stripeBucketIdx;
+        MSVStripeBuckets[stripeBucketIdx]++;
+
+        // in case of MSV the slope is encoded as direction
+        const length = line.y2 - line.y1;
+        line.normalizedSlope = length;
+
+        lines.push(line);
+      });
+    });
+
+    return lines;
+  }
+
+  private getSEPLines(
+    subSeq: SubSequence,
+    vertexList: Vertex[],
+    bpWidth: number,
+    vertexHeight: number,
+    stripeWidth: number,
+    foregroundAlpha: number
+  ): Line[] {
+    const lines: Line[] = [];
+    const subseqLength = subSeq.graphs.length;
+
+    // draw the rep. graph of only one graph exists in the seq
+    if (subseqLength > 1) {
+      subSeq.graphs.forEach((g: Graph, idx) => {
+        const filteredEdges = this.filterEdges(
+          g.edges,
+          subSeq.aggEdgesFiltered
+        );
+        filteredEdges.forEach((e: Edge) => {
+          const line = this.getLine(
+            e,
+            vertexList,
+            idx * stripeWidth,
+            bpWidth,
+            vertexHeight,
+            foregroundAlpha
+          );
+          this.cutOffLinesSEP(line, stripeWidth);
+          lines.push(line);
+        });
+      });
+    }
+
+    // representative graph
+    subSeq.aggEdgesFiltered.forEach((tuple) => {
+      const line = this.getLine(
+        tuple.edge,
+        vertexList,
+        subseqLength > 1 ? subseqLength * stripeWidth : 0,
+        bpWidth,
+        vertexHeight,
+        foregroundAlpha
+      );
+      lines.push(line);
+    });
+
+    return lines;
+  }
+
+  private getIESLines(
+    subSeq: SubSequence,
+    vertexList: Vertex[],
+    bpWidth: number,
+    vertexHeight: number,
+    stripeWidth: number,
+    foregroundAlpha: number
+  ): Line[] {
+    const lines: Line[] = [];
+    subSeq.graphs.forEach((g: Graph, idx) => {
+      const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
+      filteredEdges.forEach((e: Edge) => {
+        const line = this.getLine(
+          e,
+          vertexList,
+          idx * stripeWidth,
+          bpWidth,
+          vertexHeight,
+          foregroundAlpha
+        );
+        lines.push(line);
+      });
+    });
+
+    return lines;
+  }
+
+  private cutOffLinesSEP(l: Line, stripeWidth: number) {
     //cuttoff the lines
 
     // Calculate the slope (m) of the line
@@ -98,7 +268,7 @@ export class SubSequenceService {
     l.y2 = slope * (l.x2 - l.x1) + l.y1;
   }
 
-  private getLinesTEP(
+  private cutOffLinesTEP(
     l: Line,
     newX1: number,
     newX2: number,
@@ -124,29 +294,21 @@ export class SubSequenceService {
     l.y2 = newY2;
   }
 
-  private getLinesMSV(l: Line, stripeBuckets: number[]) {
-    let stripeBucketIdx = this.getColIndexWithLowestValue(stripeBuckets);
-    l.x1 = l.x2 = l.x1 + stripeBucketIdx;
-    stripeBuckets[stripeBucketIdx]++;
-    // in case of MSV the slope is encoded as direction
-    const length = l.y2 - l.y1;
-    l.normalizedSlope = length;
-  }
-
   private getLine(
     e: Edge,
     vertexList: Vertex[],
     xOffset: number,
     gWidth: number,
-    scaleY: number
+    scaleY: number,
+    blendingFactor: number
   ): Line {
-    let src = vertexList.find((x) => x.id === e.src);
-    let tar = vertexList.find((x) => x.id === e.target);
+    let srcIdx = vertexList.findIndex((x) => x.id === e.src);
+    let tarIdx = vertexList.findIndex((x) => x.id === e.target);
 
     const x1 = 0 + xOffset;
-    const y1 = src ? src.hcOrder* scaleY : 0;
+    const y1 = srcIdx !== -1 ? srcIdx * scaleY : 0;
     const x2 = gWidth + xOffset;
-    const y2 = tar ? tar.hcOrder* scaleY : 0;
+    const y2 = tarIdx !== -1 ? tarIdx * scaleY : 0;
     const slope = (y2 - y1) / (x2 - x1);
 
     return {
@@ -156,6 +318,7 @@ export class SubSequenceService {
       y2: y2,
       val: e.weight,
       normalizedSlope: slope,
+      opacity: blendingFactor,
     };
   }
 
@@ -175,5 +338,27 @@ export class SubSequenceService {
     }
 
     return minColIndex;
+  }
+
+  private getMaxSlope(
+    visTechnique: VIS_TECHNIQUE,
+    subSeq: SubSequence,
+    bpWidth: number
+  ): number {
+    let maxSlope = subSeq.height / bpWidth;
+    if (visTechnique === VIS_TECHNIQUE.MSV) maxSlope = subSeq.height;
+    else if (visTechnique === VIS_TECHNIQUE.TEP)
+      maxSlope = subSeq.height / subSeq.width;
+
+    return maxSlope;
+  }
+
+  private filterEdges(edges: Edge[], aggEdges: { edge: Edge; frq: number }[]) {
+    return edges.filter((edge) =>
+      aggEdges.some(
+        (tuple) =>
+          tuple.edge.src === edge.src && tuple.edge.target === edge.target
+      )
+    );
   }
 }

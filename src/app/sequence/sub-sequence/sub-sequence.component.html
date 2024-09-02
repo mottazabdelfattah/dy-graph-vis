@@ -1,37 +1,19 @@
-<!-- <div>
-  @for(g of subSeq.graphs; track $index){
-  <app-graph
-    [graph]="g"
-    [vertexList]="vertexList"
-    [vertexHeight]="vertexHeight"
-    [style.left.px]="$index * stripeWidth"
-    
-  ></app-graph>
-  }
-</div> -->
-<!-- <div>
-  
-  @for(g of subSeq.graphs; track $index){
-    
-      <app-graph
-      [graph]="g"
-      [lineWidth]="1"
-      [renderingMode]="2"
-      [blendingFactor]="0.1"
-    ></app-graph>
-    
-  
-  }
-</div>  -->
+<div class="canvas-container">
+  <!-- Export Button as an Icon -->
+  <button class="export-button" (click)="exportCanvas()" title="Export as Image">
+    <img src="download-icon.png" alt="Export" />
+  </button>
 
-<canvas #canvasElement [width]="subSeq.width" [height]="subSeq.height" style="border: 1px solid black; background-color: white;"></canvas>
+  <!-- Canvas Element -->
+  <canvas #canvasElement [width]="subSeq.width" [height]="subSeq.height" style="border: 1px solid black; background-color: white;"></canvas>
 
-<!-- Overlay Container for Labels -->
-<div class="labels-container">
-  <div *ngFor="let label of labels" 
-       class="label"
-       [style.left.px]="label.positionX" 
-       [style.top.px]="20">
-    {{ label.text }}
+  <!-- Overlay Container for Labels -->
+  <div class="labels-container">
+    <div *ngFor="let label of labels" 
+         class="label"
+         [style.left.px]="label.positionX" 
+         [style.top.px]="0">
+      {{ label.text }}
+    </div>
   </div>
 </div>

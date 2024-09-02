@@ -1,11 +1,12 @@
 import { PLASMA_CROPPED_COLOR_SCHEME } from '../../variables';
-import { Graph } from './graph/graph.model';
+import { Edge, Graph } from './graph/graph.model';
 
 export enum COLOR_SCHEME {
   GRAY_SCALE = 'GRAY_SCALE',
   MULTI_HUE = 'MULTI_HUE',
   PLASMA_CROPPED = 'PLASMA_CROPPED',
   PLASMA_WHITE_BACKGROUND = 'PLASMA_WHITE_BACKGROUND',
+  INFERNO_CROPPED = 'INFERNO_CROPPED'
 }
 
 export enum LINE_COLOR_ENCODING {
@@ -22,13 +23,14 @@ export enum SEQUENCE_ORDERING_METHOD {
 
 export enum PARTITIONING_METHOD {
   UNIFORM = 'UNIFORM',
-  DISTANCE_BASED = 'DISTANCE_BASED',
+  DISTANCE_TO_PREVIOUS_POINT = 'DISTANCE_TO_PREVIOUS_POINT',
+  AVERAGE_PAIRWISE_DISTANCE = 'AVERAGE_PAIRWISE_DISTANCE',
 }
 
 export enum LINE_RENDERING_MODE {
   NONE = 'NONE',
   BLENDING = 'BLENDING',
-  SPLATTING = 'SPLATTING',
+  // SPLATTING = 'SPLATTING',
 }
 
 export enum VIS_TECHNIQUE {
@@ -36,6 +38,12 @@ export enum VIS_TECHNIQUE {
   IES = 'IES',
   SEP = 'SEP',
   TEP = 'TEP',
+}
+
+
+export enum VERTEXT_ORDERING {
+  'HC' = 'HC',
+  'RANDOM' = 'RANDOM'
 }
 
 export interface DataItem {
@@ -49,16 +57,18 @@ export class SubSequence {
   width: number;
   height: number;
   graphs: Graph[];
-  subsequenceRep: Graph | undefined;
-  minEdgeWeight: number;
+  aggEdges: {edge :Edge, frq: number}[];
+  aggEdgesFiltered: {edge :Edge, frq: number}[];
+  // minEdgeWeight: number;
   maxEdgeWeight: number;
 
   constructor() {
     this.width = 0;
     this.height = 0;
     this.graphs = [];
-    this.subsequenceRep = undefined;
+    this.aggEdges=[];
+    this.aggEdgesFiltered=[];
     this.maxEdgeWeight = 0;
-    this.minEdgeWeight = 0;
+    // this.minEdgeWeight = 0;
   }
 }

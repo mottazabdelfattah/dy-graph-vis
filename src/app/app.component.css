@@ -6,7 +6,7 @@
   }
   
   .control-panel-container {
-    width: 25%; /* 25% of the screen width */
+    /*width: 25%;  25% of the screen width */
     background-color: #f0f0f0; /* Optional: for better visual separation */
     padding: 16px;
     box-sizing: border-box;
@@ -14,9 +14,9 @@
   }
   
   .sequence-container {
-    width: 75%; /* 75% of the screen width */
+    /*width: 75%;  75% of the screen width */
     padding: 16px;
     box-sizing: border-box;
-    overflow: auto; /* To handle content overflow */
+    /*overflow: auto;  To handle content overflow */
   }
   

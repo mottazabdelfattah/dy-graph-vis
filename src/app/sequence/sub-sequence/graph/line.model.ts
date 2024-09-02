@@ -5,4 +5,5 @@ export interface Line {
   y2: number;
   val: number;
   normalizedSlope:number;
+  opacity:number;
 }
