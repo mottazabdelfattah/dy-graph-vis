@@ -17,6 +17,7 @@ export class SequenceService {
     aggEdgeMinFreq: number,
     aggEdgeMaxFreq: number
   ) {
+
     // filter aggregated edges per subseq
     subseqList.forEach((s) => {
       // filterAggEdges

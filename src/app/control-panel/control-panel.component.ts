@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { COLOR_SCHEME, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { COLOR_SCHEME, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -16,11 +16,12 @@ export class ControlPanelComponent implements OnInit{
 
   controlForm: FormGroup;
   edgeFreqRangeValues: number[] = [20, 80]; // Default values for the range slider
-  datasets = ['sipri', 'flight', 'wgcobertura'];
+  datasets = ['sipri', 'flight', 'wgcobertura', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6'];
   visualizationTechniques = Object.values(VIS_TECHNIQUE); // Converts enum to array of values
   sequenceOrderingMethods = Object.values(SEQUENCE_ORDERING_METHOD);
   partitioningMethods = Object.values(PARTITIONING_METHOD);
   vertexOrderingMethods = Object.values(VERTEXT_ORDERING);
+  edgeOrderingMethods = Object.values(EDGE_ORDERING);
   lineRenderingMethods = Object.values(LINE_RENDERING_MODE);
   colorSchemeList = Object.values(COLOR_SCHEME);
   colorEncodingList = Object.values(LINE_COLOR_ENCODING);
@@ -37,6 +38,7 @@ export class ControlPanelComponent implements OnInit{
       partitioning: [PARTITIONING_METHOD.UNIFORM],
       intervals: [1],
       vertexOrdering: [VERTEXT_ORDERING.HC],
+      edgeOrdering:[EDGE_ORDERING.FREQUENCY],
       colorScheme: COLOR_SCHEME.GRAY_SCALE,
       colorEncoding: LINE_COLOR_ENCODING.DENSITY,
       lineRendering: [LINE_RENDERING_MODE.BLENDING],

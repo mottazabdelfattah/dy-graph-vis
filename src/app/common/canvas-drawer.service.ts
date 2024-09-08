@@ -122,12 +122,7 @@ export class CanvasDrawerService {
             pixelOpacityMap = new Float32Array(pixelOpacityMapBuffer);
             pixelHitCountMap = new Int32Array(pixelHitCountMapBuffer);
 
-            // for (let i = 0; i < resPixelDensityMap.length; i++) {
-            //   pixelDensityMap[i] += resPixelDensityMap[i];
-            //   pixelValMap[i] += resPixelValMap[i];
-            //   pixelOpacityMap[i]+=resPixelOpacityMap[i];
-            //   pixelHitCountMap[i] += resPixelHitCountMap[i];
-            // }
+            
           });
           const pixelMap =
             colorEncoding === LINE_COLOR_ENCODING.DENSITY

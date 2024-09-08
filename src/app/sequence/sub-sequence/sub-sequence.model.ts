@@ -46,6 +46,11 @@ export enum VERTEXT_ORDERING {
   'RANDOM' = 'RANDOM'
 }
 
+export enum  EDGE_ORDERING {
+  'FREQUENCY' = 'FREQUENCY',
+  'WEIGHT' = 'WEIGHT'
+}
+
 export interface DataItem {
   time: number;
   start: number;

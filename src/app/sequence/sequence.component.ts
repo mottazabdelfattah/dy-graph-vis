@@ -8,6 +8,7 @@ import {
 import { SubSequenceComponent } from './sub-sequence/sub-sequence.component';
 import {
   COLOR_SCHEME,
+  EDGE_ORDERING,
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   PARTITIONING_METHOD,
@@ -49,6 +50,7 @@ export class SequenceComponent implements OnChanges, OnInit {
   colorScheme = COLOR_SCHEME.GRAY_SCALE;
   colorEncoding = LINE_COLOR_ENCODING.DENSITY;
   vertexOrdering = VERTEXT_ORDERING.HC;
+  edgeOrdering = EDGE_ORDERING.FREQUENCY;
   tepBackgroundOpacity= 0.1;
   edgeFreqRangeMin=20;
   edgeFreqRangeMax=80;
@@ -134,7 +136,7 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.colorEncoding=currentSettings.colorEncoding;
       this.vertexOrdering=currentSettings.vertexOrdering;
       this.tepBackgroundOpacity=currentSettings.tepBackgroundOpacity;
-      
+      this.edgeOrdering=currentSettings.edgeOrdering;
       
     }
   }

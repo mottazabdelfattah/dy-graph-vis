@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import {
   COLOR_SCHEME,
+  EDGE_ORDERING,
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   SubSequence,
@@ -44,6 +45,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) blendingFactor!: number;
   @Input({ required: true }) colorEncoding!: LINE_COLOR_ENCODING;
   @Input({ required: true }) vertexOrdering!: VERTEXT_ORDERING;
+  @Input({ required: true }) edgeOrdering!: EDGE_ORDERING;
   @Input({ required: true }) tepBackgroundOpacity!: number;
   @Input({ required: true }) edgeFreqRangeMin!: number;
   @Input({ required: true }) edgeFreqRangeMax!: number;
@@ -93,7 +95,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   private RedrawCanvas() {
     this.sortVertices();
-    this.sortEdges();
+    
 
     const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
@@ -144,7 +146,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   private updateCanvasSize() {
     this.subSeq.height = this.vertexHeight * this.vertexList.length;
-    this.bpWidth = this.subSeq.height * this.G_RATIO;
+    this.bpWidth = Math.min(200, this.subSeq.height * this.G_RATIO);
     if (this.visTechnique === VIS_TECHNIQUE.SEP) {
       const seqLength =
         this.subSeq.graphs.length > 1 ? this.subSeq.graphs.length : 0;
@@ -172,12 +174,25 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  private sortEdges() {
-    this.subSeq.graphs.forEach((g) => {
-      g.edges.sort((a, b) => a.weight - b.weight);
-    });
-    this.subSeq.aggEdges.sort((a, b) => b.edge.weight - a.edge.weight);
-  }
+  // private sortEdges() {
+  //   if (this.edgeOrdering === EDGE_ORDERING.FREQUENCY) {
+  //     this.subSeq.aggEdgesFiltered.sort((a, b) => a.frq - b.frq);
+  //   } else if (this.edgeOrdering === EDGE_ORDERING.WEIGHT) {
+  //     this.subSeq.aggEdgesFiltered.sort((a, b) => b.edge.weight - a.edge.weight);
+  //   }
+
+  //   this.subSeq.graphs.forEach((g) => {
+  //     g.edges.sort((a, b) => {
+  //       const indexA = this.subSeq.aggEdgesFiltered.findIndex(
+  //         (tuple) => tuple.edge.src === a.src && tuple.edge.target === a.target
+  //       );
+  //       const indexB = this.subSeq.aggEdgesFiltered.findIndex(
+  //         (tuple) => tuple.edge.src === b.src && tuple.edge.target === b.target
+  //       );
+  //       return indexA - indexB;
+  //     });
+  //   });
+  // }
 
   exportCanvas(): void {
     const canvasElement = this.canvas.nativeElement;

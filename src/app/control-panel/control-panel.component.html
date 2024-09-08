@@ -36,6 +36,19 @@
       </select>
     </div>
 
+    <!-- Edge Ordering -->
+    <!-- <div class="form-group">
+      <label for="edgeOrdering">Edge Ordering:</label>
+      <select id="edgeOrdering" formControlName="edgeOrdering">
+        <option
+          *ngFor="let ordering of edgeOrderingMethods"
+          [value]="ordering"
+        >
+          {{ ordering }}
+        </option>
+      </select>
+    </div> -->
+
     <!-- Sequence Ordering -->
     <div class="form-group">
       <label for="sequenceOrder">Sequence Ordering:</label>
@@ -232,7 +245,7 @@
           id="vertexHeight"
           formControlName="vertexHeight"
           min="1"
-          max="10"
+          max="50"
           (blur)="onSettingsChange(controlForm.value)"
         />
         <span>{{ controlForm.get("vertexHeight")?.value }}</span>

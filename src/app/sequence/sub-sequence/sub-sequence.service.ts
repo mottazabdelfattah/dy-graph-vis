@@ -80,7 +80,7 @@ export class SubSequenceService {
 
       // normalize slope
       line.normalizedSlope = this.utilService.mapRange(
-        line.normalizedSlope,
+        -line.normalizedSlope,
         -maxSlope,
         maxSlope,
         0.0,
@@ -150,7 +150,7 @@ export class SubSequenceService {
     lineWidth: number,
     foregroundAlpha: number
   ): Line[] {
-    const MSVBucketsPerStripe = Math.floor(stripeWidth / lineWidth);
+    const MSVBucketsPerStripe = Math.ceil(stripeWidth / lineWidth);
     const lines: Line[] = [];
     subSeq.graphs.forEach((g: Graph, idx) => {
       // Initialize stripesSubspace to zeros
@@ -167,7 +167,7 @@ export class SubSequenceService {
         );
 
         let stripeBucketIdx = this.getColIndexWithLowestValue(MSVStripeBuckets);
-        line.x1 = line.x2 = line.x1 + stripeBucketIdx;
+        line.x1 = line.x2 = line.x1 + (stripeBucketIdx*lineWidth);
         MSVStripeBuckets[stripeBucketIdx]++;
 
         // in case of MSV the slope is encoded as direction
@@ -239,6 +239,7 @@ export class SubSequenceService {
     foregroundAlpha: number
   ): Line[] {
     const lines: Line[] = [];
+    
     subSeq.graphs.forEach((g: Graph, idx) => {
       const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
       filteredEdges.forEach((e: Edge) => {
