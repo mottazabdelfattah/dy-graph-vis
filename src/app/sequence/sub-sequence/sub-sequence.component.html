@@ -1,19 +1,56 @@
 <div class="canvas-container">
   <!-- Export Button as an Icon -->
-  <button class="export-button" (click)="exportCanvas()" title="Export as Image">
+  <button
+    class="export-button"
+    (click)="exportCanvas()"
+    title="Export as Image"
+  >
     <img src="download-icon.png" alt="Export" />
   </button>
 
   <!-- Canvas Element -->
-  <canvas #canvasElement [width]="subSeq.width" [height]="subSeq.height" style="border: 1px solid black; background-color: white;"></canvas>
+  <canvas
+    #canvasElement
+    [width]="subSeq.width"
+    [height]="subSeq.height"
+    style="border: 1px solid black; background-color: white"
+    (mousemove)="onMouseMove($event)"
+    (mouseleave)="onMouseLeave()"
+  ></canvas>
+  <!-- Tooltip for Y-axis (vertices) -->
+  <div
+    *ngIf="tooltipVisibleY"
+    [ngStyle]="{ 'top.px': tooltipY, 'left.px': tooltipX }"
+    class="tooltip"
+  >
+    {{ tooltipTextY }}
+  </div>
+
+  <!-- Tooltip for X-axis (timeline) -->
+  <div
+    *ngIf="tooltipVisibleX"
+    [ngStyle]="{ 'top.px': subSeq.height, 'left.px': tooltipX - 15 }"
+    class="tooltip"
+  >
+    {{ tooltipTextX }}
+  </div>
+
+  <!-- Vertical Line for the X-axis tooltip -->
+  <div
+    *ngIf="tooltipVisibleX"
+    [ngStyle]="{ 'left.px': tooltipX, 'height.px': subSeq.height }"
+    class="vertical-line"
+  ></div>
 
   <!-- Overlay Container for Labels -->
-  <div class="labels-container">
-    <div *ngFor="let label of labels" 
-         class="label"
-         [style.left.px]="label.positionX" 
-         [style.top.px]="0">
+  <!-- <div class="labels-container">
+    <div
+      *ngFor="let label of labels"
+      class="label"
+      [style.left.px]="label.positionX"
+      [style.top.px]="0"
+    >
       {{ label.text }}
     </div>
-  </div>
+  </div> -->
 </div>

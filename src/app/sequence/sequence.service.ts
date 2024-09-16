@@ -17,7 +17,6 @@ export class SequenceService {
     aggEdgeMinFreq: number,
     aggEdgeMaxFreq: number
   ) {
-
     // filter aggregated edges per subseq
     subseqList.forEach((s) => {
       // filterAggEdges
@@ -38,10 +37,20 @@ export class SequenceService {
     let subseqList: SubSequence[] = [];
     if (partitioningMethod === PARTITIONING_METHOD.UNIFORM && nIntervals > 0) {
       subseqList = this.getUniformSubSequence(rootSub, nIntervals);
-    } else if (partitioningMethod === PARTITIONING_METHOD.DISTANCE_TO_PREVIOUS_POINT) {
-      subseqList = this.getDistanceBasedSubSequences(rootSub, partitioningThreshold);
-    } else if (partitioningMethod === PARTITIONING_METHOD.AVERAGE_PAIRWISE_DISTANCE) {
-      subseqList = [rootSub];
+    } else if (
+      partitioningMethod === PARTITIONING_METHOD.DISTANCE_TO_PREVIOUS_POINT
+    ) {
+      subseqList = this.getDistanceBasedSubSequences(
+        rootSub,
+        partitioningThreshold
+      );
+    } else if (
+      partitioningMethod === PARTITIONING_METHOD.AVERAGE_PAIRWISE_DISTANCE
+    ) {
+      subseqList = this.getAVGDistanceBasedSubSequences(
+        rootSub,
+        partitioningThreshold
+      );
     }
 
     // update aggregated edges
@@ -52,41 +61,83 @@ export class SequenceService {
     return subseqList;
   }
 
-  
-  getDistanceBasedSubSequences(rootSub: SubSequence, threshold: number): SubSequence[]{
+  getAVGDistanceBasedSubSequences(
+    rootSub: SubSequence,
+    threshold: number
+  ): SubSequence[] {
     let subSequences: SubSequence[] = [];
     let currentSub = new SubSequence();
     currentSub.graphs.push(rootSub.graphs[0]);
-    
-    
+
     for (let i = 1; i < rootSub.graphs.length; i++) {
       const currentTimepoint = rootSub.graphs[i];
-      const previousTimepoint = rootSub.graphs[i-1];
+      
+      // get pairwise distances between currentTimepoint and all prev points in current_cluster
+      const distances:number[] = [];
+      currentSub.graphs.forEach((g) => {
+        distances.push(currentTimepoint.dist[g.id - 1]);
+      });
+      // Compute the average distance
+      const sum = distances.reduce((acc, curr) => acc + curr, 0); // Sum all numbers
+      const avgDistance = sum / distances.length;
 
-      // get the distance
-      const dist = currentTimepoint.dist[previousTimepoint.id-1];
-      if (dist > threshold){
+
+      if (avgDistance > threshold) {
         //Start a new cluster
         subSequences.push(currentSub);
         const newSub = new SubSequence();
         newSub.graphs.push(currentTimepoint);
         currentSub = newSub;
-        
-      }else{
+      } else {
         // Add the current time point to the existing cluster
-        currentSub.graphs.push(currentTimepoint)
+        currentSub.graphs.push(currentTimepoint);
       }
     }
     subSequences.push(currentSub);
 
     // update max edge weight
-    subSequences.forEach(sub=>{
+    subSequences.forEach((sub) => {
       sub.maxEdgeWeight = rootSub.maxEdgeWeight;
-    })
+    });
 
     return subSequences;
   }
-  
+
+  getDistanceBasedSubSequences(
+    rootSub: SubSequence,
+    threshold: number
+  ): SubSequence[] {
+    let subSequences: SubSequence[] = [];
+    let currentSub = new SubSequence();
+    currentSub.graphs.push(rootSub.graphs[0]);
+
+    for (let i = 1; i < rootSub.graphs.length; i++) {
+      const currentTimepoint = rootSub.graphs[i];
+      const previousTimepoint = rootSub.graphs[i - 1];
+
+      // get the distance
+      const dist = currentTimepoint.dist[previousTimepoint.id - 1];
+      if (dist > threshold) {
+        //Start a new cluster
+        subSequences.push(currentSub);
+        const newSub = new SubSequence();
+        newSub.graphs.push(currentTimepoint);
+        currentSub = newSub;
+      } else {
+        // Add the current time point to the existing cluster
+        currentSub.graphs.push(currentTimepoint);
+      }
+    }
+    subSequences.push(currentSub);
+
+    // update max edge weight
+    subSequences.forEach((sub) => {
+      sub.maxEdgeWeight = rootSub.maxEdgeWeight;
+    });
+
+    return subSequences;
+  }
+
   getUniformSubSequence(
     rootSub: SubSequence,
     nIntervals: number
@@ -142,6 +193,7 @@ export class SequenceService {
       const gProps = props.find((item: any) => item.g_id === g.id);
       g.hcOrder = gProps.hc_order;
       g.dist = gProps.dist;
+      g.name = String(gProps.name);
 
       items.forEach((item) => {
         g.edges.push({
@@ -160,7 +212,12 @@ export class SequenceService {
   getVertexList(vertices: any): Vertex[] {
     let vertList: Vertex[] = [];
     vertices.forEach((v: any) => {
-      vertList.push({ id: v.id, hcOrder: v.hc_order, rndOrder: v.rnd_order });
+      vertList.push({
+        id: v.id,
+        hcOrder: v.hc_order,
+        rndOrder: v.rnd_order,
+        name: String(v.name),
+      });
     });
     return vertList;
   }

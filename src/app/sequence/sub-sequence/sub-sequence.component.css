@@ -37,3 +37,24 @@
     border-radius: 3px;
   }
   
+
+  .tooltip {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    pointer-events: none; /* Ignore pointer events */
+    z-index: 1000;
+  }
+
+
+  .vertical-line {
+    position: absolute;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.5); /* Light black with transparency */
+    top: 0; /* Start at the top of the canvas */
+    z-index: 1000; /* Ensure the line is above other elements */
+    pointer-events: none; /* Ignore pointer events */
+  }

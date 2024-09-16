@@ -8,6 +8,7 @@ export interface Edge {
 
 export interface Vertex {
   id: number;
+  name: string;
   hcOrder: number;
   rndOrder: number;
 }
@@ -17,6 +18,7 @@ export class Graph {
   lines: Line[];
   hcOrder: number;
   dist: number[];
+  name: string;
   gWidth: number;
   gHeight: number;
 
@@ -25,6 +27,7 @@ export class Graph {
     this.edges = [];
     this.lines = [];
     this.dist = [];
+    this.name = '';
     this.hcOrder = -1;
     this.gWidth = 0;
     this.gHeight = 0;

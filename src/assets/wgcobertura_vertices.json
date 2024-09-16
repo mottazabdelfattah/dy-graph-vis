@@ -2,3936 +2,4723 @@
   {
     "id": 5,
     "hc_order": 782,
-    "rnd_order": 461
+    "rnd_order": 461,
+    "name": "root/org/jhotdraw/application/DrawApplication_11/_init_"
   },
   {
     "id": 6,
     "hc_order": 407,
-    "rnd_order": 255
+    "rnd_order": 255,
+    "name": "root/org/jhotdraw/application/DrawApplication_11/drawingViewAdded"
   },
   {
     "id": 7,
     "hc_order": 408,
-    "rnd_order": 701
+    "rnd_order": 701,
+    "name": "root/org/jhotdraw/application/DrawApplication_11/drawingViewSelected"
   },
   {
     "id": 9,
     "hc_order": 482,
-    "rnd_order": 188
+    "rnd_order": 188,
+    "name": "root/org/jhotdraw/application/DrawApplication_1/_init_"
   },
   {
     "id": 10,
     "hc_order": 220,
-    "rnd_order": 40
+    "rnd_order": 40,
+    "name": "root/org/jhotdraw/application/DrawApplication_1/run"
   },
   {
     "id": 12,
     "hc_order": 103,
-    "rnd_order": 256
+    "rnd_order": 256,
+    "name": "root/org/jhotdraw/application/DrawApplication_2/_init_"
   },
   {
     "id": 14,
     "hc_order": 1,
-    "rnd_order": 542
+    "rnd_order": 542,
+    "name": "root/org/jhotdraw/application/DrawApplication_2/windowClosing"
   },
   {
     "id": 17,
     "hc_order": 169,
-    "rnd_order": 547
+    "rnd_order": 547,
+    "name": "root/org/jhotdraw/application/DrawApplication_3/_init_"
   },
   {
     "id": 18,
     "hc_order": 3,
-    "rnd_order": 386
+    "rnd_order": 386,
+    "name": "root/org/jhotdraw/application/DrawApplication_3/execute"
   },
   {
     "id": 20,
     "hc_order": 168,
-    "rnd_order": 577
+    "rnd_order": 577,
+    "name": "root/org/jhotdraw/application/DrawApplication_4/_init_"
   },
   {
     "id": 22,
     "hc_order": 170,
-    "rnd_order": 180
+    "rnd_order": 180,
+    "name": "root/org/jhotdraw/application/DrawApplication_5/_init_"
   },
   {
     "id": 24,
     "hc_order": 172,
-    "rnd_order": 94
+    "rnd_order": 94,
+    "name": "root/org/jhotdraw/application/DrawApplication_6/_init_"
   },
   {
     "id": 26,
     "hc_order": 171,
-    "rnd_order": 617
+    "rnd_order": 617,
+    "name": "root/org/jhotdraw/application/DrawApplication_7/_init_"
   },
   {
     "id": 28,
     "hc_order": 179,
-    "rnd_order": 120
+    "rnd_order": 120,
+    "name": "root/org/jhotdraw/application/DrawApplication_8/_init_"
   },
   {
     "id": 30,
     "hc_order": 178,
-    "rnd_order": 96
+    "rnd_order": 96,
+    "name": "root/org/jhotdraw/application/DrawApplication_9/_init_"
   },
   {
     "id": 32,
     "hc_order": 439,
-    "rnd_order": 116
+    "rnd_order": 116,
+    "name": "root/org/jhotdraw/application/DrawApplication/_init_"
   },
   {
     "id": 33,
     "hc_order": 487,
-    "rnd_order": 143
+    "rnd_order": 143,
+    "name": "root/org/jhotdraw/application/DrawApplication/addListeners"
   },
   {
     "id": 34,
     "hc_order": 141,
-    "rnd_order": 670
+    "rnd_order": 670,
+    "name": "root/org/jhotdraw/application/DrawApplication/addMenuIfPossible"
   },
   {
     "id": 35,
     "hc_order": 349,
-    "rnd_order": 410
+    "rnd_order": 410,
+    "name": "root/org/jhotdraw/application/DrawApplication/addViewChangeListener"
   },
   {
     "id": 36,
     "hc_order": 201,
-    "rnd_order": 487
+    "rnd_order": 487,
+    "name": "root/org/jhotdraw/application/DrawApplication/checkCommandMenu"
   },
   {
     "id": 37,
     "hc_order": 200,
-    "rnd_order": 647
+    "rnd_order": 647,
+    "name": "root/org/jhotdraw/application/DrawApplication/checkCommandMenus"
   },
   {
     "id": 38,
     "hc_order": 196,
-    "rnd_order": 86
+    "rnd_order": 86,
+    "name": "root/org/jhotdraw/application/DrawApplication/class_"
   },
   {
     "id": 39,
     "hc_order": 222,
-    "rnd_order": 603
+    "rnd_order": 603,
+    "name": "root/org/jhotdraw/application/DrawApplication/closeQuery"
   },
   {
     "id": 40,
     "hc_order": 145,
-    "rnd_order": 699
+    "rnd_order": 699,
+    "name": "root/org/jhotdraw/application/DrawApplication/createAlignmentMenu"
   },
   {
     "id": 41,
     "hc_order": 133,
-    "rnd_order": 21
+    "rnd_order": 21,
+    "name": "root/org/jhotdraw/application/DrawApplication/createArrowMenu"
   },
   {
     "id": 42,
     "hc_order": 142,
-    "rnd_order": 407
+    "rnd_order": 407,
+    "name": "root/org/jhotdraw/application/DrawApplication/createAttributesMenu"
   },
   {
     "id": 43,
     "hc_order": 136,
-    "rnd_order": 622
+    "rnd_order": 622,
+    "name": "root/org/jhotdraw/application/DrawApplication/createColorMenu"
   },
   {
     "id": 44,
     "hc_order": 164,
-    "rnd_order": 229
+    "rnd_order": 229,
+    "name": "root/org/jhotdraw/application/DrawApplication/createDebugMenu"
   },
   {
     "id": 45,
     "hc_order": 53,
-    "rnd_order": 2
+    "rnd_order": 2,
+    "name": "root/org/jhotdraw/application/DrawApplication/createDefaultTool"
   },
   {
     "id": 46,
     "hc_order": 491,
-    "rnd_order": 179
+    "rnd_order": 179,
+    "name": "root/org/jhotdraw/application/DrawApplication/createDesktopListener"
   },
   {
     "id": 47,
     "hc_order": 146,
-    "rnd_order": 57
+    "rnd_order": 57,
+    "name": "root/org/jhotdraw/application/DrawApplication/createEditMenu"
   },
   {
     "id": 48,
     "hc_order": 144,
-    "rnd_order": 496
+    "rnd_order": 496,
+    "name": "root/org/jhotdraw/application/DrawApplication/createFileMenu"
   },
   {
     "id": 49,
     "hc_order": 132,
-    "rnd_order": 300
+    "rnd_order": 300,
+    "name": "root/org/jhotdraw/application/DrawApplication/createFontMenu"
   },
   {
     "id": 50,
     "hc_order": 134,
-    "rnd_order": 704
+    "rnd_order": 704,
+    "name": "root/org/jhotdraw/application/DrawApplication/createFontSizeMenu"
   },
   {
     "id": 51,
     "hc_order": 135,
-    "rnd_order": 550
+    "rnd_order": 550,
+    "name": "root/org/jhotdraw/application/DrawApplication/createFontStyleMenu"
   },
   {
     "id": 52,
     "hc_order": 481,
-    "rnd_order": 503
+    "rnd_order": 503,
+    "name": "root/org/jhotdraw/application/DrawApplication/createIconkit"
   },
   {
     "id": 53,
     "hc_order": 140,
-    "rnd_order": 394
+    "rnd_order": 394,
+    "name": "root/org/jhotdraw/application/DrawApplication/createMenus"
   },
   {
     "id": 54,
     "hc_order": 490,
-    "rnd_order": 49
+    "rnd_order": 49,
+    "name": "root/org/jhotdraw/application/DrawApplication/createStatusLine"
   },
   {
     "id": 55,
     "hc_order": 486,
-    "rnd_order": 777
+    "rnd_order": 777,
+    "name": "root/org/jhotdraw/application/DrawApplication/createStorageFormatManager"
   },
   {
     "id": 56,
     "hc_order": 540,
-    "rnd_order": 615
+    "rnd_order": 615,
+    "name": "root/org/jhotdraw/application/DrawApplication/createToolButton"
   },
   {
     "id": 57,
     "hc_order": 492,
-    "rnd_order": 623
+    "rnd_order": 623,
+    "name": "root/org/jhotdraw/application/DrawApplication/createToolPalette"
   },
   {
     "id": 58,
     "hc_order": 542,
-    "rnd_order": 700
+    "rnd_order": 700,
+    "name": "root/org/jhotdraw/application/DrawApplication/createTools"
   },
   {
     "id": 59,
     "hc_order": 484,
-    "rnd_order": 671
+    "rnd_order": 671,
+    "name": "root/org/jhotdraw/application/DrawApplication/defaultSize"
   },
   {
     "id": 60,
     "hc_order": 733,
-    "rnd_order": 666
+    "rnd_order": 666,
+    "name": "root/org/jhotdraw/application/DrawApplication/destroy"
   },
   {
     "id": 61,
     "hc_order": 30,
-    "rnd_order": 374
+    "rnd_order": 374,
+    "name": "root/org/jhotdraw/application/DrawApplication/endApp"
   },
   {
     "id": 62,
     "hc_order": 223,
-    "rnd_order": 618
+    "rnd_order": 618,
+    "name": "root/org/jhotdraw/application/DrawApplication/exit"
   },
   {
     "id": 63,
     "hc_order": 386,
-    "rnd_order": 162
+    "rnd_order": 162,
+    "name": "root/org/jhotdraw/application/DrawApplication/figureSelectionChanged"
   },
   {
     "id": 64,
     "hc_order": 471,
-    "rnd_order": 280
+    "rnd_order": 280,
+    "name": "root/org/jhotdraw/application/DrawApplication/fireViewCreatedEvent"
   },
   {
     "id": 65,
     "hc_order": 350,
-    "rnd_order": 770
+    "rnd_order": 770,
+    "name": "root/org/jhotdraw/application/DrawApplication/fireViewSelectionChangedEvent"
   },
   {
     "id": 66,
     "hc_order": 295,
-    "rnd_order": 649
+    "rnd_order": 649,
+    "name": "root/org/jhotdraw/application/DrawApplication/getApplicationName"
   },
   {
     "id": 67,
     "hc_order": 214,
-    "rnd_order": 431
+    "rnd_order": 431,
+    "name": "root/org/jhotdraw/application/DrawApplication/getDefaultDrawingTitle"
   },
   {
     "id": 68,
     "hc_order": 469,
-    "rnd_order": 578
+    "rnd_order": 578,
+    "name": "root/org/jhotdraw/application/DrawApplication/getDesktop"
   },
   {
     "id": 69,
     "hc_order": 237,
-    "rnd_order": 554
+    "rnd_order": 554,
+    "name": "root/org/jhotdraw/application/DrawApplication/getDesktopListener"
   },
   {
     "id": 70,
     "hc_order": 686,
-    "rnd_order": 656
+    "rnd_order": 656,
+    "name": "root/org/jhotdraw/application/DrawApplication/getDrawingViewSize"
   },
   {
     "id": 71,
     "hc_order": 197,
-    "rnd_order": 64
+    "rnd_order": 64,
+    "name": "root/org/jhotdraw/application/DrawApplication/getRequiredVersions"
   },
   {
     "id": 72,
     "hc_order": 475,
-    "rnd_order": 42
+    "rnd_order": 42,
+    "name": "root/org/jhotdraw/application/DrawApplication/getStatusLine"
   },
   {
     "id": 73,
     "hc_order": 335,
-    "rnd_order": 690
+    "rnd_order": 690,
+    "name": "root/org/jhotdraw/application/DrawApplication/getUndoManager"
   },
   {
     "id": 74,
     "hc_order": 489,
-    "rnd_order": 311
+    "rnd_order": 311,
+    "name": "root/org/jhotdraw/application/DrawApplication/getVersionControlStrategy"
   },
   {
     "id": 75,
     "hc_order": 476,
-    "rnd_order": 562
+    "rnd_order": 562,
+    "name": "root/org/jhotdraw/application/DrawApplication/open"
   },
   {
     "id": 76,
     "hc_order": 465,
-    "rnd_order": 305
+    "rnd_order": 305,
+    "name": "root/org/jhotdraw/application/DrawApplication/paletteUserOver"
   },
   {
     "id": 77,
     "hc_order": 464,
-    "rnd_order": 780
+    "rnd_order": 780,
+    "name": "root/org/jhotdraw/application/DrawApplication/paletteUserSelected"
   },
   {
     "id": 78,
     "hc_order": 514,
-    "rnd_order": 434
+    "rnd_order": 434,
+    "name": "root/org/jhotdraw/application/DrawApplication/setApplicationName"
   },
   {
     "id": 79,
     "hc_order": 52,
-    "rnd_order": 144
+    "rnd_order": 144,
+    "name": "root/org/jhotdraw/application/DrawApplication/setDefaultTool"
   },
   {
     "id": 80,
     "hc_order": 488,
-    "rnd_order": 748
+    "rnd_order": 748,
+    "name": "root/org/jhotdraw/application/DrawApplication/setDesktop"
   },
   {
     "id": 81,
     "hc_order": 493,
-    "rnd_order": 177
+    "rnd_order": 177,
+    "name": "root/org/jhotdraw/application/DrawApplication/setDesktopListener"
   },
   {
     "id": 82,
     "hc_order": 494,
-    "rnd_order": 290
+    "rnd_order": 290,
+    "name": "root/org/jhotdraw/application/DrawApplication/setIconkit"
   },
   {
     "id": 83,
     "hc_order": 460,
-    "rnd_order": 123
+    "rnd_order": 123,
+    "name": "root/org/jhotdraw/application/DrawApplication/setSelected"
   },
   {
     "id": 84,
     "hc_order": 495,
-    "rnd_order": 19
+    "rnd_order": 19,
+    "name": "root/org/jhotdraw/application/DrawApplication/setStatusLine"
   },
   {
     "id": 85,
     "hc_order": 496,
-    "rnd_order": 677
+    "rnd_order": 677,
+    "name": "root/org/jhotdraw/application/DrawApplication/setStorageFormatManager"
   },
   {
     "id": 86,
     "hc_order": 459,
-    "rnd_order": 653
+    "rnd_order": 653,
+    "name": "root/org/jhotdraw/application/DrawApplication/setTool"
   },
   {
     "id": 87,
     "hc_order": 497,
-    "rnd_order": 48
+    "rnd_order": 48,
+    "name": "root/org/jhotdraw/application/DrawApplication/setUndoManager"
   },
   {
     "id": 88,
     "hc_order": 474,
-    "rnd_order": 294
+    "rnd_order": 294,
+    "name": "root/org/jhotdraw/application/DrawApplication/setView"
   },
   {
     "id": 89,
     "hc_order": 457,
-    "rnd_order": 164
+    "rnd_order": 164,
+    "name": "root/org/jhotdraw/application/DrawApplication/showStatus"
   },
   {
     "id": 90,
     "hc_order": 458,
-    "rnd_order": 527
+    "rnd_order": 527,
+    "name": "root/org/jhotdraw/application/DrawApplication/tool"
   },
   {
     "id": 91,
     "hc_order": 463,
-    "rnd_order": 665
+    "rnd_order": 665,
+    "name": "root/org/jhotdraw/application/DrawApplication/toolDone"
   },
   {
     "id": 92,
     "hc_order": 351,
-    "rnd_order": 84
+    "rnd_order": 84,
+    "name": "root/org/jhotdraw/application/DrawApplication/view"
   },
   {
     "id": 95,
     "hc_order": 777,
-    "rnd_order": 754
+    "rnd_order": 754,
+    "name": "root/org/jhotdraw/contrib/AutoscrollHelper/_init_"
   },
   {
     "id": 97,
     "hc_order": 573,
-    "rnd_order": 137
+    "rnd_order": 137,
+    "name": "root/org/jhotdraw/contrib/ComponentFigure/_init_"
   },
   {
     "id": 98,
     "hc_order": 531,
-    "rnd_order": 765
+    "rnd_order": 765,
+    "name": "root/org/jhotdraw/contrib/ComponentFigure/setComponent"
   },
   {
     "id": 100,
     "hc_order": 574,
-    "rnd_order": 515
+    "rnd_order": 515,
+    "name": "root/org/jhotdraw/contrib/CompositeFigureCreationTool/_init_"
   },
   {
     "id": 102,
     "hc_order": 783,
-    "rnd_order": 540
+    "rnd_order": 540,
+    "name": "root/org/jhotdraw/contrib/DesktopEvent/_init_"
   },
   {
     "id": 103,
     "hc_order": 472,
-    "rnd_order": 544
+    "rnd_order": 544,
+    "name": "root/org/jhotdraw/contrib/DesktopEvent/getDrawingView"
   },
   {
     "id": 104,
     "hc_order": 780,
-    "rnd_order": 320
+    "rnd_order": 320,
+    "name": "root/org/jhotdraw/contrib/DesktopEvent/setDrawingView"
   },
   {
     "id": 105,
     "hc_order": 779,
-    "rnd_order": 209
+    "rnd_order": 209,
+    "name": "root/org/jhotdraw/contrib/DesktopEvent/setPreviousDrawingView"
   },
   {
     "id": 107,
     "hc_order": 93,
-    "rnd_order": 669
+    "rnd_order": 669,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService_1/_init_"
   },
   {
     "id": 108,
     "hc_order": 244,
-    "rnd_order": 782
+    "rnd_order": 782,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService_1/componentAdded"
   },
   {
     "id": 110,
     "hc_order": 441,
-    "rnd_order": 533
+    "rnd_order": 533,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/_init_"
   },
   {
     "id": 111,
     "hc_order": 230,
-    "rnd_order": 219
+    "rnd_order": 219,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/addDesktopListener"
   },
   {
     "id": 112,
     "hc_order": 509,
-    "rnd_order": 522
+    "rnd_order": 522,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/createComponentListener"
   },
   {
     "id": 113,
     "hc_order": 406,
-    "rnd_order": 528
+    "rnd_order": 528,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/createDesktopEvent"
   },
   {
     "id": 114,
     "hc_order": 234,
-    "rnd_order": 500
+    "rnd_order": 500,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/fireDrawingViewAddedEvent"
   },
   {
     "id": 115,
     "hc_order": 235,
-    "rnd_order": 295
+    "rnd_order": 295,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/fireDrawingViewSelectedEvent"
   },
   {
     "id": 116,
     "hc_order": 233,
-    "rnd_order": 361
+    "rnd_order": 361,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/getActiveDrawingView"
   },
   {
     "id": 117,
     "hc_order": 511,
-    "rnd_order": 201
+    "rnd_order": 201,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/getContainer"
   },
   {
     "id": 118,
     "hc_order": 784,
-    "rnd_order": 154
+    "rnd_order": 154,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/getDesktop"
   },
   {
     "id": 119,
     "hc_order": 232,
-    "rnd_order": 469
+    "rnd_order": 469,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/setActiveDrawingView"
   },
   {
     "id": 120,
     "hc_order": 512,
-    "rnd_order": 136
+    "rnd_order": 136,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/setContainer"
   },
   {
     "id": 121,
     "hc_order": 510,
-    "rnd_order": 5
+    "rnd_order": 5,
+    "name": "root/org/jhotdraw/contrib/DesktopEventService/setDesktop"
   },
   {
     "id": 123,
     "hc_order": 579,
-    "rnd_order": 175
+    "rnd_order": 175,
+    "name": "root/org/jhotdraw/contrib/DiamondFigure/_init_"
   },
   {
     "id": 125,
     "hc_order": 563,
-    "rnd_order": 752
+    "rnd_order": 752,
+    "name": "root/org/jhotdraw/contrib/GraphicalCompositeFigure/_init_"
   },
   {
     "id": 126,
     "hc_order": 567,
-    "rnd_order": 614
+    "rnd_order": 614,
+    "name": "root/org/jhotdraw/contrib/GraphicalCompositeFigure/getLayouter"
   },
   {
     "id": 127,
     "hc_order": 565,
-    "rnd_order": 173
+    "rnd_order": 173,
+    "name": "root/org/jhotdraw/contrib/GraphicalCompositeFigure/initialize"
   },
   {
     "id": 128,
     "hc_order": 566,
-    "rnd_order": 703
+    "rnd_order": 703,
+    "name": "root/org/jhotdraw/contrib/GraphicalCompositeFigure/setLayouter"
   },
   {
     "id": 129,
     "hc_order": 564,
-    "rnd_order": 759
+    "rnd_order": 759,
+    "name": "root/org/jhotdraw/contrib/GraphicalCompositeFigure/setPresentationFigure"
   },
   {
     "id": 131,
     "hc_order": 242,
-    "rnd_order": 332
+    "rnd_order": 332,
+    "name": "root/org/jhotdraw/contrib/Helper/getDrawingView"
   },
   {
     "id": 133,
     "hc_order": 24,
-    "rnd_order": 458
+    "rnd_order": 458,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopManager/_init_"
   },
   {
     "id": 134,
     "hc_order": 91,
-    "rnd_order": 412
+    "rnd_order": 412,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopManager/getScrollPane"
   },
   {
     "id": 135,
     "hc_order": 90,
-    "rnd_order": 479
+    "rnd_order": 479,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopManager/getScrollPaneInsets"
   },
   {
     "id": 136,
     "hc_order": 92,
-    "rnd_order": 435
+    "rnd_order": 435,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopManager/resizeDesktop"
   },
   {
     "id": 138,
     "hc_order": 23,
-    "rnd_order": 493
+    "rnd_order": 493,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane_1/_init_"
   },
   {
     "id": 139,
     "hc_order": 245,
-    "rnd_order": 613
+    "rnd_order": 613,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane_1/internalFrameActivated"
   },
   {
     "id": 140,
     "hc_order": 246,
-    "rnd_order": 51
+    "rnd_order": 51,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane_1/internalFrameOpened"
   },
   {
     "id": 142,
     "hc_order": 6,
-    "rnd_order": 273
+    "rnd_order": 273,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/_init_"
   },
   {
     "id": 143,
     "hc_order": 236,
-    "rnd_order": 241
+    "rnd_order": 241,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/addDesktopListener"
   },
   {
     "id": 144,
     "hc_order": 466,
-    "rnd_order": 608
+    "rnd_order": 608,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/addToDesktop"
   },
   {
     "id": 145,
     "hc_order": 247,
-    "rnd_order": 659
+    "rnd_order": 659,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/checkDesktopSize"
   },
   {
     "id": 146,
     "hc_order": 248,
-    "rnd_order": 442
+    "rnd_order": 442,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/createContents"
   },
   {
     "id": 147,
     "hc_order": 25,
-    "rnd_order": 352
+    "rnd_order": 352,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/createDesktopEventService"
   },
   {
     "id": 148,
     "hc_order": 241,
-    "rnd_order": 739
+    "rnd_order": 739,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/fireDrawingViewAddedEvent"
   },
   {
     "id": 149,
     "hc_order": 238,
-    "rnd_order": 518
+    "rnd_order": 518,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/fireDrawingViewSelectedEvent"
   },
   {
     "id": 150,
     "hc_order": 239,
-    "rnd_order": 774
+    "rnd_order": 774,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/getActiveDrawingView"
   },
   {
     "id": 151,
     "hc_order": 470,
-    "rnd_order": 734
+    "rnd_order": 734,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/getAllFromDesktop"
   },
   {
     "id": 152,
     "hc_order": 231,
-    "rnd_order": 607
+    "rnd_order": 607,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/getDesktopEventService"
   },
   {
     "id": 153,
     "hc_order": 294,
-    "rnd_order": 8
+    "rnd_order": 8,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/getDrawApplication"
   },
   {
     "id": 154,
     "hc_order": 240,
-    "rnd_order": 409
+    "rnd_order": 409,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/setActiveDrawingView"
   },
   {
     "id": 155,
     "hc_order": 22,
-    "rnd_order": 640
+    "rnd_order": 640,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/setDesktopEventService"
   },
   {
     "id": 156,
     "hc_order": 21,
-    "rnd_order": 178
+    "rnd_order": 178,
+    "name": "root/org/jhotdraw/contrib/MDIDesktopPane/setDrawApplication"
   },
   {
     "id": 158,
     "hc_order": 743,
-    "rnd_order": 47
+    "rnd_order": 47,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/_init_"
   },
   {
     "id": 159,
     "hc_order": 485,
-    "rnd_order": 253
+    "rnd_order": 253,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/createDesktop"
   },
   {
     "id": 160,
     "hc_order": 498,
-    "rnd_order": 572
+    "rnd_order": 572,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/createInitialDrawingView"
   },
   {
     "id": 161,
     "hc_order": 584,
-    "rnd_order": 336
+    "rnd_order": 336,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/createTools"
   },
   {
     "id": 162,
     "hc_order": 754,
-    "rnd_order": 131
+    "rnd_order": 131,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/getDefaultDrawingTitle"
   },
   {
     "id": 163,
     "hc_order": 217,
-    "rnd_order": 249
+    "rnd_order": 249,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/newWindow"
   },
   {
     "id": 164,
     "hc_order": 51,
-    "rnd_order": 264
+    "rnd_order": 264,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/promptNew"
   },
   {
     "id": 165,
     "hc_order": 215,
-    "rnd_order": 196
+    "rnd_order": 196,
+    "name": "root/org/jhotdraw/contrib/MDI_DrawApplication/views"
   },
   {
     "id": 167,
     "hc_order": 546,
-    "rnd_order": 511
+    "rnd_order": 511,
+    "name": "root/org/jhotdraw/contrib/PolygonTool/_init_"
   },
   {
     "id": 169,
     "hc_order": 569,
-    "rnd_order": 161
+    "rnd_order": 161,
+    "name": "root/org/jhotdraw/contrib/SimpleLayouter/_init_"
   },
   {
     "id": 170,
     "hc_order": 44,
-    "rnd_order": 605
+    "rnd_order": 605,
+    "name": "root/org/jhotdraw/contrib/SimpleLayouter/setInsets"
   },
   {
     "id": 171,
     "hc_order": 43,
-    "rnd_order": 362
+    "rnd_order": 362,
+    "name": "root/org/jhotdraw/contrib/SimpleLayouter/setLayoutable"
   },
   {
     "id": 173,
     "hc_order": 583,
-    "rnd_order": 721
+    "rnd_order": 721,
+    "name": "root/org/jhotdraw/contrib/SplitConnectionTool/_init_"
   },
   {
     "id": 175,
     "hc_order": 568,
-    "rnd_order": 240
+    "rnd_order": 240,
+    "name": "root/org/jhotdraw/contrib/StandardLayouter/_init_"
   },
   {
     "id": 177,
     "hc_order": 570,
-    "rnd_order": 248
+    "rnd_order": 248,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/_init_"
   },
   {
     "id": 178,
     "hc_order": 534,
-    "rnd_order": 270
+    "rnd_order": 270,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/createFont"
   },
   {
     "id": 179,
     "hc_order": 668,
-    "rnd_order": 119
+    "rnd_order": 119,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/getAttribute"
   },
   {
     "id": 180,
     "hc_order": 537,
-    "rnd_order": 545
+    "rnd_order": 545,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/markFontDirty"
   },
   {
     "id": 181,
     "hc_order": 536,
-    "rnd_order": 122
+    "rnd_order": 122,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/markSizeDirty"
   },
   {
     "id": 182,
     "hc_order": 535,
-    "rnd_order": 373
+    "rnd_order": 373,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/markTextDirty"
   },
   {
     "id": 183,
     "hc_order": 31,
-    "rnd_order": 228
+    "rnd_order": 228,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/setFontDirty"
   },
   {
     "id": 184,
     "hc_order": 7,
-    "rnd_order": 309
+    "rnd_order": 309,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/setSizeDirty"
   },
   {
     "id": 185,
     "hc_order": 48,
-    "rnd_order": 310
+    "rnd_order": 310,
+    "name": "root/org/jhotdraw/contrib/TextAreaFigure/setTextDirty"
   },
   {
     "id": 187,
     "hc_order": 575,
-    "rnd_order": 596
+    "rnd_order": 596,
+    "name": "root/org/jhotdraw/contrib/TextAreaTool/_init_"
   },
   {
     "id": 189,
     "hc_order": 578,
-    "rnd_order": 284
+    "rnd_order": 284,
+    "name": "root/org/jhotdraw/contrib/TriangleFigure/_init_"
   },
   {
     "id": 191,
     "hc_order": 174,
-    "rnd_order": 232
+    "rnd_order": 232,
+    "name": "root/org/jhotdraw/contrib/WindowMenu_1/_init_"
   },
   {
     "id": 193,
     "hc_order": 173,
-    "rnd_order": 252
+    "rnd_order": 252,
+    "name": "root/org/jhotdraw/contrib/WindowMenu_2/_init_"
   },
   {
     "id": 195,
     "hc_order": 192,
-    "rnd_order": 588
+    "rnd_order": 588,
+    "name": "root/org/jhotdraw/contrib/WindowMenu_3/_init_"
   },
   {
     "id": 197,
     "hc_order": 468,
-    "rnd_order": 689
+    "rnd_order": 689,
+    "name": "root/org/jhotdraw/contrib/WindowMenu/_init_"
   },
   {
     "id": 200,
     "hc_order": 5,
-    "rnd_order": 293
+    "rnd_order": 293,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/_init_"
   },
   {
     "id": 201,
     "hc_order": 126,
-    "rnd_order": 652
+    "rnd_order": 652,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/class_"
   },
   {
     "id": 202,
     "hc_order": 41,
-    "rnd_order": 571
+    "rnd_order": 571,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/createDragGestureRecognizer"
   },
   {
     "id": 203,
     "hc_order": 40,
-    "rnd_order": 369
+    "rnd_order": 369,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/createDragSourceListener"
   },
   {
     "id": 204,
     "hc_order": 42,
-    "rnd_order": 448
+    "rnd_order": 448,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/createDropTarget"
   },
   {
     "id": 205,
     "hc_order": 39,
-    "rnd_order": 78
+    "rnd_order": 78,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/createDropTargetListener"
   },
   {
     "id": 206,
     "hc_order": 38,
-    "rnd_order": 660
+    "rnd_order": 660,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/getDragGestureListener"
   },
   {
     "id": 207,
     "hc_order": 125,
-    "rnd_order": 419
+    "rnd_order": 419,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/getDragSourceActions"
   },
   {
     "id": 208,
     "hc_order": 128,
-    "rnd_order": 672
+    "rnd_order": 672,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/getDropTargetActions"
   },
   {
     "id": 209,
     "hc_order": 127,
-    "rnd_order": 149
+    "rnd_order": 149,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/getDropTargetListener"
   },
   {
     "id": 210,
     "hc_order": 94,
-    "rnd_order": 278
+    "rnd_order": 278,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/initialize"
   },
   {
     "id": 211,
     "hc_order": 36,
-    "rnd_order": 23
+    "rnd_order": 23,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/setDragGestureListener"
   },
   {
     "id": 212,
     "hc_order": 35,
-    "rnd_order": 497
+    "rnd_order": 497,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/setDragGestureRecognizer"
   },
   {
     "id": 213,
     "hc_order": 37,
-    "rnd_order": 365
+    "rnd_order": 365,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/setDragSourceListener"
   },
   {
     "id": 214,
     "hc_order": 34,
-    "rnd_order": 651
+    "rnd_order": 651,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/setDropTarget"
   },
   {
     "id": 215,
     "hc_order": 33,
-    "rnd_order": 718
+    "rnd_order": 718,
+    "name": "root/org/jhotdraw/contrib/dnd/DNDHelper/setDropTargetListener"
   },
   {
     "id": 217,
     "hc_order": 747,
-    "rnd_order": 118
+    "rnd_order": 118,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool_1/_init_"
   },
   {
     "id": 218,
     "hc_order": 757,
-    "rnd_order": 25
+    "rnd_order": 25,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool_1/dragGestureRecognized"
   },
   {
     "id": 220,
     "hc_order": 541,
-    "rnd_order": 399
+    "rnd_order": 399,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/_init_"
   },
   {
     "id": 221,
     "hc_order": 17,
-    "rnd_order": 526
+    "rnd_order": 526,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/class_"
   },
   {
     "id": 222,
     "hc_order": 505,
-    "rnd_order": 266
+    "rnd_order": 266,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/createDragGestureListener"
   },
   {
     "id": 223,
     "hc_order": 16,
-    "rnd_order": 316
+    "rnd_order": 316,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/getDragGestureListener"
   },
   {
     "id": 224,
     "hc_order": 745,
-    "rnd_order": 633
+    "rnd_order": 633,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/isDragOn"
   },
   {
     "id": 225,
     "hc_order": 403,
-    "rnd_order": 438
+    "rnd_order": 438,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/setCursor"
   },
   {
     "id": 226,
     "hc_order": 504,
-    "rnd_order": 106
+    "rnd_order": 106,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/setDragGestureListener"
   },
   {
     "id": 227,
     "hc_order": 14,
-    "rnd_order": 433
+    "rnd_order": 433,
+    "name": "root/org/jhotdraw/contrib/dnd/DragNDropTool/viewCreated"
   },
   {
     "id": 229,
     "hc_order": 123,
-    "rnd_order": 432
+    "rnd_order": 432,
+    "name": "root/org/jhotdraw/contrib/dnd/JHDDragSourceListener/_init_"
   },
   {
     "id": 231,
     "hc_order": 124,
-    "rnd_order": 333
+    "rnd_order": 333,
+    "name": "root/org/jhotdraw/contrib/dnd/JHDDropTargetListener/_init_"
   },
   {
     "id": 234,
     "hc_order": 57,
-    "rnd_order": 398
+    "rnd_order": 398,
+    "name": "root/org/jhotdraw/contrib/html/AbstractContentProducer/_init_"
   },
   {
     "id": 236,
     "hc_order": 729,
-    "rnd_order": 279
+    "rnd_order": 279,
+    "name": "root/org/jhotdraw/contrib/html/AttributeFigureContentProducer/_init_"
   },
   {
     "id": 238,
     "hc_order": 728,
-    "rnd_order": 646
+    "rnd_order": 646,
+    "name": "root/org/jhotdraw/contrib/html/ColorContentProducer/_init_"
   },
   {
     "id": 240,
     "hc_order": 561,
-    "rnd_order": 408
+    "rnd_order": 408,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/_init_"
   },
   {
     "id": 241,
     "hc_order": 587,
-    "rnd_order": 216
+    "rnd_order": 216,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/class_"
   },
   {
     "id": 242,
     "hc_order": 766,
-    "rnd_order": 45
+    "rnd_order": 45,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/getContentProducer"
   },
   {
     "id": 243,
     "hc_order": 768,
-    "rnd_order": 250
+    "rnd_order": 250,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/getExactContentProducer"
   },
   {
     "id": 244,
     "hc_order": 770,
-    "rnd_order": 452
+    "rnd_order": 452,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/getParent"
   },
   {
     "id": 245,
     "hc_order": 767,
-    "rnd_order": 775
+    "rnd_order": 775,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/getSuperClassContentProducer"
   },
   {
     "id": 246,
     "hc_order": 769,
-    "rnd_order": 587
+    "rnd_order": 587,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/isAutonomous"
   },
   {
     "id": 247,
     "hc_order": 592,
-    "rnd_order": 287
+    "rnd_order": 287,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/registerContentProducer"
   },
   {
     "id": 248,
     "hc_order": 752,
-    "rnd_order": 727
+    "rnd_order": 727,
+    "name": "root/org/jhotdraw/contrib/html/ContentProducerRegistry/setParent"
   },
   {
     "id": 250,
     "hc_order": 552,
-    "rnd_order": 679
+    "rnd_order": 679,
+    "name": "root/org/jhotdraw/contrib/html/DisposableResourceManagerFactory/createStandardHolder"
   },
   {
     "id": 251,
     "hc_order": 119,
-    "rnd_order": 313
+    "rnd_order": 313,
+    "name": "root/org/jhotdraw/contrib/html/DisposableResourceManagerFactory/getManager"
   },
   {
     "id": 252,
     "hc_order": 116,
-    "rnd_order": 743
+    "rnd_order": 743,
+    "name": "root/org/jhotdraw/contrib/html/DisposableResourceManagerFactory/initManager"
   },
   {
     "id": 254,
     "hc_order": 82,
-    "rnd_order": 59
+    "rnd_order": 59,
+    "name": "root/org/jhotdraw/contrib/html/DisposalThread/_init_"
   },
   {
     "id": 257,
     "hc_order": 110,
-    "rnd_order": 203
+    "rnd_order": 203,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/_init_"
   },
   {
     "id": 258,
     "hc_order": 9,
-    "rnd_order": 99
+    "rnd_order": 99,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/getManager"
   },
   {
     "id": 259,
     "hc_order": 81,
-    "rnd_order": 9
+    "rnd_order": 9,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/getPeriodicity"
   },
   {
     "id": 260,
     "hc_order": 108,
-    "rnd_order": 735
+    "rnd_order": 735,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/initDisposalThread"
   },
   {
     "id": 261,
     "hc_order": 104,
-    "rnd_order": 446
+    "rnd_order": 446,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/setManager"
   },
   {
     "id": 262,
     "hc_order": 109,
-    "rnd_order": 181
+    "rnd_order": 181,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/setPeriodicity"
   },
   {
     "id": 263,
     "hc_order": 106,
-    "rnd_order": 145
+    "rnd_order": 145,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/startDisposing"
   },
   {
     "id": 264,
     "hc_order": 8,
-    "rnd_order": 349
+    "rnd_order": 349,
+    "name": "root/org/jhotdraw/contrib/html/ETSLADisposalStrategy/stopDisposing"
   },
   {
     "id": 266,
     "hc_order": 597,
-    "rnd_order": 773
+    "rnd_order": 773,
+    "name": "root/org/jhotdraw/contrib/html/FigureDataContentProducer/_init_"
   },
   {
     "id": 268,
     "hc_order": 594,
-    "rnd_order": 191
+    "rnd_order": 191,
+    "name": "root/org/jhotdraw/contrib/html/HTMLColorContentProducer/_init_"
   },
   {
     "id": 270,
     "hc_order": 560,
-    "rnd_order": 183
+    "rnd_order": 183,
+    "name": "root/org/jhotdraw/contrib/html/HTMLContentProducer/_init_"
   },
   {
     "id": 272,
     "hc_order": 84,
-    "rnd_order": 557
+    "rnd_order": 557,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure_1/_init_"
   },
   {
     "id": 274,
     "hc_order": 83,
-    "rnd_order": 555
+    "rnd_order": 555,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure_2/_init_"
   },
   {
     "id": 276,
     "hc_order": 86,
-    "rnd_order": 490
+    "rnd_order": 490,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure_3/_init_"
   },
   {
     "id": 278,
     "hc_order": 85,
-    "rnd_order": 292
+    "rnd_order": 292,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure_4/_init_"
   },
   {
     "id": 280,
     "hc_order": 580,
-    "rnd_order": 46
+    "rnd_order": 46,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/_init_"
   },
   {
     "id": 281,
     "hc_order": 89,
-    "rnd_order": 776
+    "rnd_order": 776,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/addPopupMenuItems"
   },
   {
     "id": 282,
     "hc_order": 593,
-    "rnd_order": 215
+    "rnd_order": 215,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/class_"
   },
   {
     "id": 283,
     "hc_order": 557,
-    "rnd_order": 157
+    "rnd_order": 157,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/createPopupMenu"
   },
   {
     "id": 284,
     "hc_order": 539,
-    "rnd_order": 347
+    "rnd_order": 347,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/initialize"
   },
   {
     "id": 285,
     "hc_order": 555,
-    "rnd_order": 366
+    "rnd_order": 366,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/markFontDirty"
   },
   {
     "id": 286,
     "hc_order": 538,
-    "rnd_order": 142
+    "rnd_order": 142,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/markImageDirty"
   },
   {
     "id": 287,
     "hc_order": 553,
-    "rnd_order": 531
+    "rnd_order": 531,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/markSizeDirty"
   },
   {
     "id": 288,
     "hc_order": 554,
-    "rnd_order": 510
+    "rnd_order": 510,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/markTextDirty"
   },
   {
     "id": 289,
     "hc_order": 556,
-    "rnd_order": 524
+    "rnd_order": 524,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/setAttribute"
   },
   {
     "id": 290,
     "hc_order": 559,
-    "rnd_order": 58
+    "rnd_order": 58,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/setFrameFigure"
   },
   {
     "id": 291,
     "hc_order": 558,
-    "rnd_order": 610
+    "rnd_order": 610,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/setIntrinsicContentProducer"
   },
   {
     "id": 292,
     "hc_order": 87,
-    "rnd_order": 147
+    "rnd_order": 147,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/usesBufferedDraw"
   },
   {
     "id": 293,
     "hc_order": 88,
-    "rnd_order": 14
+    "rnd_order": 14,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaFigure/usesDirectDraw"
   },
   {
     "id": 295,
     "hc_order": 591,
-    "rnd_order": 569
+    "rnd_order": 569,
+    "name": "root/org/jhotdraw/contrib/html/HTMLTextAreaTool/_init_"
   },
   {
     "id": 297,
     "hc_order": 115,
-    "rnd_order": 621
+    "rnd_order": 621,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/_init_"
   },
   {
     "id": 298,
     "hc_order": 117,
-    "rnd_order": 664
+    "rnd_order": 664,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/clone"
   },
   {
     "id": 299,
     "hc_order": 20,
-    "rnd_order": 60
+    "rnd_order": 60,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/dispose"
   },
   {
     "id": 300,
     "hc_order": 114,
-    "rnd_order": 691
+    "rnd_order": 691,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/getDisposableDelay"
   },
   {
     "id": 301,
     "hc_order": 771,
-    "rnd_order": 688
+    "rnd_order": 688,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/resetDelay"
   },
   {
     "id": 302,
     "hc_order": 113,
-    "rnd_order": 482
+    "rnd_order": 482,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/setDisposableDelay"
   },
   {
     "id": 303,
     "hc_order": 120,
-    "rnd_order": 297
+    "rnd_order": 297,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceHolder/setResource"
   },
   {
     "id": 305,
     "hc_order": 111,
-    "rnd_order": 18
+    "rnd_order": 18,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceManager/_init_"
   },
   {
     "id": 306,
     "hc_order": 107,
-    "rnd_order": 254
+    "rnd_order": 254,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceManager/getStrategy"
   },
   {
     "id": 307,
     "hc_order": 118,
-    "rnd_order": 158
+    "rnd_order": 158,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceManager/registerResource"
   },
   {
     "id": 308,
     "hc_order": 105,
-    "rnd_order": 360
+    "rnd_order": 360,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceManager/setStrategy"
   },
   {
     "id": 309,
     "hc_order": 112,
-    "rnd_order": 377
+    "rnd_order": 377,
+    "name": "root/org/jhotdraw/contrib/html/StandardDisposableResourceManager/startDisposing"
   },
   {
     "id": 311,
     "hc_order": 596,
-    "rnd_order": 50
+    "rnd_order": 50,
+    "name": "root/org/jhotdraw/contrib/html/TextHolderContentProducer/_init_"
   },
   {
     "id": 313,
     "hc_order": 581,
-    "rnd_order": 722
+    "rnd_order": 722,
+    "name": "root/org/jhotdraw/contrib/html/URLContentProducer/_init_"
   },
   {
     "id": 316,
     "hc_order": 29,
-    "rnd_order": 764
+    "rnd_order": 764,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_1/_init_"
   },
   {
     "id": 317,
     "hc_order": 741,
-    "rnd_order": 451
+    "rnd_order": 451,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_1/mousePressed"
   },
   {
     "id": 318,
     "hc_order": 742,
-    "rnd_order": 135
+    "rnd_order": 135,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_1/mouseReleased"
   },
   {
     "id": 320,
     "hc_order": 45,
-    "rnd_order": 745
+    "rnd_order": 745,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_2/_init_"
   },
   {
     "id": 321,
     "hc_order": 740,
-    "rnd_order": 696
+    "rnd_order": 696,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_2/mouseDragged"
   },
   {
     "id": 322,
     "hc_order": 739,
-    "rnd_order": 364
+    "rnd_order": 364,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_2/mouseMoved"
   },
   {
     "id": 324,
     "hc_order": 744,
-    "rnd_order": 186
+    "rnd_order": 186,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_3/_init_"
   },
   {
     "id": 325,
     "hc_order": 776,
-    "rnd_order": 629
+    "rnd_order": 629,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView_3/keyPressed"
   },
   {
     "id": 327,
     "hc_order": 685,
-    "rnd_order": 462
+    "rnd_order": 462,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/_init_"
   },
   {
     "id": 328,
     "hc_order": 225,
-    "rnd_order": 261
+    "rnd_order": 261,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/access_000"
   },
   {
     "id": 329,
     "hc_order": 255,
-    "rnd_order": 172
+    "rnd_order": 172,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/constrainPoint"
   },
   {
     "id": 330,
     "hc_order": 269,
-    "rnd_order": 732
+    "rnd_order": 732,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/createKeyListener"
   },
   {
     "id": 331,
     "hc_order": 268,
-    "rnd_order": 737
+    "rnd_order": 737,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/createMouseListener"
   },
   {
     "id": 332,
     "hc_order": 266,
-    "rnd_order": 109
+    "rnd_order": 109,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/createMouseMotionListener"
   },
   {
     "id": 333,
     "hc_order": 285,
-    "rnd_order": 24
+    "rnd_order": 24,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/createScaledEvent"
   },
   {
     "id": 334,
     "hc_order": 284,
-    "rnd_order": 71
+    "rnd_order": 71,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/drawBackground"
   },
   {
     "id": 335,
     "hc_order": 291,
-    "rnd_order": 485
+    "rnd_order": 485,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/drawingInvalidated"
   },
   {
     "id": 336,
     "hc_order": 283,
-    "rnd_order": 267
+    "rnd_order": 267,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/getGraphics"
   },
   {
     "id": 337,
     "hc_order": 749,
-    "rnd_order": 90
+    "rnd_order": 90,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/getMinimumSize"
   },
   {
     "id": 338,
     "hc_order": 249,
-    "rnd_order": 239
+    "rnd_order": 239,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/getPreferredSize"
   },
   {
     "id": 339,
     "hc_order": 276,
-    "rnd_order": 584
+    "rnd_order": 584,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/getScale"
   },
   {
     "id": 340,
     "hc_order": 252,
-    "rnd_order": 728
+    "rnd_order": 728,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/getSize"
   },
   {
     "id": 341,
     "hc_order": 282,
-    "rnd_order": 304
+    "rnd_order": 304,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/paint"
   },
   {
     "id": 342,
     "hc_order": 280,
-    "rnd_order": 746
+    "rnd_order": 746,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/repairDamage"
   },
   {
     "id": 343,
     "hc_order": 684,
-    "rnd_order": 38
+    "rnd_order": 38,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/setDrawing"
   },
   {
     "id": 344,
     "hc_order": 275,
-    "rnd_order": 768
+    "rnd_order": 768,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomDrawingView/transformGraphics"
   },
   {
     "id": 346,
     "hc_order": 545,
-    "rnd_order": 750
+    "rnd_order": 750,
+    "name": "root/org/jhotdraw/contrib/zoom/ZoomTool/_init_"
   },
   {
     "id": 349,
     "hc_order": 604,
-    "rnd_order": 530
+    "rnd_order": 530,
+    "name": "root/org/jhotdraw/figures/AbstractLineDecoration/_init_"
   },
   {
     "id": 351,
     "hc_order": 600,
-    "rnd_order": 125
+    "rnd_order": 125,
+    "name": "root/org/jhotdraw/figures/ArrowTip/_init_"
   },
   {
     "id": 352,
     "hc_order": 603,
-    "rnd_order": 359
+    "rnd_order": 359,
+    "name": "root/org/jhotdraw/figures/ArrowTip/setAngle"
   },
   {
     "id": 353,
     "hc_order": 602,
-    "rnd_order": 328
+    "rnd_order": 328,
+    "name": "root/org/jhotdraw/figures/ArrowTip/setInnerRadius"
   },
   {
     "id": 354,
     "hc_order": 601,
-    "rnd_order": 717
+    "rnd_order": 717,
+    "name": "root/org/jhotdraw/figures/ArrowTip/setOuterRadius"
   },
   {
     "id": 356,
     "hc_order": 533,
-    "rnd_order": 227
+    "rnd_order": 227,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/_init_"
   },
   {
     "id": 357,
     "hc_order": 529,
-    "rnd_order": 234
+    "rnd_order": 234,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/draw"
   },
   {
     "id": 358,
     "hc_order": 666,
-    "rnd_order": 160
+    "rnd_order": 160,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/getAttribute"
   },
   {
     "id": 359,
     "hc_order": 665,
-    "rnd_order": 501
+    "rnd_order": 501,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/getDefaultAttribute"
   },
   {
     "id": 360,
     "hc_order": 698,
-    "rnd_order": 579
+    "rnd_order": 579,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/getFillColor"
   },
   {
     "id": 361,
     "hc_order": 697,
-    "rnd_order": 581
+    "rnd_order": 581,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/getFrameColor"
   },
   {
     "id": 362,
     "hc_order": 586,
-    "rnd_order": 27
+    "rnd_order": 27,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/initDefaultAttribute"
   },
   {
     "id": 363,
     "hc_order": 671,
-    "rnd_order": 269
+    "rnd_order": 269,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/initializeAttributes"
   },
   {
     "id": 364,
     "hc_order": 672,
-    "rnd_order": 552
+    "rnd_order": 552,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/setAttribute"
   },
   {
     "id": 365,
     "hc_order": 669,
-    "rnd_order": 212
+    "rnd_order": 212,
+    "name": "root/org/jhotdraw/figures/AttributeFigure/writeObject"
   },
   {
     "id": 367,
     "hc_order": 585,
-    "rnd_order": 772
+    "rnd_order": 772,
+    "name": "root/org/jhotdraw/figures/BorderTool/_init_"
   },
   {
     "id": 369,
     "hc_order": 582,
-    "rnd_order": 662
+    "rnd_order": 662,
+    "name": "root/org/jhotdraw/figures/ConnectedTextTool/_init_"
   },
   {
     "id": 371,
     "hc_order": 588,
-    "rnd_order": 598
+    "rnd_order": 598,
+    "name": "root/org/jhotdraw/figures/ElbowConnection/_init_"
   },
   {
     "id": 373,
     "hc_order": 572,
-    "rnd_order": 130
+    "rnd_order": 130,
+    "name": "root/org/jhotdraw/figures/EllipseFigure/_init_"
   },
   {
     "id": 374,
     "hc_order": 525,
-    "rnd_order": 194
+    "rnd_order": 194,
+    "name": "root/org/jhotdraw/figures/EllipseFigure/basicDisplayBox"
   },
   {
     "id": 375,
     "hc_order": 709,
-    "rnd_order": 686
+    "rnd_order": 686,
+    "name": "root/org/jhotdraw/figures/EllipseFigure/displayBox"
   },
   {
     "id": 376,
     "hc_order": 704,
-    "rnd_order": 767
+    "rnd_order": 767,
+    "name": "root/org/jhotdraw/figures/EllipseFigure/drawBackground"
   },
   {
     "id": 377,
     "hc_order": 703,
-    "rnd_order": 204
+    "rnd_order": 204,
+    "name": "root/org/jhotdraw/figures/EllipseFigure/drawFrame"
   },
   {
     "id": 379,
     "hc_order": 676,
-    "rnd_order": 720
+    "rnd_order": 720,
+    "name": "root/org/jhotdraw/figures/FigureAttributes/_init_"
   },
   {
     "id": 380,
     "hc_order": 663,
-    "rnd_order": 425
+    "rnd_order": 425,
+    "name": "root/org/jhotdraw/figures/FigureAttributes/get"
   },
   {
     "id": 381,
     "hc_order": 662,
-    "rnd_order": 570
+    "rnd_order": 570,
+    "name": "root/org/jhotdraw/figures/FigureAttributes/hasDefined"
   },
   {
     "id": 382,
     "hc_order": 675,
-    "rnd_order": 348
+    "rnd_order": 348,
+    "name": "root/org/jhotdraw/figures/FigureAttributes/set"
   },
   {
     "id": 384,
     "hc_order": 184,
-    "rnd_order": 566
+    "rnd_order": 566,
+    "name": "root/org/jhotdraw/figures/GroupCommand/_init_"
   },
   {
     "id": 385,
     "hc_order": 318,
-    "rnd_order": 306
+    "rnd_order": 306,
+    "name": "root/org/jhotdraw/figures/GroupCommand/isExecutableWithView"
   },
   {
     "id": 387,
     "hc_order": 175,
-    "rnd_order": 166
+    "rnd_order": 166,
+    "name": "root/org/jhotdraw/figures/InsertImageCommand/_init_"
   },
   {
     "id": 389,
     "hc_order": 595,
-    "rnd_order": 33
+    "rnd_order": 33,
+    "name": "root/org/jhotdraw/figures/LineConnection/_init_"
   },
   {
     "id": 391,
     "hc_order": 589,
-    "rnd_order": 218
+    "rnd_order": 218,
+    "name": "root/org/jhotdraw/figures/LineFigure/_init_"
   },
   {
     "id": 393,
     "hc_order": 438,
-    "rnd_order": 247
+    "rnd_order": 247,
+    "name": "root/org/jhotdraw/figures/PolyLineFigure/_init_"
   },
   {
     "id": 394,
     "hc_order": 678,
-    "rnd_order": 401
+    "rnd_order": 401,
+    "name": "root/org/jhotdraw/figures/PolyLineFigure/addPoint"
   },
   {
     "id": 395,
     "hc_order": 599,
-    "rnd_order": 449
+    "rnd_order": 449,
+    "name": "root/org/jhotdraw/figures/PolyLineFigure/setEndDecoration"
   },
   {
     "id": 396,
     "hc_order": 598,
-    "rnd_order": 757
+    "rnd_order": 757,
+    "name": "root/org/jhotdraw/figures/PolyLineFigure/setStartDecoration"
   },
   {
     "id": 398,
     "hc_order": 562,
-    "rnd_order": 308
+    "rnd_order": 308,
+    "name": "root/org/jhotdraw/figures/RectangleFigure/_init_"
   },
   {
     "id": 399,
     "hc_order": 526,
-    "rnd_order": 224
+    "rnd_order": 224,
+    "name": "root/org/jhotdraw/figures/RectangleFigure/basicDisplayBox"
   },
   {
     "id": 400,
     "hc_order": 708,
-    "rnd_order": 538
+    "rnd_order": 538,
+    "name": "root/org/jhotdraw/figures/RectangleFigure/displayBox"
   },
   {
     "id": 401,
     "hc_order": 702,
-    "rnd_order": 736
+    "rnd_order": 736,
+    "name": "root/org/jhotdraw/figures/RectangleFigure/drawBackground"
   },
   {
     "id": 402,
     "hc_order": 701,
-    "rnd_order": 303
+    "rnd_order": 303,
+    "name": "root/org/jhotdraw/figures/RectangleFigure/drawFrame"
   },
   {
     "id": 404,
     "hc_order": 571,
-    "rnd_order": 502
+    "rnd_order": 502,
+    "name": "root/org/jhotdraw/figures/RoundRectangleFigure/_init_"
   },
   {
     "id": 405,
     "hc_order": 530,
-    "rnd_order": 330
+    "rnd_order": 330,
+    "name": "root/org/jhotdraw/figures/RoundRectangleFigure/basicDisplayBox"
   },
   {
     "id": 407,
     "hc_order": 544,
-    "rnd_order": 731
+    "rnd_order": 731,
+    "name": "root/org/jhotdraw/figures/ScribbleTool/_init_"
   },
   {
     "id": 409,
     "hc_order": 590,
-    "rnd_order": 17
+    "rnd_order": 17,
+    "name": "root/org/jhotdraw/figures/TextFigure/_init_"
   },
   {
     "id": 410,
     "hc_order": 524,
-    "rnd_order": 595
+    "rnd_order": 595,
+    "name": "root/org/jhotdraw/figures/TextFigure/basicDisplayBox"
   },
   {
     "id": 411,
     "hc_order": 677,
-    "rnd_order": 681
+    "rnd_order": 681,
+    "name": "root/org/jhotdraw/figures/TextFigure/changed"
   },
   {
     "id": 412,
     "hc_order": 654,
-    "rnd_order": 335
+    "rnd_order": 335,
+    "name": "root/org/jhotdraw/figures/TextFigure/createCurrentFont"
   },
   {
     "id": 413,
     "hc_order": 710,
-    "rnd_order": 351
+    "rnd_order": 351,
+    "name": "root/org/jhotdraw/figures/TextFigure/displayBox"
   },
   {
     "id": 414,
     "hc_order": 699,
-    "rnd_order": 471
+    "rnd_order": 471,
+    "name": "root/org/jhotdraw/figures/TextFigure/drawFrame"
   },
   {
     "id": 415,
     "hc_order": 667,
-    "rnd_order": 210
+    "rnd_order": 210,
+    "name": "root/org/jhotdraw/figures/TextFigure/getAttribute"
   },
   {
     "id": 416,
     "hc_order": 651,
-    "rnd_order": 195
+    "rnd_order": 195,
+    "name": "root/org/jhotdraw/figures/TextFigure/getFont"
   },
   {
     "id": 417,
     "hc_order": 683,
-    "rnd_order": 719
+    "rnd_order": 719,
+    "name": "root/org/jhotdraw/figures/TextFigure/getObservedFigure"
   },
   {
     "id": 418,
     "hc_order": 652,
-    "rnd_order": 344
+    "rnd_order": 344,
+    "name": "root/org/jhotdraw/figures/TextFigure/getText"
   },
   {
     "id": 419,
     "hc_order": 618,
-    "rnd_order": 370
+    "rnd_order": 370,
+    "name": "root/org/jhotdraw/figures/TextFigure/getTextHolder"
   },
   {
     "id": 420,
     "hc_order": 682,
-    "rnd_order": 197
+    "rnd_order": 197,
+    "name": "root/org/jhotdraw/figures/TextFigure/markDirty"
   },
   {
     "id": 421,
     "hc_order": 693,
-    "rnd_order": 98
+    "rnd_order": 98,
+    "name": "root/org/jhotdraw/figures/TextFigure/overlayColumns"
   },
   {
     "id": 422,
     "hc_order": 670,
-    "rnd_order": 708
+    "rnd_order": 708,
+    "name": "root/org/jhotdraw/figures/TextFigure/readObject"
   },
   {
     "id": 423,
     "hc_order": 655,
-    "rnd_order": 260
+    "rnd_order": 260,
+    "name": "root/org/jhotdraw/figures/TextFigure/setAttribute"
   },
   {
     "id": 424,
     "hc_order": 636,
-    "rnd_order": 32
+    "rnd_order": 32,
+    "name": "root/org/jhotdraw/figures/TextFigure/setText"
   },
   {
     "id": 425,
     "hc_order": 694,
-    "rnd_order": 429
+    "rnd_order": 429,
+    "name": "root/org/jhotdraw/figures/TextFigure/textDisplayBox"
   },
   {
     "id": 426,
     "hc_order": 696,
-    "rnd_order": 83
+    "rnd_order": 83,
+    "name": "root/org/jhotdraw/figures/TextFigure/textExtent"
   },
   {
     "id": 428,
     "hc_order": 576,
-    "rnd_order": 525
+    "rnd_order": 525,
+    "name": "root/org/jhotdraw/figures/TextTool/_init_"
   },
   {
     "id": 429,
     "hc_order": 405,
-    "rnd_order": 262
+    "rnd_order": 262,
+    "name": "root/org/jhotdraw/figures/TextTool/activate"
   },
   {
     "id": 430,
     "hc_order": 620,
-    "rnd_order": 223
+    "rnd_order": 223,
+    "name": "root/org/jhotdraw/figures/TextTool/beginEdit"
   },
   {
     "id": 431,
     "hc_order": 649,
-    "rnd_order": 505
+    "rnd_order": 505,
+    "name": "root/org/jhotdraw/figures/TextTool/createFloatingTextField"
   },
   {
     "id": 432,
     "hc_order": 635,
-    "rnd_order": 632
+    "rnd_order": 632,
+    "name": "root/org/jhotdraw/figures/TextTool/createPasteUndoActivity"
   },
   {
     "id": 433,
     "hc_order": 387,
-    "rnd_order": 217
+    "rnd_order": 217,
+    "name": "root/org/jhotdraw/figures/TextTool/deactivate"
   },
   {
     "id": 434,
     "hc_order": 391,
-    "rnd_order": 271
+    "rnd_order": 271,
+    "name": "root/org/jhotdraw/figures/TextTool/endEdit"
   },
   {
     "id": 435,
     "hc_order": 650,
-    "rnd_order": 711
+    "rnd_order": 711,
+    "name": "root/org/jhotdraw/figures/TextTool/fieldBounds"
   },
   {
     "id": 436,
     "hc_order": 638,
-    "rnd_order": 464
+    "rnd_order": 464,
+    "name": "root/org/jhotdraw/figures/TextTool/getFloatingTextField"
   },
   {
     "id": 437,
     "hc_order": 630,
-    "rnd_order": 756
+    "rnd_order": 756,
+    "name": "root/org/jhotdraw/figures/TextTool/getTypingTarget"
   },
   {
     "id": 438,
     "hc_order": 378,
-    "rnd_order": 625
+    "rnd_order": 625,
+    "name": "root/org/jhotdraw/figures/TextTool/isActive"
   },
   {
     "id": 439,
     "hc_order": 634,
-    "rnd_order": 155
+    "rnd_order": 155,
+    "name": "root/org/jhotdraw/figures/TextTool/isDeleteTextFigure"
   },
   {
     "id": 440,
     "hc_order": 397,
-    "rnd_order": 7
+    "rnd_order": 7,
+    "name": "root/org/jhotdraw/figures/TextTool/mouseDown"
   },
   {
     "id": 441,
     "hc_order": 393,
-    "rnd_order": 312
+    "rnd_order": 312,
+    "name": "root/org/jhotdraw/figures/TextTool/mouseUp"
   },
   {
     "id": 442,
     "hc_order": 648,
-    "rnd_order": 288
+    "rnd_order": 288,
+    "name": "root/org/jhotdraw/figures/TextTool/setFloatingTextField"
   },
   {
     "id": 443,
     "hc_order": 631,
-    "rnd_order": 141
+    "rnd_order": 141,
+    "name": "root/org/jhotdraw/figures/TextTool/setSelectedFigure"
   },
   {
     "id": 444,
     "hc_order": 645,
-    "rnd_order": 478
+    "rnd_order": 478,
+    "name": "root/org/jhotdraw/figures/TextTool/setTypingTarget"
   },
   {
     "id": 446,
     "hc_order": 185,
-    "rnd_order": 421
+    "rnd_order": 421,
+    "name": "root/org/jhotdraw/figures/UngroupCommand/_init_"
   },
   {
     "id": 447,
     "hc_order": 322,
-    "rnd_order": 422
+    "rnd_order": 422,
+    "name": "root/org/jhotdraw/figures/UngroupCommand/isExecutableWithView"
   },
   {
     "id": 450,
     "hc_order": 293,
-    "rnd_order": 529
+    "rnd_order": 529,
+    "name": "root/org/jhotdraw/framework/DrawingChangeEvent/_init_"
   },
   {
     "id": 451,
     "hc_order": 277,
-    "rnd_order": 749
+    "rnd_order": 749,
+    "name": "root/org/jhotdraw/framework/DrawingChangeEvent/getInvalidatedRectangle"
   },
   {
     "id": 453,
     "hc_order": 658,
-    "rnd_order": 481
+    "rnd_order": 481,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/_init_"
   },
   {
     "id": 454,
     "hc_order": 660,
-    "rnd_order": 785
+    "rnd_order": 785,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/addConstant"
   },
   {
     "id": 455,
     "hc_order": 659,
-    "rnd_order": 208
+    "rnd_order": 208,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/equals"
   },
   {
     "id": 456,
     "hc_order": 664,
-    "rnd_order": 483
+    "rnd_order": 483,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/getConstant"
   },
   {
     "id": 457,
     "hc_order": 606,
-    "rnd_order": 389
+    "rnd_order": 389,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/getID"
   },
   {
     "id": 458,
     "hc_order": 605,
-    "rnd_order": 424
+    "rnd_order": 424,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/getName"
   },
   {
     "id": 459,
     "hc_order": 661,
-    "rnd_order": 44
+    "rnd_order": 44,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/hashCode"
   },
   {
     "id": 460,
     "hc_order": 657,
-    "rnd_order": 285
+    "rnd_order": 285,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/setID"
   },
   {
     "id": 461,
     "hc_order": 656,
-    "rnd_order": 15
+    "rnd_order": 15,
+    "name": "root/org/jhotdraw/framework/FigureAttributeConstant/setName"
   },
   {
     "id": 463,
     "hc_order": 712,
-    "rnd_order": 753
+    "rnd_order": 753,
+    "name": "root/org/jhotdraw/framework/FigureChangeEvent/_init_"
   },
   {
     "id": 464,
     "hc_order": 522,
-    "rnd_order": 512
+    "rnd_order": 512,
+    "name": "root/org/jhotdraw/framework/FigureChangeEvent/getFigure"
   },
   {
     "id": 465,
     "hc_order": 292,
-    "rnd_order": 415
+    "rnd_order": 415,
+    "name": "root/org/jhotdraw/framework/FigureChangeEvent/getInvalidatedRectangle"
   },
   {
     "id": 469,
     "hc_order": 687,
-    "rnd_order": 575
+    "rnd_order": 575,
+    "name": "root/org/jhotdraw/samples/javadraw/AnimationDecorator/_init_"
   },
   {
     "id": 470,
     "hc_order": 679,
-    "rnd_order": 371
+    "rnd_order": 371,
+    "name": "root/org/jhotdraw/samples/javadraw/AnimationDecorator/basicDisplayBox"
   },
   {
     "id": 471,
     "hc_order": 716,
-    "rnd_order": 473
+    "rnd_order": 473,
+    "name": "root/org/jhotdraw/samples/javadraw/AnimationDecorator/displayBox"
   },
   {
     "id": 473,
     "hc_order": 755,
-    "rnd_order": 628
+    "rnd_order": 628,
+    "name": "root/org/jhotdraw/samples/javadraw/BouncingDrawing/_init_"
   },
   {
     "id": 474,
     "hc_order": 298,
-    "rnd_order": 88
+    "rnd_order": 88,
+    "name": "root/org/jhotdraw/samples/javadraw/BouncingDrawing/add"
   },
   {
     "id": 476,
     "hc_order": 181,
-    "rnd_order": 684
+    "rnd_order": 684,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp_1/_init_"
   },
   {
     "id": 478,
     "hc_order": 180,
-    "rnd_order": 706
+    "rnd_order": 706,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp_2/_init_"
   },
   {
     "id": 480,
     "hc_order": 177,
-    "rnd_order": 54
+    "rnd_order": 54,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp_3/_init_"
   },
   {
     "id": 482,
     "hc_order": 176,
-    "rnd_order": 509
+    "rnd_order": 509,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp_4/_init_"
   },
   {
     "id": 484,
     "hc_order": 165,
-    "rnd_order": 307
+    "rnd_order": 307,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp_5/_init_"
   },
   {
     "id": 486,
     "hc_order": 500,
-    "rnd_order": 546
+    "rnd_order": 546,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/_init_"
   },
   {
     "id": 487,
     "hc_order": 138,
-    "rnd_order": 230
+    "rnd_order": 230,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createAnimationMenu"
   },
   {
     "id": 488,
     "hc_order": 143,
-    "rnd_order": 641
+    "rnd_order": 641,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createDebugMenu"
   },
   {
     "id": 489,
     "hc_order": 216,
-    "rnd_order": 495
+    "rnd_order": 495,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createDrawing"
   },
   {
     "id": 490,
     "hc_order": 467,
-    "rnd_order": 200
+    "rnd_order": 200,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createDrawingView"
   },
   {
     "id": 491,
     "hc_order": 137,
-    "rnd_order": 426
+    "rnd_order": 426,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createImagesMenu"
   },
   {
     "id": 492,
     "hc_order": 477,
-    "rnd_order": 139
+    "rnd_order": 139,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createMenus"
   },
   {
     "id": 493,
     "hc_order": 98,
-    "rnd_order": 573
+    "rnd_order": 573,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createSelectionTool"
   },
   {
     "id": 494,
     "hc_order": 499,
-    "rnd_order": 174
+    "rnd_order": 174,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createTools"
   },
   {
     "id": 495,
     "hc_order": 139,
-    "rnd_order": 82
+    "rnd_order": 82,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/createWindowMenu"
   },
   {
     "id": 496,
     "hc_order": 254,
-    "rnd_order": 314
+    "rnd_order": 314,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/destroy"
   },
   {
     "id": 497,
     "hc_order": 732,
-    "rnd_order": 476
+    "rnd_order": 476,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/endAnimation"
   },
   {
     "id": 498,
     "hc_order": 731,
-    "rnd_order": 674
+    "rnd_order": 674,
+    "name": "root/org/jhotdraw/samples/javadraw/JavaDrawApp/main"
   },
   {
     "id": 500,
     "hc_order": 738,
-    "rnd_order": 199
+    "rnd_order": 199,
+    "name": "root/org/jhotdraw/samples/javadraw/MySelectionTool/_init_"
   },
   {
     "id": 502,
     "hc_order": 547,
-    "rnd_order": 453
+    "rnd_order": 453,
+    "name": "root/org/jhotdraw/samples/javadraw/URLTool/_init_"
   },
   {
     "id": 505,
     "hc_order": 381,
-    "rnd_order": 783
+    "rnd_order": 783,
+    "name": "root/org/jhotdraw/standard/AWTCursor/_init_"
   },
   {
     "id": 507,
     "hc_order": 50,
-    "rnd_order": 97
+    "rnd_order": 97,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_1/_init_"
   },
   {
     "id": 508,
     "hc_order": 12,
-    "rnd_order": 729
+    "rnd_order": 729,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_1/viewCreated"
   },
   {
     "id": 509,
     "hc_order": 97,
-    "rnd_order": 606
+    "rnd_order": 606,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_1/viewSelectionChanged"
   },
   {
     "id": 511,
     "hc_order": 431,
-    "rnd_order": 156
+    "rnd_order": 156,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_EventDispatcher/_init_"
   },
   {
     "id": 512,
     "hc_order": 303,
-    "rnd_order": 105
+    "rnd_order": 105,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_EventDispatcher/addCommandListener"
   },
   {
     "id": 513,
     "hc_order": 304,
-    "rnd_order": 642
+    "rnd_order": 642,
+    "name": "root/org/jhotdraw/standard/AbstractCommand_EventDispatcher/fireCommandExecutableEvent"
   },
   {
     "id": 515,
     "hc_order": 398,
-    "rnd_order": 559
+    "rnd_order": 559,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/_init_"
   },
   {
     "id": 516,
     "hc_order": 206,
-    "rnd_order": 534
+    "rnd_order": 534,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/addCommandListener"
   },
   {
     "id": 517,
     "hc_order": 348,
-    "rnd_order": 445
+    "rnd_order": 445,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/createEventDispatcher"
   },
   {
     "id": 518,
     "hc_order": 347,
-    "rnd_order": 744
+    "rnd_order": 744,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/createViewChangeListener"
   },
   {
     "id": 519,
     "hc_order": 336,
-    "rnd_order": 12
+    "rnd_order": 12,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/getDrawingEditor"
   },
   {
     "id": 520,
     "hc_order": 305,
-    "rnd_order": 590
+    "rnd_order": 590,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/getEventDispatcher"
   },
   {
     "id": 521,
     "hc_order": 213,
-    "rnd_order": 206
+    "rnd_order": 206,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/isExecutable"
   },
   {
     "id": 522,
     "hc_order": 310,
-    "rnd_order": 111
+    "rnd_order": 111,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/isExecutableWithView"
   },
   {
     "id": 523,
     "hc_order": 308,
-    "rnd_order": 457
+    "rnd_order": 457,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/isViewRequired"
   },
   {
     "id": 524,
     "hc_order": 203,
-    "rnd_order": 716
+    "rnd_order": 716,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/name"
   },
   {
     "id": 525,
     "hc_order": 346,
-    "rnd_order": 463
+    "rnd_order": 463,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/setDrawingEditor"
   },
   {
     "id": 526,
     "hc_order": 345,
-    "rnd_order": 115
+    "rnd_order": 115,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/setEventDispatcher"
   },
   {
     "id": 527,
     "hc_order": 344,
-    "rnd_order": 152
+    "rnd_order": 152,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/setName"
   },
   {
     "id": 528,
     "hc_order": 399,
-    "rnd_order": 513
+    "rnd_order": 513,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/view"
   },
   {
     "id": 529,
     "hc_order": 2,
-    "rnd_order": 4
+    "rnd_order": 4,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/viewCreated"
   },
   {
     "id": 530,
     "hc_order": 221,
-    "rnd_order": 31
+    "rnd_order": 31,
+    "name": "root/org/jhotdraw/standard/AbstractCommand/viewSelectionChanged"
   },
   {
     "id": 532,
     "hc_order": 435,
-    "rnd_order": 185
+    "rnd_order": 185,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/_init_"
   },
   {
     "id": 533,
     "hc_order": 691,
-    "rnd_order": 450
+    "rnd_order": 450,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/addFigureChangeListener"
   },
   {
     "id": 534,
     "hc_order": 519,
-    "rnd_order": 113
+    "rnd_order": 113,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/addToContainer"
   },
   {
     "id": 535,
     "hc_order": 681,
-    "rnd_order": 738
+    "rnd_order": 738,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/changed"
   },
   {
     "id": 536,
     "hc_order": 673,
-    "rnd_order": 73
+    "rnd_order": 73,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/clone"
   },
   {
     "id": 537,
     "hc_order": 706,
-    "rnd_order": 499
+    "rnd_order": 499,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/containsPoint"
   },
   {
     "id": 538,
     "hc_order": 626,
-    "rnd_order": 423
+    "rnd_order": 423,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/displayBox"
   },
   {
     "id": 539,
     "hc_order": 448,
-    "rnd_order": 437
+    "rnd_order": 437,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/findFigureInside"
   },
   {
     "id": 540,
     "hc_order": 527,
-    "rnd_order": 439
+    "rnd_order": 439,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/getTextHolder"
   },
   {
     "id": 541,
     "hc_order": 692,
-    "rnd_order": 102
+    "rnd_order": 102,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/invalidate"
   },
   {
     "id": 542,
     "hc_order": 713,
-    "rnd_order": 713
+    "rnd_order": 713,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/invalidateRectangle"
   },
   {
     "id": 543,
     "hc_order": 613,
-    "rnd_order": 683
+    "rnd_order": 683,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/isEmpty"
   },
   {
     "id": 544,
     "hc_order": 711,
-    "rnd_order": 101
+    "rnd_order": 101,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/listener"
   },
   {
     "id": 545,
     "hc_order": 517,
-    "rnd_order": 648
+    "rnd_order": 648,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/setZValue"
   },
   {
     "id": 546,
     "hc_order": 705,
-    "rnd_order": 368
+    "rnd_order": 368,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/size"
   },
   {
     "id": 547,
     "hc_order": 680,
-    "rnd_order": 151
+    "rnd_order": 151,
+    "name": "root/org/jhotdraw/standard/AbstractFigure/willChange"
   },
   {
     "id": 549,
     "hc_order": 28,
-    "rnd_order": 636
+    "rnd_order": 636,
+    "name": "root/org/jhotdraw/standard/AbstractTool_1/_init_"
   },
   {
     "id": 550,
     "hc_order": 13,
-    "rnd_order": 112
+    "rnd_order": 112,
+    "name": "root/org/jhotdraw/standard/AbstractTool_1/viewCreated"
   },
   {
     "id": 551,
     "hc_order": 96,
-    "rnd_order": 214
+    "rnd_order": 214,
+    "name": "root/org/jhotdraw/standard/AbstractTool_1/viewSelectionChanged"
   },
   {
     "id": 553,
     "hc_order": 432,
-    "rnd_order": 291
+    "rnd_order": 291,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/_init_"
   },
   {
     "id": 554,
     "hc_order": 368,
-    "rnd_order": 658
+    "rnd_order": 658,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/addToolListener"
   },
   {
     "id": 555,
     "hc_order": 369,
-    "rnd_order": 34
+    "rnd_order": 34,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/fireToolActivatedEvent"
   },
   {
     "id": 556,
     "hc_order": 379,
-    "rnd_order": 259
+    "rnd_order": 259,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/fireToolDeactivatedEvent"
   },
   {
     "id": 557,
     "hc_order": 326,
-    "rnd_order": 258
+    "rnd_order": 258,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/fireToolEnabledEvent"
   },
   {
     "id": 558,
     "hc_order": 364,
-    "rnd_order": 324
+    "rnd_order": 324,
+    "name": "root/org/jhotdraw/standard/AbstractTool_EventDispatcher/fireToolUsableEvent"
   },
   {
     "id": 560,
     "hc_order": 502,
-    "rnd_order": 695
+    "rnd_order": 695,
+    "name": "root/org/jhotdraw/standard/AbstractTool/_init_"
   },
   {
     "id": 561,
     "hc_order": 375,
-    "rnd_order": 393
+    "rnd_order": 393,
+    "name": "root/org/jhotdraw/standard/AbstractTool/activate"
   },
   {
     "id": 562,
     "hc_order": 360,
-    "rnd_order": 583
+    "rnd_order": 583,
+    "name": "root/org/jhotdraw/standard/AbstractTool/addToolListener"
   },
   {
     "id": 563,
     "hc_order": 337,
-    "rnd_order": 507
+    "rnd_order": 507,
+    "name": "root/org/jhotdraw/standard/AbstractTool/checkUsable"
   },
   {
     "id": 564,
     "hc_order": 341,
-    "rnd_order": 549
+    "rnd_order": 549,
+    "name": "root/org/jhotdraw/standard/AbstractTool/createEventDispatcher"
   },
   {
     "id": 565,
     "hc_order": 340,
-    "rnd_order": 687
+    "rnd_order": 687,
+    "name": "root/org/jhotdraw/standard/AbstractTool/createViewChangeListener"
   },
   {
     "id": 566,
     "hc_order": 376,
-    "rnd_order": 317
+    "rnd_order": 317,
+    "name": "root/org/jhotdraw/standard/AbstractTool/deactivate"
   },
   {
     "id": 567,
     "hc_order": 619,
-    "rnd_order": 580
+    "rnd_order": 580,
+    "name": "root/org/jhotdraw/standard/AbstractTool/drawing"
   },
   {
     "id": 568,
     "hc_order": 614,
-    "rnd_order": 710
+    "rnd_order": 710,
+    "name": "root/org/jhotdraw/standard/AbstractTool/editor"
   },
   {
     "id": 569,
     "hc_order": 374,
-    "rnd_order": 11
+    "rnd_order": 11,
+    "name": "root/org/jhotdraw/standard/AbstractTool/getActiveView"
   },
   {
     "id": 570,
     "hc_order": 625,
-    "rnd_order": 169
+    "rnd_order": 169,
+    "name": "root/org/jhotdraw/standard/AbstractTool/getAnchorX"
   },
   {
     "id": 571,
     "hc_order": 624,
-    "rnd_order": 170
+    "rnd_order": 170,
+    "name": "root/org/jhotdraw/standard/AbstractTool/getAnchorY"
   },
   {
     "id": 572,
     "hc_order": 373,
-    "rnd_order": 517
+    "rnd_order": 517,
+    "name": "root/org/jhotdraw/standard/AbstractTool/getEventDispatcher"
   },
   {
     "id": 573,
     "hc_order": 607,
-    "rnd_order": 521
+    "rnd_order": 521,
+    "name": "root/org/jhotdraw/standard/AbstractTool/getUndoActivity"
   },
   {
     "id": 574,
     "hc_order": 377,
-    "rnd_order": 489
+    "rnd_order": 489,
+    "name": "root/org/jhotdraw/standard/AbstractTool/isActive"
   },
   {
     "id": 575,
     "hc_order": 327,
-    "rnd_order": 400
+    "rnd_order": 400,
+    "name": "root/org/jhotdraw/standard/AbstractTool/isEnabled"
   },
   {
     "id": 576,
     "hc_order": 365,
-    "rnd_order": 553
+    "rnd_order": 553,
+    "name": "root/org/jhotdraw/standard/AbstractTool/isUsable"
   },
   {
     "id": 577,
     "hc_order": 243,
-    "rnd_order": 190
+    "rnd_order": 190,
+    "name": "root/org/jhotdraw/standard/AbstractTool/keyDown"
   },
   {
     "id": 578,
     "hc_order": 629,
-    "rnd_order": 329
+    "rnd_order": 329,
+    "name": "root/org/jhotdraw/standard/AbstractTool/mouseDown"
   },
   {
     "id": 579,
     "hc_order": 382,
-    "rnd_order": 363
+    "rnd_order": 363,
+    "name": "root/org/jhotdraw/standard/AbstractTool/mouseMove"
   },
   {
     "id": 580,
     "hc_order": 641,
-    "rnd_order": 392
+    "rnd_order": 392,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setAnchorX"
   },
   {
     "id": 581,
     "hc_order": 640,
-    "rnd_order": 384
+    "rnd_order": 384,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setAnchorY"
   },
   {
     "id": 582,
     "hc_order": 342,
-    "rnd_order": 612
+    "rnd_order": 612,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setEditor"
   },
   {
     "id": 583,
     "hc_order": 339,
-    "rnd_order": 327
+    "rnd_order": 327,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setEnabled"
   },
   {
     "id": 584,
     "hc_order": 343,
-    "rnd_order": 654
+    "rnd_order": 654,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setEventDispatcher"
   },
   {
     "id": 585,
     "hc_order": 609,
-    "rnd_order": 182
+    "rnd_order": 182,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setUndoActivity"
   },
   {
     "id": 586,
     "hc_order": 325,
-    "rnd_order": 26
+    "rnd_order": 26,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setUsable"
   },
   {
     "id": 587,
     "hc_order": 639,
-    "rnd_order": 257
+    "rnd_order": 257,
+    "name": "root/org/jhotdraw/standard/AbstractTool/setView"
   },
   {
     "id": 588,
     "hc_order": 643,
-    "rnd_order": 81
+    "rnd_order": 81,
+    "name": "root/org/jhotdraw/standard/AbstractTool/view"
   },
   {
     "id": 589,
     "hc_order": 15,
-    "rnd_order": 353
+    "rnd_order": 353,
+    "name": "root/org/jhotdraw/standard/AbstractTool/viewCreated"
   },
   {
     "id": 590,
     "hc_order": 501,
-    "rnd_order": 338
+    "rnd_order": 338,
+    "name": "root/org/jhotdraw/standard/AbstractTool/viewSelectionChanged"
   },
   {
     "id": 592,
     "hc_order": 549,
-    "rnd_order": 66
+    "rnd_order": 66,
+    "name": "root/org/jhotdraw/standard/ActionTool/_init_"
   },
   {
     "id": 594,
     "hc_order": 151,
-    "rnd_order": 655
+    "rnd_order": 655,
+    "name": "root/org/jhotdraw/standard/AlignCommand_1/_init_"
   },
   {
     "id": 596,
     "hc_order": 150,
-    "rnd_order": 786
+    "rnd_order": 786,
+    "name": "root/org/jhotdraw/standard/AlignCommand_2/_init_"
   },
   {
     "id": 598,
     "hc_order": 152,
-    "rnd_order": 103
+    "rnd_order": 103,
+    "name": "root/org/jhotdraw/standard/AlignCommand_3/_init_"
   },
   {
     "id": 600,
     "hc_order": 153,
-    "rnd_order": 585
+    "rnd_order": 585,
+    "name": "root/org/jhotdraw/standard/AlignCommand_4/_init_"
   },
   {
     "id": 602,
     "hc_order": 154,
-    "rnd_order": 519
+    "rnd_order": 519,
+    "name": "root/org/jhotdraw/standard/AlignCommand_5/_init_"
   },
   {
     "id": 604,
     "hc_order": 155,
-    "rnd_order": 726
+    "rnd_order": 726,
+    "name": "root/org/jhotdraw/standard/AlignCommand_6/_init_"
   },
   {
     "id": 606,
     "hc_order": 130,
-    "rnd_order": 709
+    "rnd_order": 709,
+    "name": "root/org/jhotdraw/standard/AlignCommand_Alignment/_init_"
   },
   {
     "id": 607,
     "hc_order": 402,
-    "rnd_order": 110
+    "rnd_order": 110,
+    "name": "root/org/jhotdraw/standard/AlignCommand_Alignment/getDescription"
   },
   {
     "id": 608,
     "hc_order": 129,
-    "rnd_order": 551
+    "rnd_order": 551,
+    "name": "root/org/jhotdraw/standard/AlignCommand_Alignment/setDescription"
   },
   {
     "id": 610,
     "hc_order": 157,
-    "rnd_order": 55
+    "rnd_order": 55,
+    "name": "root/org/jhotdraw/standard/AlignCommand/_init_"
   },
   {
     "id": 611,
     "hc_order": 317,
-    "rnd_order": 276
+    "rnd_order": 276,
+    "name": "root/org/jhotdraw/standard/AlignCommand/isExecutableWithView"
   },
   {
     "id": 612,
     "hc_order": 401,
-    "rnd_order": 334
+    "rnd_order": 334,
+    "name": "root/org/jhotdraw/standard/AlignCommand/setAlignment"
   },
   {
     "id": 614,
     "hc_order": 188,
-    "rnd_order": 516
+    "rnd_order": 516,
+    "name": "root/org/jhotdraw/standard/BringToFrontCommand/_init_"
   },
   {
     "id": 615,
     "hc_order": 316,
-    "rnd_order": 387
+    "rnd_order": 387,
+    "name": "root/org/jhotdraw/standard/BringToFrontCommand/isExecutableWithView"
   },
   {
     "id": 617,
     "hc_order": 167,
-    "rnd_order": 568
+    "rnd_order": 568,
+    "name": "root/org/jhotdraw/standard/ChangeAttributeCommand/_init_"
   },
   {
     "id": 619,
     "hc_order": 437,
-    "rnd_order": 486
+    "rnd_order": 486,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/_init_"
   },
   {
     "id": 620,
     "hc_order": 523,
-    "rnd_order": 245
+    "rnd_order": 245,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/_addToQuadTree"
   },
   {
     "id": 621,
     "hc_order": 521,
-    "rnd_order": 30
+    "rnd_order": 30,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/_removeFromQuadTree"
   },
   {
     "id": 622,
     "hc_order": 412,
-    "rnd_order": 72
+    "rnd_order": 72,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/add"
   },
   {
     "id": 623,
     "hc_order": 516,
-    "rnd_order": 556
+    "rnd_order": 556,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/containsFigure"
   },
   {
     "id": 624,
     "hc_order": 418,
-    "rnd_order": 104
+    "rnd_order": 104,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/draw"
   },
   {
     "id": 625,
     "hc_order": 689,
-    "rnd_order": 388
+    "rnd_order": 388,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/figureChanged"
   },
   {
     "id": 626,
     "hc_order": 416,
-    "rnd_order": 560
+    "rnd_order": 560,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/figures"
   },
   {
     "id": 627,
     "hc_order": 446,
-    "rnd_order": 455
+    "rnd_order": 455,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/figuresReverse"
   },
   {
     "id": 628,
     "hc_order": 289,
-    "rnd_order": 238
+    "rnd_order": 238,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/findFigure"
   },
   {
     "id": 629,
     "hc_order": 616,
-    "rnd_order": 246
+    "rnd_order": 246,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/findFigureInside"
   },
   {
     "id": 630,
     "hc_order": 414,
-    "rnd_order": 301
+    "rnd_order": 301,
+    "name": "root/org/jhotdraw/standard/CompositeFigure/init"
   },
   {
     "id": 632,
     "hc_order": 548,
-    "rnd_order": 226
+    "rnd_order": 226,
+    "name": "root/org/jhotdraw/standard/ConnectionTool/_init_"
   },
   {
     "id": 634,
     "hc_order": 163,
-    "rnd_order": 784
+    "rnd_order": 784,
+    "name": "root/org/jhotdraw/standard/CopyCommand/_init_"
   },
   {
     "id": 635,
     "hc_order": 321,
-    "rnd_order": 644
+    "rnd_order": 644,
+    "name": "root/org/jhotdraw/standard/CopyCommand/isExecutableWithView"
   },
   {
     "id": 637,
     "hc_order": 551,
-    "rnd_order": 176
+    "rnd_order": 176,
+    "name": "root/org/jhotdraw/standard/CreationTool/_init_"
   },
   {
     "id": 638,
     "hc_order": 404,
-    "rnd_order": 447
+    "rnd_order": 447,
+    "name": "root/org/jhotdraw/standard/CreationTool/activate"
   },
   {
     "id": 639,
     "hc_order": 628,
-    "rnd_order": 626
+    "rnd_order": 626,
+    "name": "root/org/jhotdraw/standard/CreationTool/createFigure"
   },
   {
     "id": 640,
     "hc_order": 612,
-    "rnd_order": 395
+    "rnd_order": 395,
+    "name": "root/org/jhotdraw/standard/CreationTool/createUndoActivity"
   },
   {
     "id": 641,
     "hc_order": 390,
-    "rnd_order": 724
+    "rnd_order": 724,
+    "name": "root/org/jhotdraw/standard/CreationTool/deactivate"
   },
   {
     "id": 642,
     "hc_order": 623,
-    "rnd_order": 3
+    "rnd_order": 3,
+    "name": "root/org/jhotdraw/standard/CreationTool/getAddedFigure"
   },
   {
     "id": 643,
     "hc_order": 611,
-    "rnd_order": 520
+    "rnd_order": 520,
+    "name": "root/org/jhotdraw/standard/CreationTool/getAddedFigures"
   },
   {
     "id": 644,
     "hc_order": 615,
-    "rnd_order": 283
+    "rnd_order": 283,
+    "name": "root/org/jhotdraw/standard/CreationTool/getCreatedFigure"
   },
   {
     "id": 645,
     "hc_order": 674,
-    "rnd_order": 244
+    "rnd_order": 244,
+    "name": "root/org/jhotdraw/standard/CreationTool/getPrototypeFigure"
   },
   {
     "id": 646,
     "hc_order": 396,
-    "rnd_order": 474
+    "rnd_order": 474,
+    "name": "root/org/jhotdraw/standard/CreationTool/mouseDown"
   },
   {
     "id": 647,
     "hc_order": 395,
-    "rnd_order": 418
+    "rnd_order": 418,
+    "name": "root/org/jhotdraw/standard/CreationTool/mouseDrag"
   },
   {
     "id": 648,
     "hc_order": 394,
-    "rnd_order": 36
+    "rnd_order": 36,
+    "name": "root/org/jhotdraw/standard/CreationTool/mouseUp"
   },
   {
     "id": 649,
     "hc_order": 622,
-    "rnd_order": 715
+    "rnd_order": 715,
+    "name": "root/org/jhotdraw/standard/CreationTool/setAddedFigure"
   },
   {
     "id": 650,
     "hc_order": 366,
-    "rnd_order": 68
+    "rnd_order": 68,
+    "name": "root/org/jhotdraw/standard/CreationTool/setAddedFigures"
   },
   {
     "id": 651,
     "hc_order": 621,
-    "rnd_order": 205
+    "rnd_order": 205,
+    "name": "root/org/jhotdraw/standard/CreationTool/setCreatedFigure"
   },
   {
     "id": 652,
     "hc_order": 503,
-    "rnd_order": 342
+    "rnd_order": 342,
+    "name": "root/org/jhotdraw/standard/CreationTool/setPrototypeFigure"
   },
   {
     "id": 654,
     "hc_order": 162,
-    "rnd_order": 62
+    "rnd_order": 62,
+    "name": "root/org/jhotdraw/standard/CutCommand/_init_"
   },
   {
     "id": 655,
     "hc_order": 320,
-    "rnd_order": 537
+    "rnd_order": 537,
+    "name": "root/org/jhotdraw/standard/CutCommand/isExecutableWithView"
   },
   {
     "id": 657,
     "hc_order": 532,
-    "rnd_order": 75
+    "rnd_order": 75,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/_init_"
   },
   {
     "id": 658,
     "hc_order": 450,
-    "rnd_order": 350
+    "rnd_order": 350,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/basicDisplayBox"
   },
   {
     "id": 659,
     "hc_order": 449,
-    "rnd_order": 714
+    "rnd_order": 714,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/containsPoint"
   },
   {
     "id": 660,
     "hc_order": 452,
-    "rnd_order": 443
+    "rnd_order": 443,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/decorate"
   },
   {
     "id": 661,
     "hc_order": 707,
-    "rnd_order": 740
+    "rnd_order": 740,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/displayBox"
   },
   {
     "id": 662,
     "hc_order": 419,
-    "rnd_order": 331
+    "rnd_order": 331,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/draw"
   },
   {
     "id": 663,
     "hc_order": 690,
-    "rnd_order": 427
+    "rnd_order": 427,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/figureChanged"
   },
   {
     "id": 664,
     "hc_order": 715,
-    "rnd_order": 95
+    "rnd_order": 95,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/figureInvalidated"
   },
   {
     "id": 665,
     "hc_order": 447,
-    "rnd_order": 402
+    "rnd_order": 402,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/findFigureInside"
   },
   {
     "id": 666,
     "hc_order": 528,
-    "rnd_order": 488
+    "rnd_order": 488,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/getDecoratedFigure"
   },
   {
     "id": 667,
     "hc_order": 617,
-    "rnd_order": 428
+    "rnd_order": 428,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/getTextHolder"
   },
   {
     "id": 668,
     "hc_order": 451,
-    "rnd_order": 281
+    "rnd_order": 281,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/initialize"
   },
   {
     "id": 669,
     "hc_order": 518,
-    "rnd_order": 242
+    "rnd_order": 242,
+    "name": "root/org/jhotdraw/standard/DecoratorFigure/setDecoratedFigure"
   },
   {
     "id": 671,
     "hc_order": 159,
-    "rnd_order": 372
+    "rnd_order": 372,
+    "name": "root/org/jhotdraw/standard/DeleteCommand/_init_"
   },
   {
     "id": 672,
     "hc_order": 315,
-    "rnd_order": 233
+    "rnd_order": 233,
+    "name": "root/org/jhotdraw/standard/DeleteCommand/isExecutableWithView"
   },
   {
     "id": 674,
     "hc_order": 161,
-    "rnd_order": 108
+    "rnd_order": 108,
+    "name": "root/org/jhotdraw/standard/DuplicateCommand/_init_"
   },
   {
     "id": 675,
     "hc_order": 314,
-    "rnd_order": 165
+    "rnd_order": 165,
+    "name": "root/org/jhotdraw/standard/DuplicateCommand/isExecutableWithView"
   },
   {
     "id": 677,
     "hc_order": 721,
-    "rnd_order": 778
+    "rnd_order": 778,
+    "name": "root/org/jhotdraw/standard/FigureChangeEventMulticaster/add"
   },
   {
     "id": 678,
     "hc_order": 774,
-    "rnd_order": 589
+    "rnd_order": 589,
+    "name": "root/org/jhotdraw/standard/FigureChangeEventMulticaster/addInternal"
   },
   {
     "id": 680,
     "hc_order": 610,
-    "rnd_order": 70
+    "rnd_order": 70,
+    "name": "root/org/jhotdraw/standard/FigureEnumerator/_init_"
   },
   {
     "id": 681,
     "hc_order": 415,
-    "rnd_order": 222
+    "rnd_order": 222,
+    "name": "root/org/jhotdraw/standard/FigureEnumerator/hasNextFigure"
   },
   {
     "id": 682,
     "hc_order": 417,
-    "rnd_order": 376
+    "rnd_order": 376,
+    "name": "root/org/jhotdraw/standard/FigureEnumerator/nextFigure"
   },
   {
     "id": 683,
     "hc_order": 54,
-    "rnd_order": 468
+    "rnd_order": 468,
+    "name": "root/org/jhotdraw/standard/FigureEnumerator/reset"
   },
   {
     "id": 685,
     "hc_order": 166,
-    "rnd_order": 354
+    "rnd_order": 354,
+    "name": "root/org/jhotdraw/standard/FigureTransferCommand/_init_"
   },
   {
     "id": 687,
     "hc_order": 443,
-    "rnd_order": 268
+    "rnd_order": 268,
+    "name": "root/org/jhotdraw/standard/HandleEnumerator/_init_"
   },
   {
     "id": 688,
     "hc_order": 422,
-    "rnd_order": 189
+    "rnd_order": 189,
+    "name": "root/org/jhotdraw/standard/HandleEnumerator/hasNextHandle"
   },
   {
     "id": 689,
     "hc_order": 778,
-    "rnd_order": 211
+    "rnd_order": 211,
+    "name": "root/org/jhotdraw/standard/HandleEnumerator/reset"
   },
   {
     "id": 691,
     "hc_order": 753,
-    "rnd_order": 132
+    "rnd_order": 132,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/_init_"
   },
   {
     "id": 692,
     "hc_order": 371,
-    "rnd_order": 480
+    "rnd_order": 480,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/checkDamage"
   },
   {
     "id": 693,
     "hc_order": 370,
-    "rnd_order": 243
+    "rnd_order": 243,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/clearSelection"
   },
   {
     "id": 694,
     "hc_order": 427,
-    "rnd_order": 129
+    "rnd_order": 129,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/getBackground"
   },
   {
     "id": 695,
     "hc_order": 750,
-    "rnd_order": 441
+    "rnd_order": 441,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/getManagedDrawingView"
   },
   {
     "id": 696,
     "hc_order": 324,
-    "rnd_order": 85
+    "rnd_order": 85,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/isInteractive"
   },
   {
     "id": 697,
     "hc_order": 307,
-    "rnd_order": 315
+    "rnd_order": 315,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/removeFigureSelectionListener"
   },
   {
     "id": 698,
     "hc_order": 426,
-    "rnd_order": 657
+    "rnd_order": 657,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/setBackground"
   },
   {
     "id": 699,
     "hc_order": 425,
-    "rnd_order": 535
+    "rnd_order": 535,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/setDrawing"
   },
   {
     "id": 700,
     "hc_order": 424,
-    "rnd_order": 128
+    "rnd_order": 128,
+    "name": "root/org/jhotdraw/standard/NullDrawingView/setEditor"
   },
   {
     "id": 702,
     "hc_order": 543,
-    "rnd_order": 69
+    "rnd_order": 69,
+    "name": "root/org/jhotdraw/standard/NullTool/_init_"
   },
   {
     "id": 703,
     "hc_order": 456,
-    "rnd_order": 762
+    "rnd_order": 762,
+    "name": "root/org/jhotdraw/standard/NullTool/activate"
   },
   {
     "id": 704,
     "hc_order": 338,
-    "rnd_order": 13
+    "rnd_order": 13,
+    "name": "root/org/jhotdraw/standard/NullTool/checkUsable"
   },
   {
     "id": 706,
     "hc_order": 642,
-    "rnd_order": 638
+    "rnd_order": 638,
+    "name": "root/org/jhotdraw/standard/PasteCommand_UndoActivity/_init_"
   },
   {
     "id": 708,
     "hc_order": 160,
-    "rnd_order": 678
+    "rnd_order": 678,
+    "name": "root/org/jhotdraw/standard/PasteCommand/_init_"
   },
   {
     "id": 709,
     "hc_order": 313,
-    "rnd_order": 730
+    "rnd_order": 730,
+    "name": "root/org/jhotdraw/standard/PasteCommand/isExecutableWithView"
   },
   {
     "id": 711,
     "hc_order": 722,
-    "rnd_order": 543
+    "rnd_order": 543,
+    "name": "root/org/jhotdraw/standard/QuadTree/_init_"
   },
   {
     "id": 712,
     "hc_order": 723,
-    "rnd_order": 411
+    "rnd_order": 411,
+    "name": "root/org/jhotdraw/standard/QuadTree/_init"
   },
   {
     "id": 713,
     "hc_order": 727,
-    "rnd_order": 163
+    "rnd_order": 163,
+    "name": "root/org/jhotdraw/standard/QuadTree/_makeNortheast"
   },
   {
     "id": 714,
     "hc_order": 726,
-    "rnd_order": 609
+    "rnd_order": 609,
+    "name": "root/org/jhotdraw/standard/QuadTree/_makeNorthwest"
   },
   {
     "id": 715,
     "hc_order": 725,
-    "rnd_order": 22
+    "rnd_order": 22,
+    "name": "root/org/jhotdraw/standard/QuadTree/_makeSoutheast"
   },
   {
     "id": 716,
     "hc_order": 724,
-    "rnd_order": 184
+    "rnd_order": 184,
+    "name": "root/org/jhotdraw/standard/QuadTree/_makeSouthwest"
   },
   {
     "id": 717,
     "hc_order": 719,
-    "rnd_order": 616
+    "rnd_order": 616,
+    "name": "root/org/jhotdraw/standard/QuadTree/add"
   },
   {
     "id": 718,
     "hc_order": 720,
-    "rnd_order": 375
+    "rnd_order": 375,
+    "name": "root/org/jhotdraw/standard/QuadTree/getAbsoluteBoundingRectangle2D"
   },
   {
     "id": 719,
     "hc_order": 520,
-    "rnd_order": 77
+    "rnd_order": 77,
+    "name": "root/org/jhotdraw/standard/QuadTree/remove"
   },
   {
     "id": 721,
     "hc_order": 508,
-    "rnd_order": 712
+    "rnd_order": 712,
+    "name": "root/org/jhotdraw/standard/ReverseFigureEnumerator/_init_"
   },
   {
     "id": 722,
     "hc_order": 444,
-    "rnd_order": 397
+    "rnd_order": 397,
+    "name": "root/org/jhotdraw/standard/ReverseFigureEnumerator/hasNextFigure"
   },
   {
     "id": 723,
     "hc_order": 445,
-    "rnd_order": 92
+    "rnd_order": 92,
+    "name": "root/org/jhotdraw/standard/ReverseFigureEnumerator/nextFigure"
   },
   {
     "id": 724,
     "hc_order": 58,
-    "rnd_order": 725
+    "rnd_order": 725,
+    "name": "root/org/jhotdraw/standard/ReverseFigureEnumerator/reset"
   },
   {
     "id": 726,
     "hc_order": 187,
-    "rnd_order": 601
+    "rnd_order": 601,
+    "name": "root/org/jhotdraw/standard/SelectAllCommand/_init_"
   },
   {
     "id": 727,
     "hc_order": 323,
-    "rnd_order": 576
+    "rnd_order": 576,
+    "name": "root/org/jhotdraw/standard/SelectAllCommand/isExecutableWithView"
   },
   {
     "id": 729,
     "hc_order": 550,
-    "rnd_order": 74
+    "rnd_order": 74,
+    "name": "root/org/jhotdraw/standard/SelectionTool/_init_"
   },
   {
     "id": 730,
     "hc_order": 644,
-    "rnd_order": 87
+    "rnd_order": 87,
+    "name": "root/org/jhotdraw/standard/SelectionTool/getDelegateTool"
   },
   {
     "id": 731,
     "hc_order": 261,
-    "rnd_order": 667
+    "rnd_order": 667,
+    "name": "root/org/jhotdraw/standard/SelectionTool/mouseMove"
   },
   {
     "id": 732,
     "hc_order": 258,
-    "rnd_order": 379
+    "rnd_order": 379,
+    "name": "root/org/jhotdraw/standard/SelectionTool/mouseUp"
   },
   {
     "id": 734,
     "hc_order": 183,
-    "rnd_order": 20
+    "rnd_order": 20,
+    "name": "root/org/jhotdraw/standard/SendToBackCommand/_init_"
   },
   {
     "id": 735,
     "hc_order": 319,
-    "rnd_order": 1
+    "rnd_order": 1,
+    "name": "root/org/jhotdraw/standard/SendToBackCommand/isExecutableWithView"
   },
   {
     "id": 737,
     "hc_order": 765,
-    "rnd_order": 619
+    "rnd_order": 619,
+    "name": "root/org/jhotdraw/standard/SimpleUpdateStrategy/_init_"
   },
   {
     "id": 738,
     "hc_order": 60,
-    "rnd_order": 565
+    "rnd_order": 565,
+    "name": "root/org/jhotdraw/standard/SimpleUpdateStrategy/draw"
   },
   {
     "id": 740,
     "hc_order": 633,
-    "rnd_order": 680
+    "rnd_order": 680,
+    "name": "root/org/jhotdraw/standard/SingleFigureEnumerator/_init_"
   },
   {
     "id": 741,
     "hc_order": 421,
-    "rnd_order": 639
+    "rnd_order": 639,
+    "name": "root/org/jhotdraw/standard/SingleFigureEnumerator/hasNextFigure"
   },
   {
     "id": 742,
     "hc_order": 420,
-    "rnd_order": 321
+    "rnd_order": 321,
+    "name": "root/org/jhotdraw/standard/SingleFigureEnumerator/nextFigure"
   },
   {
     "id": 743,
     "hc_order": 0,
-    "rnd_order": 231
+    "rnd_order": 231,
+    "name": "root/org/jhotdraw/standard/SingleFigureEnumerator/reset"
   },
   {
     "id": 745,
     "hc_order": 428,
-    "rnd_order": 766
+    "rnd_order": 766,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/_init_"
   },
   {
     "id": 746,
     "hc_order": 688,
-    "rnd_order": 769
+    "rnd_order": 769,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/add"
   },
   {
     "id": 747,
     "hc_order": 301,
-    "rnd_order": 440
+    "rnd_order": 440,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/addDrawingChangeListener"
   },
   {
     "id": 748,
     "hc_order": 410,
-    "rnd_order": 761
+    "rnd_order": 761,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/displayBox"
   },
   {
     "id": 749,
     "hc_order": 281,
-    "rnd_order": 574
+    "rnd_order": 574,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/drawingChangeListeners"
   },
   {
     "id": 750,
     "hc_order": 714,
-    "rnd_order": 10
+    "rnd_order": 10,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/figureInvalidated"
   },
   {
     "id": 751,
     "hc_order": 411,
-    "rnd_order": 406
+    "rnd_order": 406,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/figureRequestUpdate"
   },
   {
     "id": 752,
     "hc_order": 296,
-    "rnd_order": 758
+    "rnd_order": 758,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/getTitle"
   },
   {
     "id": 753,
     "hc_order": 756,
-    "rnd_order": 492
+    "rnd_order": 492,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/setTitle"
   },
   {
     "id": 754,
     "hc_order": 299,
-    "rnd_order": 508
+    "rnd_order": 508,
+    "name": "root/org/jhotdraw/standard/StandardDrawing/unlock"
   },
   {
     "id": 756,
     "hc_order": 26,
-    "rnd_order": 126
+    "rnd_order": 126,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_1/_init_"
   },
   {
     "id": 757,
     "hc_order": 122,
-    "rnd_order": 414
+    "rnd_order": 414,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_1/editor"
   },
   {
     "id": 758,
     "hc_order": 121,
-    "rnd_order": 153
+    "rnd_order": 153,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_1/view"
   },
   {
     "id": 760,
     "hc_order": 271,
-    "rnd_order": 747
+    "rnd_order": 747,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_ASH/_init_"
   },
   {
     "id": 762,
     "hc_order": 56,
-    "rnd_order": 341
+    "rnd_order": 341,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewKeyListener/_init_"
   },
   {
     "id": 763,
     "hc_order": 131,
-    "rnd_order": 235
+    "rnd_order": 235,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewKeyListener/createDeleteCommand"
   },
   {
     "id": 764,
     "hc_order": 226,
-    "rnd_order": 323
+    "rnd_order": 323,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewKeyListener/keyPressed"
   },
   {
     "id": 767,
     "hc_order": 4,
-    "rnd_order": 277
+    "rnd_order": 277,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseListener/_init_"
   },
   {
     "id": 768,
     "hc_order": 229,
-    "rnd_order": 140
+    "rnd_order": 140,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseListener/mousePressed"
   },
   {
     "id": 769,
     "hc_order": 228,
-    "rnd_order": 532
+    "rnd_order": 532,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseListener/mouseReleased"
   },
   {
     "id": 771,
     "hc_order": 46,
-    "rnd_order": 80
+    "rnd_order": 80,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseMotionListener/_init_"
   },
   {
     "id": 772,
     "hc_order": 227,
-    "rnd_order": 484
+    "rnd_order": 484,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseMotionListener/mouseDragged"
   },
   {
     "id": 773,
     "hc_order": 224,
-    "rnd_order": 207
+    "rnd_order": 207,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView_DrawingViewMouseMotionListener/mouseMoved"
   },
   {
     "id": 775,
     "hc_order": 429,
-    "rnd_order": 168
+    "rnd_order": 168,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/_init_"
   },
   {
     "id": 776,
     "hc_order": 18,
-    "rnd_order": 343
+    "rnd_order": 343,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/DNDInitialize"
   },
   {
     "id": 777,
     "hc_order": 627,
-    "rnd_order": 385
+    "rnd_order": 385,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/add"
   },
   {
     "id": 778,
     "hc_order": 265,
-    "rnd_order": 124
+    "rnd_order": 124,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/addFigureSelectionListener"
   },
   {
     "id": 779,
     "hc_order": 257,
-    "rnd_order": 53
+    "rnd_order": 53,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/checkDamage"
   },
   {
     "id": 780,
     "hc_order": 300,
-    "rnd_order": 16
+    "rnd_order": 16,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/checkMinimumSize"
   },
   {
     "id": 781,
     "hc_order": 372,
-    "rnd_order": 567
+    "rnd_order": 567,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/clearSelection"
   },
   {
     "id": 782,
     "hc_order": 77,
-    "rnd_order": 61
+    "rnd_order": 61,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/createDNDHelper"
   },
   {
     "id": 783,
     "hc_order": 270,
-    "rnd_order": 41
+    "rnd_order": 41,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/createDisplayUpdate"
   },
   {
     "id": 784,
     "hc_order": 78,
-    "rnd_order": 597
+    "rnd_order": 597,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/drawAll"
   },
   {
     "id": 785,
     "hc_order": 287,
-    "rnd_order": 251
+    "rnd_order": 251,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/drawDrawing"
   },
   {
     "id": 786,
     "hc_order": 286,
-    "rnd_order": 213
+    "rnd_order": 213,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/drawHandles"
   },
   {
     "id": 787,
     "hc_order": 297,
-    "rnd_order": 741
+    "rnd_order": 741,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/drawing"
   },
   {
     "id": 788,
     "hc_order": 290,
-    "rnd_order": 673
+    "rnd_order": 673,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/drawingRequestUpdate"
   },
   {
     "id": 789,
     "hc_order": 264,
-    "rnd_order": 586
+    "rnd_order": 586,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/editor"
   },
   {
     "id": 790,
     "hc_order": 288,
-    "rnd_order": 337
+    "rnd_order": 337,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/findHandle"
   },
   {
     "id": 791,
     "hc_order": 251,
-    "rnd_order": 454
+    "rnd_order": 454,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/getConstrainer"
   },
   {
     "id": 792,
     "hc_order": 95,
-    "rnd_order": 221
+    "rnd_order": 221,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/getDNDHelper"
   },
   {
     "id": 793,
     "hc_order": 279,
-    "rnd_order": 723
+    "rnd_order": 723,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/getDamage"
   },
   {
     "id": 794,
     "hc_order": 59,
-    "rnd_order": 357
+    "rnd_order": 357,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/getDisplayUpdate"
   },
   {
     "id": 795,
     "hc_order": 413,
-    "rnd_order": 444
+    "rnd_order": 444,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/getDrawingSize"
   },
   {
     "id": 796,
     "hc_order": 253,
-    "rnd_order": 494
+    "rnd_order": 494,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/isFocusTraversable"
   },
   {
     "id": 797,
     "hc_order": 309,
-    "rnd_order": 237
+    "rnd_order": 237,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/isInteractive"
   },
   {
     "id": 798,
     "hc_order": 274,
-    "rnd_order": 630
+    "rnd_order": 630,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/paintComponent"
   },
   {
     "id": 799,
     "hc_order": 306,
-    "rnd_order": 121
+    "rnd_order": 121,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/removeFigureSelectionListener"
   },
   {
     "id": 800,
     "hc_order": 442,
-    "rnd_order": 6
+    "rnd_order": 6,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/selection"
   },
   {
     "id": 801,
     "hc_order": 400,
-    "rnd_order": 413
+    "rnd_order": 413,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/selectionCount"
   },
   {
     "id": 802,
     "hc_order": 423,
-    "rnd_order": 340
+    "rnd_order": 340,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/selectionHandles"
   },
   {
     "id": 803,
     "hc_order": 440,
-    "rnd_order": 472
+    "rnd_order": 472,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/selectionZOrdered"
   },
   {
     "id": 804,
     "hc_order": 380,
-    "rnd_order": 265
+    "rnd_order": 265,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/setCursor"
   },
   {
     "id": 805,
     "hc_order": 278,
-    "rnd_order": 367
+    "rnd_order": 367,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/setDamage"
   },
   {
     "id": 806,
     "hc_order": 267,
-    "rnd_order": 378
+    "rnd_order": 378,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/setDisplayUpdate"
   },
   {
     "id": 807,
     "hc_order": 409,
-    "rnd_order": 692
+    "rnd_order": 692,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/setDrawing"
   },
   {
     "id": 808,
     "hc_order": 272,
-    "rnd_order": 319
+    "rnd_order": 319,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/setLastClick"
   },
   {
     "id": 809,
     "hc_order": 256,
-    "rnd_order": 693
+    "rnd_order": 693,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/tool"
   },
   {
     "id": 810,
     "hc_order": 473,
-    "rnd_order": 198
+    "rnd_order": 198,
+    "name": "root/org/jhotdraw/standard/StandardDrawingView/unfreezeView"
   },
   {
     "id": 812,
     "hc_order": 156,
-    "rnd_order": 356
+    "rnd_order": 356,
+    "name": "root/org/jhotdraw/standard/ToggleGridCommand/_init_"
   },
   {
     "id": 814,
     "hc_order": 328,
-    "rnd_order": 475
+    "rnd_order": 475,
+    "name": "root/org/jhotdraw/standard/ToolButton/_init_"
   },
   {
     "id": 815,
     "hc_order": 479,
-    "rnd_order": 514
+    "rnd_order": 514,
+    "name": "root/org/jhotdraw/standard/ToolButton/getMaximumSize"
   },
   {
     "id": 816,
     "hc_order": 478,
-    "rnd_order": 420
+    "rnd_order": 420,
+    "name": "root/org/jhotdraw/standard/ToolButton/getMinimumSize"
   },
   {
     "id": 817,
     "hc_order": 734,
-    "rnd_order": 498
+    "rnd_order": 498,
+    "name": "root/org/jhotdraw/standard/ToolButton/getPaletteIcon"
   },
   {
     "id": 818,
     "hc_order": 480,
-    "rnd_order": 326
+    "rnd_order": 326,
+    "name": "root/org/jhotdraw/standard/ToolButton/getPreferredSize"
   },
   {
     "id": 819,
     "hc_order": 462,
-    "rnd_order": 523
+    "rnd_order": 523,
+    "name": "root/org/jhotdraw/standard/ToolButton/name"
   },
   {
     "id": 820,
     "hc_order": 11,
-    "rnd_order": 548
+    "rnd_order": 548,
+    "name": "root/org/jhotdraw/standard/ToolButton/paint"
   },
   {
     "id": 821,
     "hc_order": 730,
-    "rnd_order": 396
+    "rnd_order": 396,
+    "name": "root/org/jhotdraw/standard/ToolButton/paintSelected"
   },
   {
     "id": 822,
     "hc_order": 357,
-    "rnd_order": 650
+    "rnd_order": 650,
+    "name": "root/org/jhotdraw/standard/ToolButton/setPaletteIcon"
   },
   {
     "id": 823,
     "hc_order": 356,
-    "rnd_order": 391
+    "rnd_order": 391,
+    "name": "root/org/jhotdraw/standard/ToolButton/setTool"
   },
   {
     "id": 824,
     "hc_order": 461,
-    "rnd_order": 733
+    "rnd_order": 733,
+    "name": "root/org/jhotdraw/standard/ToolButton/tool"
   },
   {
     "id": 825,
     "hc_order": 331,
-    "rnd_order": 28
+    "rnd_order": 28,
+    "name": "root/org/jhotdraw/standard/ToolButton/toolActivated"
   },
   {
     "id": 826,
     "hc_order": 746,
-    "rnd_order": 63
+    "rnd_order": 63,
+    "name": "root/org/jhotdraw/standard/ToolButton/toolDeactivated"
   },
   {
     "id": 827,
     "hc_order": 329,
-    "rnd_order": 781
+    "rnd_order": 781,
+    "name": "root/org/jhotdraw/standard/ToolButton/toolUsable"
   },
   {
     "id": 830,
     "hc_order": 717,
-    "rnd_order": 755
+    "rnd_order": 755,
+    "name": "root/org/jhotdraw/util/Bounds/_init_"
   },
   {
     "id": 831,
     "hc_order": 718,
-    "rnd_order": 459
+    "rnd_order": 459,
+    "name": "root/org/jhotdraw/util/Bounds/asRectangle2D"
   },
   {
     "id": 832,
     "hc_order": 761,
-    "rnd_order": 771
+    "rnd_order": 771,
+    "name": "root/org/jhotdraw/util/Bounds/getHeight"
   },
   {
     "id": 833,
     "hc_order": 759,
-    "rnd_order": 148
+    "rnd_order": 148,
+    "name": "root/org/jhotdraw/util/Bounds/getLesserX"
   },
   {
     "id": 834,
     "hc_order": 760,
-    "rnd_order": 634
+    "rnd_order": 634,
+    "name": "root/org/jhotdraw/util/Bounds/getLesserY"
   },
   {
     "id": 835,
     "hc_order": 758,
-    "rnd_order": 192
+    "rnd_order": 192,
+    "name": "root/org/jhotdraw/util/Bounds/getWidth"
   },
   {
     "id": 837,
     "hc_order": 763,
-    "rnd_order": 346
+    "rnd_order": 346,
+    "name": "root/org/jhotdraw/util/Clipboard/_init_"
   },
   {
     "id": 838,
     "hc_order": 764,
-    "rnd_order": 663
+    "rnd_order": 663,
+    "name": "root/org/jhotdraw/util/Clipboard/getClipboard"
   },
   {
     "id": 839,
     "hc_order": 762,
-    "rnd_order": 779
+    "rnd_order": 779,
+    "name": "root/org/jhotdraw/util/Clipboard/getContents"
   },
   {
     "id": 841,
     "hc_order": 19,
-    "rnd_order": 380
+    "rnd_order": 380,
+    "name": "root/org/jhotdraw/util/CollectionsFactory/_init_"
   },
   {
     "id": 842,
     "hc_order": 79,
-    "rnd_order": 381
+    "rnd_order": 381,
+    "name": "root/org/jhotdraw/util/CollectionsFactory/createCollectionsFactory"
   },
   {
     "id": 843,
     "hc_order": 507,
-    "rnd_order": 631
+    "rnd_order": 631,
+    "name": "root/org/jhotdraw/util/CollectionsFactory/current"
   },
   {
     "id": 844,
     "hc_order": 513,
-    "rnd_order": 637
+    "rnd_order": 637,
+    "name": "root/org/jhotdraw/util/CollectionsFactory/determineCollectionsFactory"
   },
   {
     "id": 845,
     "hc_order": 80,
-    "rnd_order": 702
+    "rnd_order": 702,
+    "name": "root/org/jhotdraw/util/CollectionsFactory/isJDK12"
   },
   {
     "id": 847,
     "hc_order": 653,
-    "rnd_order": 707
+    "rnd_order": 707,
+    "name": "root/org/jhotdraw/util/ColorEntry/_init_"
   },
   {
     "id": 849,
     "hc_order": 191,
-    "rnd_order": 167
+    "rnd_order": 167,
+    "name": "root/org/jhotdraw/util/ColorMap/color"
   },
   {
     "id": 850,
     "hc_order": 700,
-    "rnd_order": 591
+    "rnd_order": 591,
+    "name": "root/org/jhotdraw/util/ColorMap/isTransparent"
   },
   {
     "id": 851,
     "hc_order": 190,
-    "rnd_order": 668
+    "rnd_order": 668,
+    "name": "root/org/jhotdraw/util/ColorMap/name"
   },
   {
     "id": 852,
     "hc_order": 189,
-    "rnd_order": 286
+    "rnd_order": 286,
+    "name": "root/org/jhotdraw/util/ColorMap/size"
   },
   {
     "id": 854,
     "hc_order": 147,
-    "rnd_order": 604
+    "rnd_order": 604,
+    "name": "root/org/jhotdraw/util/CommandMenu/_init_"
   },
   {
     "id": 855,
     "hc_order": 748,
-    "rnd_order": 465
+    "rnd_order": 465,
+    "name": "root/org/jhotdraw/util/CommandMenu/actionPerformed"
   },
   {
     "id": 856,
     "hc_order": 148,
-    "rnd_order": 65
+    "rnd_order": 65,
+    "name": "root/org/jhotdraw/util/CommandMenu/add"
   },
   {
     "id": 857,
     "hc_order": 158,
-    "rnd_order": 436
+    "rnd_order": 436,
+    "name": "root/org/jhotdraw/util/CommandMenu/addCheckItem"
   },
   {
     "id": 858,
     "hc_order": 205,
-    "rnd_order": 318
+    "rnd_order": 318,
+    "name": "root/org/jhotdraw/util/CommandMenu/addMenuItem"
   },
   {
     "id": 859,
     "hc_order": 202,
-    "rnd_order": 760
+    "rnd_order": 760,
+    "name": "root/org/jhotdraw/util/CommandMenu/checkEnabled"
   },
   {
     "id": 860,
     "hc_order": 218,
-    "rnd_order": 100
+    "rnd_order": 100,
+    "name": "root/org/jhotdraw/util/CommandMenu/commandExecutable"
   },
   {
     "id": 862,
     "hc_order": 99,
-    "rnd_order": 91
+    "rnd_order": 91,
+    "name": "root/org/jhotdraw/util/FloatingTextField/_init_"
   },
   {
     "id": 863,
     "hc_order": 647,
-    "rnd_order": 390
+    "rnd_order": 390,
+    "name": "root/org/jhotdraw/util/FloatingTextField/createOverlay"
   },
   {
     "id": 864,
     "hc_order": 632,
-    "rnd_order": 296
+    "rnd_order": 296,
+    "name": "root/org/jhotdraw/util/FloatingTextField/endOverlay"
   },
   {
     "id": 865,
     "hc_order": 695,
-    "rnd_order": 564
+    "rnd_order": 564,
+    "name": "root/org/jhotdraw/util/FloatingTextField/getPreferredSize"
   },
   {
     "id": 866,
     "hc_order": 637,
-    "rnd_order": 193
+    "rnd_order": 193,
+    "name": "root/org/jhotdraw/util/FloatingTextField/getText"
   },
   {
     "id": 867,
     "hc_order": 646,
-    "rnd_order": 563
+    "rnd_order": 563,
+    "name": "root/org/jhotdraw/util/FloatingTextField/setBounds"
   },
   {
     "id": 869,
     "hc_order": 250,
-    "rnd_order": 76
+    "rnd_order": 76,
+    "name": "root/org/jhotdraw/util/Geom/range"
   },
   {
     "id": 871,
     "hc_order": 434,
-    "rnd_order": 460
+    "rnd_order": 460,
+    "name": "root/org/jhotdraw/util/Iconkit/_init_"
   },
   {
     "id": 872,
     "hc_order": 355,
-    "rnd_order": 470
+    "rnd_order": 470,
+    "name": "root/org/jhotdraw/util/Iconkit/instance"
   },
   {
     "id": 873,
     "hc_order": 353,
-    "rnd_order": 225
+    "rnd_order": 225,
+    "name": "root/org/jhotdraw/util/Iconkit/loadImageResource"
   },
   {
     "id": 875,
     "hc_order": 354,
-    "rnd_order": 676
+    "rnd_order": 676,
+    "name": "root/org/jhotdraw/util/PaletteButton/_init_"
   },
   {
     "id": 878,
     "hc_order": 786,
-    "rnd_order": 146
+    "rnd_order": 146,
+    "name": "root/org/jhotdraw/util/PaletteButton/mouseExited"
   },
   {
     "id": 879,
     "hc_order": 785,
-    "rnd_order": 594
+    "rnd_order": 594,
+    "name": "root/org/jhotdraw/util/PaletteButton/mouseMoved"
   },
   {
     "id": 881,
     "hc_order": 773,
-    "rnd_order": 506
+    "rnd_order": 506,
+    "name": "root/org/jhotdraw/util/PaletteButton/mouseReleased"
   },
   {
     "id": 882,
     "hc_order": 70,
-    "rnd_order": 466
+    "rnd_order": 466,
+    "name": "root/org/jhotdraw/util/PaletteButton/reset"
   },
   {
     "id": 883,
     "hc_order": 69,
-    "rnd_order": 79
+    "rnd_order": 79,
+    "name": "root/org/jhotdraw/util/PaletteButton/select"
   },
   {
     "id": 885,
     "hc_order": 352,
-    "rnd_order": 593
+    "rnd_order": 593,
+    "name": "root/org/jhotdraw/util/PaletteIcon/_init_"
   },
   {
     "id": 886,
     "hc_order": 736,
-    "rnd_order": 56
+    "rnd_order": 56,
+    "name": "root/org/jhotdraw/util/PaletteIcon/getHeight"
   },
   {
     "id": 887,
     "hc_order": 735,
-    "rnd_order": 645
+    "rnd_order": 645,
+    "name": "root/org/jhotdraw/util/PaletteIcon/getWidth"
   },
   {
     "id": 888,
     "hc_order": 737,
-    "rnd_order": 592
+    "rnd_order": 592,
+    "name": "root/org/jhotdraw/util/PaletteIcon/selected"
   },
   {
     "id": 890,
     "hc_order": 182,
-    "rnd_order": 456
+    "rnd_order": 456,
+    "name": "root/org/jhotdraw/util/RedoCommand/_init_"
   },
   {
     "id": 891,
     "hc_order": 311,
-    "rnd_order": 491
+    "rnd_order": 491,
+    "name": "root/org/jhotdraw/util/RedoCommand/isExecutableWithView"
   },
   {
     "id": 893,
     "hc_order": 49,
-    "rnd_order": 150
+    "rnd_order": 150,
+    "name": "root/org/jhotdraw/util/ReverseListEnumerator/_init_"
   },
   {
     "id": 894,
     "hc_order": 781,
-    "rnd_order": 697
+    "rnd_order": 697,
+    "name": "root/org/jhotdraw/util/ReverseListEnumerator/hasNext"
   },
   {
     "id": 895,
     "hc_order": 751,
-    "rnd_order": 89
+    "rnd_order": 89,
+    "name": "root/org/jhotdraw/util/ReverseListEnumerator/next"
   },
   {
     "id": 897,
     "hc_order": 72,
-    "rnd_order": 635
+    "rnd_order": 635,
+    "name": "root/org/jhotdraw/util/SerializationStorageFormat/_init_"
   },
   {
     "id": 898,
     "hc_order": 64,
-    "rnd_order": 52
+    "rnd_order": 52,
+    "name": "root/org/jhotdraw/util/SerializationStorageFormat/createFileDescription"
   },
   {
     "id": 899,
     "hc_order": 65,
-    "rnd_order": 159
+    "rnd_order": 159,
+    "name": "root/org/jhotdraw/util/SerializationStorageFormat/createFileExtension"
   },
   {
     "id": 901,
     "hc_order": 27,
-    "rnd_order": 37
+    "rnd_order": 37,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat_1/_init_"
   },
   {
     "id": 903,
     "hc_order": 71,
-    "rnd_order": 114
+    "rnd_order": 114,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/_init_"
   },
   {
     "id": 904,
     "hc_order": 63,
-    "rnd_order": 67
+    "rnd_order": 67,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/createFileDescription"
   },
   {
     "id": 905,
     "hc_order": 62,
-    "rnd_order": 504
+    "rnd_order": 504,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/createFileExtension"
   },
   {
     "id": 906,
     "hc_order": 61,
-    "rnd_order": 117
+    "rnd_order": 117,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/createFileFilter"
   },
   {
     "id": 907,
     "hc_order": 55,
-    "rnd_order": 358
+    "rnd_order": 358,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/getFileExtension"
   },
   {
     "id": 908,
     "hc_order": 67,
-    "rnd_order": 134
+    "rnd_order": 134,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/setFileDescription"
   },
   {
     "id": 909,
     "hc_order": 66,
-    "rnd_order": 171
+    "rnd_order": 171,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/setFileExtension"
   },
   {
     "id": 910,
     "hc_order": 68,
-    "rnd_order": 477
+    "rnd_order": 477,
+    "name": "root/org/jhotdraw/util/StandardStorageFormat/setFileFilter"
   },
   {
     "id": 912,
     "hc_order": 775,
-    "rnd_order": 599
+    "rnd_order": 599,
+    "name": "root/org/jhotdraw/util/StandardVersionControlStrategy/_init_"
   },
   {
     "id": 913,
     "hc_order": 483,
-    "rnd_order": 536
+    "rnd_order": 536,
+    "name": "root/org/jhotdraw/util/StandardVersionControlStrategy/assertCompatibleVersion"
   },
   {
     "id": 914,
     "hc_order": 199,
-    "rnd_order": 751
+    "rnd_order": 751,
+    "name": "root/org/jhotdraw/util/StandardVersionControlStrategy/getVersionRequester"
   },
   {
     "id": 915,
     "hc_order": 198,
-    "rnd_order": 289
+    "rnd_order": 289,
+    "name": "root/org/jhotdraw/util/StandardVersionControlStrategy/isCompatibleVersion"
   },
   {
     "id": 916,
     "hc_order": 772,
-    "rnd_order": 133
+    "rnd_order": 133,
+    "name": "root/org/jhotdraw/util/StandardVersionControlStrategy/setVersionRequester"
   },
   {
     "id": 918,
     "hc_order": 433,
-    "rnd_order": 138
+    "rnd_order": 138,
+    "name": "root/org/jhotdraw/util/StorageFormatManager/_init_"
   },
   {
     "id": 919,
     "hc_order": 73,
-    "rnd_order": 742
+    "rnd_order": 742,
+    "name": "root/org/jhotdraw/util/StorageFormatManager/addStorageFormat"
   },
   {
     "id": 920,
     "hc_order": 75,
-    "rnd_order": 620
+    "rnd_order": 620,
+    "name": "root/org/jhotdraw/util/StorageFormatManager/getDefaultStorageFormat"
   },
   {
     "id": 921,
     "hc_order": 74,
-    "rnd_order": 263
+    "rnd_order": 263,
+    "name": "root/org/jhotdraw/util/StorageFormatManager/setDefaultStorageFormat"
   },
   {
     "id": 923,
     "hc_order": 186,
-    "rnd_order": 600
+    "rnd_order": 600,
+    "name": "root/org/jhotdraw/util/UndoCommand/_init_"
   },
   {
     "id": 924,
     "hc_order": 312,
-    "rnd_order": 39
+    "rnd_order": 39,
+    "name": "root/org/jhotdraw/util/UndoCommand/isExecutableWithView"
   },
   {
     "id": 926,
     "hc_order": 436,
-    "rnd_order": 467
+    "rnd_order": 467,
+    "name": "root/org/jhotdraw/util/UndoManager/_init_"
   },
   {
     "id": 927,
     "hc_order": 384,
-    "rnd_order": 383
+    "rnd_order": 383,
+    "name": "root/org/jhotdraw/util/UndoManager/clearRedos"
   },
   {
     "id": 928,
     "hc_order": 32,
-    "rnd_order": 611
+    "rnd_order": 611,
+    "name": "root/org/jhotdraw/util/UndoManager/clearStack"
   },
   {
     "id": 929,
     "hc_order": 334,
-    "rnd_order": 685
+    "rnd_order": 685,
+    "name": "root/org/jhotdraw/util/UndoManager/getRedoSize"
   },
   {
     "id": 930,
     "hc_order": 333,
-    "rnd_order": 220
+    "rnd_order": 220,
+    "name": "root/org/jhotdraw/util/UndoManager/getUndoSize"
   },
   {
     "id": 931,
     "hc_order": 385,
-    "rnd_order": 355
+    "rnd_order": 355,
+    "name": "root/org/jhotdraw/util/UndoManager/pushUndo"
   },
   {
     "id": 932,
     "hc_order": 389,
-    "rnd_order": 339
+    "rnd_order": 339,
+    "name": "root/org/jhotdraw/util/UndoManager/removeFirstElementInFullList"
   },
   {
     "id": 934,
     "hc_order": 100,
-    "rnd_order": 404
+    "rnd_order": 404,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/_init_"
   },
   {
     "id": 935,
     "hc_order": 388,
-    "rnd_order": 127
+    "rnd_order": 127,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/isUndoable"
   },
   {
     "id": 936,
     "hc_order": 430,
-    "rnd_order": 302
+    "rnd_order": 302,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/rememberFigures"
   },
   {
     "id": 937,
     "hc_order": 608,
-    "rnd_order": 602
+    "rnd_order": 602,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/setAffectedFigures"
   },
   {
     "id": 938,
     "hc_order": 47,
-    "rnd_order": 705
+    "rnd_order": 705,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/setDrawingView"
   },
   {
     "id": 939,
     "hc_order": 101,
-    "rnd_order": 694
+    "rnd_order": 694,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/setRedoable"
   },
   {
     "id": 940,
     "hc_order": 102,
-    "rnd_order": 627
+    "rnd_order": 627,
+    "name": "root/org/jhotdraw/util/UndoableAdapter/setUndoable"
   },
   {
     "id": 942,
     "hc_order": 149,
-    "rnd_order": 416
+    "rnd_order": 416,
+    "name": "root/org/jhotdraw/util/UndoableCommand/_init_"
   },
   {
     "id": 943,
     "hc_order": 207,
-    "rnd_order": 298
+    "rnd_order": 298,
+    "name": "root/org/jhotdraw/util/UndoableCommand/addCommandListener"
   },
   {
     "id": 944,
     "hc_order": 219,
-    "rnd_order": 382
+    "rnd_order": 382,
+    "name": "root/org/jhotdraw/util/UndoableCommand/commandExecutable"
   },
   {
     "id": 945,
     "hc_order": 211,
-    "rnd_order": 299
+    "rnd_order": 299,
+    "name": "root/org/jhotdraw/util/UndoableCommand/createEventDispatcher"
   },
   {
     "id": 946,
     "hc_order": 302,
-    "rnd_order": 541
+    "rnd_order": 541,
+    "name": "root/org/jhotdraw/util/UndoableCommand/getEventDispatcher"
   },
   {
     "id": 947,
     "hc_order": 208,
-    "rnd_order": 558
+    "rnd_order": 558,
+    "name": "root/org/jhotdraw/util/UndoableCommand/getWrappedCommand"
   },
   {
     "id": 948,
     "hc_order": 212,
-    "rnd_order": 698
+    "rnd_order": 698,
+    "name": "root/org/jhotdraw/util/UndoableCommand/isExecutable"
   },
   {
     "id": 949,
     "hc_order": 204,
-    "rnd_order": 682
+    "rnd_order": 682,
+    "name": "root/org/jhotdraw/util/UndoableCommand/name"
   },
   {
     "id": 950,
     "hc_order": 210,
-    "rnd_order": 29
+    "rnd_order": 29,
+    "name": "root/org/jhotdraw/util/UndoableCommand/setEventDispatcher"
   },
   {
     "id": 951,
     "hc_order": 209,
-    "rnd_order": 35
+    "rnd_order": 35,
+    "name": "root/org/jhotdraw/util/UndoableCommand/setWrappedCommand"
   },
   {
     "id": 953,
     "hc_order": 577,
-    "rnd_order": 345
+    "rnd_order": 345,
+    "name": "root/org/jhotdraw/util/UndoableTool/_init_"
   },
   {
     "id": 954,
     "hc_order": 455,
-    "rnd_order": 236
+    "rnd_order": 236,
+    "name": "root/org/jhotdraw/util/UndoableTool/activate"
   },
   {
     "id": 955,
     "hc_order": 359,
-    "rnd_order": 0
+    "rnd_order": 0,
+    "name": "root/org/jhotdraw/util/UndoableTool/addToolListener"
   },
   {
     "id": 956,
     "hc_order": 363,
-    "rnd_order": 282
+    "rnd_order": 282,
+    "name": "root/org/jhotdraw/util/UndoableTool/createEventDispatcher"
   },
   {
     "id": 957,
     "hc_order": 453,
-    "rnd_order": 624
+    "rnd_order": 624,
+    "name": "root/org/jhotdraw/util/UndoableTool/deactivate"
   },
   {
     "id": 958,
     "hc_order": 263,
-    "rnd_order": 561
+    "rnd_order": 561,
+    "name": "root/org/jhotdraw/util/UndoableTool/editor"
   },
   {
     "id": 959,
     "hc_order": 383,
-    "rnd_order": 43
+    "rnd_order": 43,
+    "name": "root/org/jhotdraw/util/UndoableTool/getActiveView"
   },
   {
     "id": 960,
     "hc_order": 367,
-    "rnd_order": 582
+    "rnd_order": 582,
+    "name": "root/org/jhotdraw/util/UndoableTool/getEventDispatcher"
   },
   {
     "id": 961,
     "hc_order": 392,
-    "rnd_order": 430
+    "rnd_order": 430,
+    "name": "root/org/jhotdraw/util/UndoableTool/getWrappedTool"
   },
   {
     "id": 962,
     "hc_order": 454,
-    "rnd_order": 403
+    "rnd_order": 403,
+    "name": "root/org/jhotdraw/util/UndoableTool/isActive"
   },
   {
     "id": 963,
     "hc_order": 358,
-    "rnd_order": 187
+    "rnd_order": 187,
+    "name": "root/org/jhotdraw/util/UndoableTool/isUsable"
   },
   {
     "id": 964,
     "hc_order": 273,
-    "rnd_order": 417
+    "rnd_order": 417,
+    "name": "root/org/jhotdraw/util/UndoableTool/mouseDown"
   },
   {
     "id": 965,
     "hc_order": 262,
-    "rnd_order": 539
+    "rnd_order": 539,
+    "name": "root/org/jhotdraw/util/UndoableTool/mouseDrag"
   },
   {
     "id": 966,
     "hc_order": 260,
-    "rnd_order": 275
+    "rnd_order": 275,
+    "name": "root/org/jhotdraw/util/UndoableTool/mouseMove"
   },
   {
     "id": 967,
     "hc_order": 259,
-    "rnd_order": 322
+    "rnd_order": 322,
+    "name": "root/org/jhotdraw/util/UndoableTool/mouseUp"
   },
   {
     "id": 968,
     "hc_order": 362,
-    "rnd_order": 405
+    "rnd_order": 405,
+    "name": "root/org/jhotdraw/util/UndoableTool/setEventDispatcher"
   },
   {
     "id": 969,
     "hc_order": 361,
-    "rnd_order": 272
+    "rnd_order": 272,
+    "name": "root/org/jhotdraw/util/UndoableTool/setWrappedTool"
   },
   {
     "id": 970,
     "hc_order": 332,
-    "rnd_order": 274
+    "rnd_order": 274,
+    "name": "root/org/jhotdraw/util/UndoableTool/toolActivated"
   },
   {
     "id": 971,
     "hc_order": 330,
-    "rnd_order": 202
+    "rnd_order": 202,
+    "name": "root/org/jhotdraw/util/UndoableTool/toolUsable"
   },
   {
     "id": 973,
     "hc_order": 194,
-    "rnd_order": 661
+    "rnd_order": 661,
+    "name": "root/org/jhotdraw/util/VersionManagement/getNextPackage"
   },
   {
     "id": 974,
     "hc_order": 195,
-    "rnd_order": 107
+    "rnd_order": 107,
+    "name": "root/org/jhotdraw/util/VersionManagement/getPackageVersion"
   },
   {
     "id": 975,
     "hc_order": 10,
-    "rnd_order": 675
+    "rnd_order": 675,
+    "name": "root/org/jhotdraw/util/VersionManagement/isCompatibleVersion"
   },
   {
     "id": 976,
     "hc_order": 193,
-    "rnd_order": 643
+    "rnd_order": 643,
+    "name": "root/org/jhotdraw/util/VersionManagement/normalizePackageName"
   },
   {
     "id": 980,
     "hc_order": 76,
-    "rnd_order": 93
+    "rnd_order": 93,
+    "name": "root/org/jhotdraw/util/collections/jdk12/CollectionsFactoryJDK12/_init_"
   },
   {
     "id": 981,
     "hc_order": 506,
-    "rnd_order": 763
+    "rnd_order": 763,
+    "name": "root/org/jhotdraw/util/collections/jdk12/CollectionsFactoryJDK12/createList"
   },
   {
     "id": 982,
     "hc_order": 515,
-    "rnd_order": 325
+    "rnd_order": 325,
+    "name": "root/org/jhotdraw/util/collections/jdk12/CollectionsFactoryJDK12/createMap"
   }
  ]

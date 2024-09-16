@@ -58,6 +58,15 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   G_RATIO = 1.0 / 1.618;
   bpWidth = 100;
   labels: { text: string; positionX: number; positionY: number }[] = [];
+  
+  tooltipTextY: string = ''; // Tooltip text for Y-axis
+  tooltipVisibleY: boolean = false; // Tooltip visibility for Y-axis
+  
+  tooltipTextX: string = ''; // Tooltip text for X-axis
+  tooltipVisibleX: boolean = false; // Tooltip visibility for X-axis
+  
+  tooltipX: number = 0; // X position of tooltip
+  tooltipY: number = 0; // Y position of tooltip
 
   constructor() {}
 
@@ -146,7 +155,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   private updateCanvasSize() {
     this.subSeq.height = this.vertexHeight * this.vertexList.length;
-    this.bpWidth = Math.min(200, this.subSeq.height * this.G_RATIO);
+    this.bpWidth = Math.min(300, this.subSeq.height * this.G_RATIO);
     if (this.visTechnique === VIS_TECHNIQUE.SEP) {
       const seqLength =
         this.subSeq.graphs.length > 1 ? this.subSeq.graphs.length : 0;
@@ -203,5 +212,41 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     link.href = dataURL;
     link.download = 'canvas-image.png';
     link.click();
+  }
+
+  onMouseMove(event: MouseEvent) {
+    const canvas = this.canvas.nativeElement;
+    const rect = canvas.getBoundingClientRect();
+
+    // Get mouse position relative to the canvas
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    // Translate mouseY to corresponding vertex based on verticalSpacing (Y-axis tooltip)
+    const vertexIndex = Math.floor(mouseY / this.vertexHeight);
+    if (vertexIndex >= 0 && vertexIndex < this.vertexList.length) {
+      this.tooltipTextY = this.vertexList[vertexIndex].name;
+      this.tooltipX = mouseX + 10; // Position tooltip slightly to the right of the cursor
+      this.tooltipY = mouseY + 10; // Position tooltip slightly below the cursor
+      this.tooltipVisibleY = true;
+    } else {
+      this.tooltipVisibleY = false;
+    }
+
+    // Translate mouseX to corresponding graph name based on horizontalSpacing (X-axis tooltip)
+    const graphIndex = Math.floor(mouseX / this.stripeWidth);
+    if (graphIndex >= 0 && graphIndex < this.subSeq.graphs.length) {
+      this.tooltipTextX = this.subSeq.graphs[graphIndex].name;
+      this.tooltipX = mouseX; // X tooltip aligned with mouse X position
+      this.tooltipVisibleX = true;
+    } else {
+      this.tooltipVisibleX = false;
+    }
+  }
+
+  onMouseLeave() {
+    // Hide tooltips when mouse leaves the canvas
+    this.tooltipVisibleY = false;
+    this.tooltipVisibleX = false;
   }
 }

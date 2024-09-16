@@ -126,7 +126,7 @@ export class CanvasDrawerService {
           });
           const pixelMap =
             colorEncoding === LINE_COLOR_ENCODING.DENSITY
-              ? pixelDensityMap
+              ? this.scalePixelMap(pixelDensityMap)
               : this.averagePixelMap(pixelValMap, pixelHitCountMap);
           this.drawPixelMap(pixelMap, pixelOpacityMap, colorScheme);
         },
@@ -214,6 +214,16 @@ export class CanvasDrawerService {
     return finalPixelMap;
   }
 
+  private scalePixelMap(pixelValMap: Float32Array){
+    const maxPixelVal = this.findMaxDensity(pixelValMap);
+    let finalPixelMap = new Float32Array(pixelValMap.length);
+    for (let i = 0; i < pixelValMap.length; i++) {
+      finalPixelMap[i] = Math.log10(pixelValMap[i] + 1.0) / Math.log10(maxPixelVal + 1.0); 
+    }
+
+    return finalPixelMap;
+  }
+
   private drawPixelMap(
     pixelMap: Float32Array,
     pixeOpacityMap: Float32Array,
@@ -222,17 +232,14 @@ export class CanvasDrawerService {
     const width = this.canvas.width;
     const height = this.canvas.height;
     const imageData = this.context.createImageData(width, height);
-    const maxPixelVal = this.findMaxDensity(pixelMap);
+    
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const index = (y * width + x) * 4;
         const pixelVal = pixelMap[y * width + x];
         const localAlpha = pixeOpacityMap[y * width + x];
 
-        const foreColor =
-          maxPixelVal > 0
-            ? this.mapDensityToColor(pixelVal, maxPixelVal, colorScheme)
-            : { r: 0, g: 0, b: 0 };
+        const foreColor = this.mapDensityToColor(pixelVal, colorScheme);
         if (foreColor) {
           const color = this.blendWithBackground(foreColor, localAlpha);
 
@@ -250,20 +257,20 @@ export class CanvasDrawerService {
   }
 
   private mapDensityToColor(
-    density: number,
-    maxDensity: number,
+    intensity: number,
     colorScheme: any[]
   ): { r: number; g: number; b: number } {
-    let color = { r: 255, g: 255, b: 255 };
+    //let color = { r: 255, g: 255, b: 255 };
     //if (density > 0) {
     //const normalized = density / maxDensity;
-    const normalized = Math.log10(density + 1.0) / Math.log10(maxDensity + 1.0); // normalized pixel value
-    const idx = Math.floor(normalized * 255);
-    color = colorScheme[idx];
+    //const normalized = Math.log10(density + 1.0) / Math.log10(maxDensity + 1.0); // normalized pixel value
+    const idx = Math.floor(intensity * (colorScheme.length-1));
+    const color = colorScheme[idx];
     //}
-
     return color;
   }
+
+  
 
   private findMaxDensity(pixelDensityMap: Float32Array): number {
     let max = 0;
