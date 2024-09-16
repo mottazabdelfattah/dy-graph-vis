@@ -1,4 +1,4 @@
-import { Injectable, ElementRef, inject } from '@angular/core';
+import {ElementRef } from '@angular/core';
 import { Line } from '../sequence/sub-sequence/graph/line.model';
 import {
   GRAY_SCALE_COLOR_SCHEME,
@@ -15,36 +15,19 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
 export class CanvasDrawerService {
   private context!: CanvasRenderingContext2D;
   private canvas!: HTMLCanvasElement;
   private http!: HttpClient;
 
-  private workers: Worker[] = [];
-  workerCount = 5;
-  private activeWorkers: Set<number> = new Set();
-
-  // Clean up workers when they are no longer needed
-  terminateWorkers(): void {
-    this.workers.forEach((worker) => worker.terminate());
-    this.workers = [];
-  }
+  
 
   constructor(canvasElement: ElementRef<HTMLCanvasElement>, http: HttpClient) {
     this.http = http;
     this.canvas = canvasElement.nativeElement;
     this.context = this.canvas.getContext('2d', { willReadFrequently: true })!;
 
-    // Instantiate Web Worker using Angular CLI support
-    for (let i = 0; i < this.workerCount; i++) {
-      const worker = new Worker(
-        new URL('./canvas-drawer.worker', import.meta.url)
-      );
-      this.workers.push(worker);
-    }
+    
   }
 
   drawLinesBackEnd(
@@ -174,33 +157,6 @@ export class CanvasDrawerService {
     });
   }
 
-  // private drawLinesBlended(
-  //   lines: Line[],
-  //   lineWidth: number,
-  //   blendingFactor: number,
-  //   colorEncoding: LINE_COLOR_ENCODING,
-  //   colorScheme: any[]
-  // ): void {
-  //   this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
-  //   this.context.globalAlpha = blendingFactor;
-
-  //   this.context.lineWidth = lineWidth;
-
-  //   lines.forEach((line: Line) => {
-  //     const foreColor = this.mapDensityToColor(
-  //       line.normalizedSlope,
-  //       1.0,
-  //       colorScheme
-  //     );
-  //     this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`;
-  //     this.context.beginPath();
-  //     this.context.moveTo(line.x1, line.y1);
-  //     this.context.lineTo(line.x2, line.y2);
-  //     this.context.stroke();
-  //   });
-
-  //   this.context.globalAlpha = 1.0; //reset
-  // }
 
   private averagePixelMap(
     pixelValMap: Float32Array,
@@ -260,13 +216,10 @@ export class CanvasDrawerService {
     intensity: number,
     colorScheme: any[]
   ): { r: number; g: number; b: number } {
-    //let color = { r: 255, g: 255, b: 255 };
-    //if (density > 0) {
-    //const normalized = density / maxDensity;
-    //const normalized = Math.log10(density + 1.0) / Math.log10(maxDensity + 1.0); // normalized pixel value
+    
     const idx = Math.floor(intensity * (colorScheme.length-1));
     const color = colorScheme[idx];
-    //}
+    
     return color;
   }
 

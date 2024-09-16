@@ -43,7 +43,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy  {
   }
 
   ngOnDestroy(): void {
-    this.canvasDrawerService.terminateWorkers();
+    // this.canvasDrawerService.terminateWorkers();
   }
 
   // private getLines(edges: Edge[]): Line[] {

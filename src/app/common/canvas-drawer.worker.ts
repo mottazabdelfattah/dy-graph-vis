@@ -53,7 +53,7 @@ addEventListener('message', ({ data }) => {
             localPixelDensityMap[canvasY * canvasWidth + canvasX];
           const newValue = alpha / 255.0;
 
-          if (renderingMode === LINE_RENDERING_MODE.SPLATTING) {
+          if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
             // Simple addition for splatting
             localPixelDensityMap[canvasY * canvasWidth + canvasX] =
               existingValue + newValue;

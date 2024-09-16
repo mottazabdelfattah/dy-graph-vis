@@ -54,17 +54,18 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   private canvasDrawerService!: CanvasDrawerService;
   private subSeqService = inject(SubSequenceService);
   private resizeObserver!: ResizeObserver;
+  private resizeTimeout!: any;
 
   G_RATIO = 1.0 / 1.618;
   bpWidth = 100;
   labels: { text: string; positionX: number; positionY: number }[] = [];
-  
+
   tooltipTextY: string = ''; // Tooltip text for Y-axis
   tooltipVisibleY: boolean = false; // Tooltip visibility for Y-axis
-  
+
   tooltipTextX: string = ''; // Tooltip text for X-axis
   tooltipVisibleX: boolean = false; // Tooltip visibility for X-axis
-  
+
   tooltipX: number = 0; // X position of tooltip
   tooltipY: number = 0; // Y position of tooltip
 
@@ -104,8 +105,6 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   private RedrawCanvas() {
     this.sortVertices();
-    
-
     const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
       this.subSeq,
@@ -150,7 +149,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private handleCanvasResize() {
-    this.RedrawCanvas(); // Call your method to update the canvas
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(() => {
+      this.RedrawCanvas(); // Only redraw after resize settles
+    }, 200); // Delay to ensure resize is finished
   }
 
   private updateCanvasSize() {
@@ -163,10 +165,12 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     } else if (this.visTechnique === VIS_TECHNIQUE.IES) {
       this.subSeq.width =
         this.stripeWidth * (this.subSeq.graphs.length - 1) + this.bpWidth;
-    } else if (
-      this.visTechnique === VIS_TECHNIQUE.MSV ||
-      this.visTechnique === VIS_TECHNIQUE.TEP
-    ) {
+    } else if (this.visTechnique === VIS_TECHNIQUE.TEP) {
+      this.subSeq.width = Math.max(
+        this.bpWidth,
+        this.stripeWidth * this.subSeq.graphs.length
+      );
+    } else if (this.visTechnique === VIS_TECHNIQUE.MSV) {
       this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length;
     }
   }

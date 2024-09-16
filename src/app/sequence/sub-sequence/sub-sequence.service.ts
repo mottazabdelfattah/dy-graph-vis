@@ -101,19 +101,19 @@ export class SubSequenceService {
     backgroundAlpha: number
   ): Line[] {
     const lines: Line[] = [];
-    const subseqLength = subSeq.graphs.length;
-    subSeq.graphs.forEach((g: Graph, idx) => {
-      const newX1 = idx * stripeWidth;
-      const newX2 = newX1 + stripeWidth;
+    subSeq.graphs.forEach((g: Graph, g_idx) => {
+      
       const subSeqSart = 0;
-      const subSeqWidth = subseqLength * stripeWidth;
+      const subSeqWidth = subSeq.width;
 
       // background lines
       subSeq.aggEdgesFiltered.forEach((tuple) => {
+        const newX1 = g_idx * stripeWidth;
+        const newX2 = g_idx === subSeq.graphs.length - 1 ? subSeqWidth : newX1 + stripeWidth;
         const line = this.getLine(
           tuple.edge,
           vertexList,
-          subSeq.graphs.length * stripeWidth,
+          0,
           bpWidth,
           vertexHeight,
           backgroundAlpha
@@ -125,10 +125,12 @@ export class SubSequenceService {
       // forground lines
       const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
       filteredEdges.forEach((e: Edge) => {
+        const newX1 = g_idx * stripeWidth;
+        const newX2 = newX1 + stripeWidth;
         const line = this.getLine(
           e,
           vertexList,
-          idx * stripeWidth,
+          g_idx * stripeWidth,
           bpWidth,
           vertexHeight,
           foregroundAlpha
