@@ -12,6 +12,7 @@ import {
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
   PARTITIONING_METHOD,
+  SEP_STRIPE,
   SEQUENCE_ORDERING_METHOD,
   SubSequence,
   VERTEXT_ORDERING,
@@ -54,6 +55,7 @@ export class SequenceComponent implements OnChanges, OnInit {
   tepBackgroundOpacity= 0.1;
   edgeFreqRangeMin=20;
   edgeFreqRangeMax=80;
+  sepStripeOp = SEP_STRIPE.START;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
@@ -107,24 +109,6 @@ export class SequenceComponent implements OnChanges, OnInit {
         this.repartition(currentSettings.partitioning, currentSettings.intervals, currentSettings.threshold);
       }
 
-
-      if(previousSettings?.dataset !== currentSettings.dataset ||
-        previousSettings?.partitioning !== currentSettings.partitioning ||
-        (previousSettings?.intervals !== currentSettings.intervals &&
-          this.partitioningMethod === PARTITIONING_METHOD.UNIFORM) ||
-          (previousSettings?.threshold !== currentSettings.threshold &&
-            this.partitioningMethod !== PARTITIONING_METHOD.UNIFORM)||
-        previousSettings?.sequenceOrder !==
-          currentSettings.sequenceOrder ||
-          previousSettings?.edgeFreqRangeMin !==
-          currentSettings.edgeFreqRangeMin ||
-          previousSettings?.edgeFreqRangeMax !==
-          currentSettings.edgeFreqRangeMax
-      ) {
-        this.filterAggregatedEdges(currentSettings.edgeFreqRangeMin, currentSettings.edgeFreqRangeMax);
-      }
-
-
       // update other settings
       this.visTechnique = currentSettings.visualization;
       this.stripeWidth = currentSettings.stripeWidth;
@@ -137,6 +121,9 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.vertexOrdering=currentSettings.vertexOrdering;
       this.tepBackgroundOpacity=currentSettings.tepBackgroundOpacity;
       this.edgeOrdering=currentSettings.edgeOrdering;
+      this.sepStripeOp=currentSettings.sepStripeOp;
+      this.edgeFreqRangeMin = currentSettings.edgeFreqRangeMin;
+      this.edgeFreqRangeMax = currentSettings.edgeFreqRangeMax;
       
     }
   }
@@ -188,11 +175,7 @@ export class SequenceComponent implements OnChanges, OnInit {
     }
   }
 
-  private filterAggregatedEdges(min: number, max:number){
-    this.edgeFreqRangeMin=min;
-    this.edgeFreqRangeMax=max;
-    this.sequenceService.filterSubSequenceAggregateEdges(this.subList, this.edgeFreqRangeMin, this.edgeFreqRangeMax);
-  }
+  
 
 
   

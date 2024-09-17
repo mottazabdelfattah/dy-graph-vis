@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   LINE_COLOR_ENCODING,
+  SEP_STRIPE,
   SubSequence,
   VIS_TECHNIQUE,
 } from './sub-sequence.model';
@@ -12,6 +13,21 @@ import { UtilService } from '../../common/util.service';
 export class SubSequenceService {
   constructor(private utilService: UtilService) {}
 
+  filterAggEdges(
+    subseq: SubSequence,
+    aggEdgeMinFreq: number,
+    aggEdgeMaxFreq: number,
+    selectedVertices: Vertex[]
+  ) {
+    // filterAggEdges
+    subseq.aggEdgesFiltered = subseq.aggEdges.filter(
+      (agg) =>
+        (agg.frq / subseq.graphs.length) * 100 >= aggEdgeMinFreq &&
+        (agg.frq / subseq.graphs.length) * 100 <= aggEdgeMaxFreq &&
+        (selectedVertices.length === 0 || selectedVertices.some(vertex => vertex.id === agg.edge.src))
+    );
+  }
+
   updateGraphLines(
     visTechnique: VIS_TECHNIQUE,
     subSeq: SubSequence,
@@ -21,7 +37,8 @@ export class SubSequenceService {
     stripeWidth: number,
     lineWidth: number,
     foregroundAlpha: number,
-    backgroundAlpha: number
+    backgroundAlpha: number,
+    sepStripeOp: SEP_STRIPE
   ): Line[] {
     let lines: Line[] = [];
 
@@ -57,7 +74,8 @@ export class SubSequenceService {
           bpWidth,
           vertexHeight,
           stripeWidth,
-          foregroundAlpha
+          foregroundAlpha,
+          sepStripeOp
         );
         break;
       case VIS_TECHNIQUE.TEP:
@@ -102,14 +120,16 @@ export class SubSequenceService {
   ): Line[] {
     const lines: Line[] = [];
     subSeq.graphs.forEach((g: Graph, g_idx) => {
-      
       const subSeqSart = 0;
       const subSeqWidth = subSeq.width;
 
       // background lines
       subSeq.aggEdgesFiltered.forEach((tuple) => {
         const newX1 = g_idx * stripeWidth;
-        const newX2 = g_idx === subSeq.graphs.length - 1 ? subSeqWidth : newX1 + stripeWidth;
+        const newX2 =
+          g_idx === subSeq.graphs.length - 1
+            ? subSeqWidth
+            : newX1 + stripeWidth;
         const line = this.getLine(
           tuple.edge,
           vertexList,
@@ -169,7 +189,7 @@ export class SubSequenceService {
         );
 
         let stripeBucketIdx = this.getColIndexWithLowestValue(MSVStripeBuckets);
-        line.x1 = line.x2 = line.x1 + (stripeBucketIdx*lineWidth);
+        line.x1 = line.x2 = line.x1 + stripeBucketIdx * lineWidth;
         MSVStripeBuckets[stripeBucketIdx]++;
 
         // in case of MSV the slope is encoded as direction
@@ -189,10 +209,19 @@ export class SubSequenceService {
     bpWidth: number,
     vertexHeight: number,
     stripeWidth: number,
-    foregroundAlpha: number
+    foregroundAlpha: number,
+    stripePos: SEP_STRIPE
   ): Line[] {
     const lines: Line[] = [];
     const subseqLength = subSeq.graphs.length;
+    let repXOffset = 0;
+    let stripesXOffset = 0;
+    if (stripePos === SEP_STRIPE.START && subseqLength > 1) {
+      repXOffset = subseqLength * stripeWidth;
+    }
+    if (stripePos === SEP_STRIPE.END) {
+      stripesXOffset = stripeWidth;
+    }
 
     // draw the rep. graph of only one graph exists in the seq
     if (subseqLength > 1) {
@@ -205,12 +234,13 @@ export class SubSequenceService {
           const line = this.getLine(
             e,
             vertexList,
-            idx * stripeWidth,
+            stripesXOffset + idx * stripeWidth,
             bpWidth,
             vertexHeight,
             foregroundAlpha
           );
-          this.cutOffLinesSEP(line, stripeWidth);
+
+          this.cutOffLinesSEP(line, stripePos, stripeWidth);
           lines.push(line);
         });
       });
@@ -221,7 +251,7 @@ export class SubSequenceService {
       const line = this.getLine(
         tuple.edge,
         vertexList,
-        subseqLength > 1 ? subseqLength * stripeWidth : 0,
+        repXOffset,
         bpWidth,
         vertexHeight,
         foregroundAlpha
@@ -241,7 +271,7 @@ export class SubSequenceService {
     foregroundAlpha: number
   ): Line[] {
     const lines: Line[] = [];
-    
+
     subSeq.graphs.forEach((g: Graph, idx) => {
       const filteredEdges = this.filterEdges(g.edges, subSeq.aggEdgesFiltered);
       filteredEdges.forEach((e: Edge) => {
@@ -260,15 +290,26 @@ export class SubSequenceService {
     return lines;
   }
 
-  private cutOffLinesSEP(l: Line, stripeWidth: number) {
-    //cuttoff the lines
-
-    // Calculate the slope (m) of the line
+  private cutOffLinesSEP(l: Line, stripePos: SEP_STRIPE, stripeWidth: number) {
+    // Calculate the slope (m) and intercept (b) of the line
     const slope = (l.y2 - l.y1) / (l.x2 - l.x1);
-    // Calculate the new x2
-    l.x2 = l.x1 + stripeWidth;
-    // Calculate the new y2 using the line equation
-    l.y2 = slope * (l.x2 - l.x1) + l.y1;
+    const intercept = l.y1 - slope * l.x1;
+
+    // Adjust the x coordinates based on whether to trim at the start or end
+    if (stripePos === SEP_STRIPE.START) {
+      // Trim the first 10 pixels in the x direction (i.e. near x1)
+      const newX2 = l.x1 + stripeWidth;
+      const newY2 = slope * newX2 + intercept;
+
+      l.x2 = newX2;
+      l.y2 = newY2;
+    } else {
+      // Trim the last 10 pixels in the x direction (i.e. near x2)
+      const newX1 = l.x2 - stripeWidth;
+      const newY1 = slope * newX1 + intercept;
+      l.x1 = newX1;
+      l.y1 = newY1;
+    }
   }
 
   private cutOffLinesTEP(

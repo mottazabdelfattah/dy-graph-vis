@@ -277,5 +277,29 @@
         <span>{{ controlForm.get("tepBackgroundOpacity")?.value }}</span>
       </div>
     </div>
+    <!-- SEP Specific Settings -->
+    <div
+      class="settings-group"
+      [ngStyle]="{
+        display:
+          controlForm.get('visualization')?.value === VIS_TECHNIQUE.SEP
+            ? 'block'
+            : 'none'
+      }"
+    >
+      <h3>SEP Settings</h3>
+
+      <div class="form-group">
+        <label for="sepStackingOption">Stacking Option:</label>
+        <select id="sepStackingOption" formControlName="sepStripeOp">
+          <option
+            *ngFor="let op of SEPStackingOptions"
+            [value]="op"
+          >
+            {{ op }}
+          </option>
+        </select>
+      </div>
+    </div>
   </form>
 </div>

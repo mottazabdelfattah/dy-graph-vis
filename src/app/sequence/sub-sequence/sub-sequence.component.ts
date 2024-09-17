@@ -14,6 +14,7 @@ import {
   EDGE_ORDERING,
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
+  SEP_STRIPE,
   SubSequence,
   VERTEXT_ORDERING,
   VIS_TECHNIQUE,
@@ -25,6 +26,7 @@ import { Line } from './graph/line.model';
 import { CanvasDrawerService } from '../../common/canvas-drawer.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-sub-sequence',
   standalone: true,
@@ -49,6 +51,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) tepBackgroundOpacity!: number;
   @Input({ required: true }) edgeFreqRangeMin!: number;
   @Input({ required: true }) edgeFreqRangeMax!: number;
+  @Input({ required: true }) sepStripeOp!: SEP_STRIPE;
 
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
@@ -69,6 +72,13 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   tooltipX: number = 0; // X position of tooltip
   tooltipY: number = 0; // Y position of tooltip
 
+  private selectedVerticesSubject = new BehaviorSubject<Vertex[]>([]);
+  selectedVertices$ = this.selectedVerticesSubject.asObservable(); // Expose it as an Observable
+  isSelecting: boolean = false; // To track if selection is in progress
+  startY: number = 0; // Initial Y position when mouse is pressed
+  endY: number = 0; // Final Y position when mouse is released
+  selectionStyle: any = {}; // Style binding for the selection rectangle
+
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -85,7 +95,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+     // Add click event listener to the document to handle clicks outside the canvas
+     document.addEventListener('click', this.handleDocumentClick.bind(this));
+  }
 
   ngAfterViewInit(): void {
     this.canvasDrawerService = new CanvasDrawerService(this.canvas, this.http);
@@ -101,10 +114,25 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.canvas) {
       this.resizeObserver.observe(this.canvas.nativeElement);
     }
+
+    // Subscribe to selectedVertices$ and observe changes
+    this.selectedVertices$.subscribe((selected) => {
+      //console.log('Selected vertices changed:', selected);
+      this.RedrawCanvas();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Clean up the observer
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+    document.removeEventListener('click', this.handleDocumentClick.bind(this));
   }
 
   private RedrawCanvas() {
     this.sortVertices();
+    this.filterAggregatedEdges();
     const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
       this.subSeq,
@@ -114,7 +142,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.stripeWidth,
       this.lineWidth,
       this.blendingFactor,
-      this.tepBackgroundOpacity
+      this.tepBackgroundOpacity,
+      this.sepStripeOp
     );
 
     // draw lines
@@ -141,11 +170,27 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  ngOnDestroy(): void {
-    // Clean up the observer
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
+  
+
+  handleDocumentClick(event: MouseEvent) {
+    const canvas = this.canvas.nativeElement;
+    const rect = canvas.getBoundingClientRect();
+    const isClickInsideCanvas = (
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom
+    );
+
+    if (!isClickInsideCanvas) {
+      this.resetSelection();
     }
+  }
+
+  resetSelection() {
+    this.isSelecting = false;
+    this.selectionStyle = {};
+    this.selectedVerticesSubject.next([]); // Clear selected vertices
   }
 
   private handleCanvasResize() {
@@ -187,25 +232,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  // private sortEdges() {
-  //   if (this.edgeOrdering === EDGE_ORDERING.FREQUENCY) {
-  //     this.subSeq.aggEdgesFiltered.sort((a, b) => a.frq - b.frq);
-  //   } else if (this.edgeOrdering === EDGE_ORDERING.WEIGHT) {
-  //     this.subSeq.aggEdgesFiltered.sort((a, b) => b.edge.weight - a.edge.weight);
-  //   }
+  private filterAggregatedEdges(){
+    this.subSeqService.filterAggEdges(this.subSeq, this.edgeFreqRangeMin, this.edgeFreqRangeMax, this.selectedVerticesSubject.value);
+  }
 
-  //   this.subSeq.graphs.forEach((g) => {
-  //     g.edges.sort((a, b) => {
-  //       const indexA = this.subSeq.aggEdgesFiltered.findIndex(
-  //         (tuple) => tuple.edge.src === a.src && tuple.edge.target === a.target
-  //       );
-  //       const indexB = this.subSeq.aggEdgesFiltered.findIndex(
-  //         (tuple) => tuple.edge.src === b.src && tuple.edge.target === b.target
-  //       );
-  //       return indexA - indexB;
-  //     });
-  //   });
-  // }
 
   exportCanvas(): void {
     const canvasElement = this.canvas.nativeElement;
@@ -238,7 +268,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     // Translate mouseX to corresponding graph name based on horizontalSpacing (X-axis tooltip)
-    const graphIndex = Math.floor(mouseX / this.stripeWidth);
+    const xOffset = this.sepStripeOp === SEP_STRIPE.START ? 0 : this.bpWidth;
+    const graphIndex = Math.floor((mouseX - xOffset) / this.stripeWidth);
     if (graphIndex >= 0 && graphIndex < this.subSeq.graphs.length) {
       this.tooltipTextX = this.subSeq.graphs[graphIndex].name;
       this.tooltipX = mouseX; // X tooltip aligned with mouse X position
@@ -246,11 +277,75 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     } else {
       this.tooltipVisibleX = false;
     }
+
+    // Handle selection during mouse movement
+    if (this.isSelecting) {
+      this.endY = mouseY; // Update the end Y coordinate
+      this.updateSelectionRectangle(); // Dynamically update the selection rectangle
+    }
+  }
+
+  onMouseDown(event: MouseEvent) {
+    const canvas = this.canvas.nativeElement;
+    const rect = canvas.getBoundingClientRect();
+    const mouseY = event.clientY - rect.top; // Get mouse Y position relative to the canvas
+
+    this.isSelecting = true;
+    this.startY = mouseY;
+    this.endY = mouseY; // Initialize endY to the startY for now
+  }
+
+  onMouseUp(event: MouseEvent) {
+    const canvas = this.canvas.nativeElement;
+    const rect = canvas.getBoundingClientRect();
+    const mouseY = event.clientY - rect.top;
+
+    this.isSelecting = false;
+    this.endY = mouseY; // Set the final end Y coordinate
+
+    // Get selected vertices based on the selection range
+    const selectedVertices = this.getSelectedVertices();
+
+    // Update the BehaviorSubject to notify subscribers
+    this.selectedVerticesSubject.next(selectedVertices);
+
+    // Hide the selection rectangle
+    this.selectionStyle = {};
   }
 
   onMouseLeave() {
-    // Hide tooltips when mouse leaves the canvas
     this.tooltipVisibleY = false;
     this.tooltipVisibleX = false;
   }
+
+  updateSelectionRectangle() {
+    const rectTop = Math.min(this.startY, this.endY); // Top of the selection
+    const rectHeight = Math.abs(this.endY - this.startY); // Height of the selection
+
+    // Update the selection rectangle's style dynamically
+    this.selectionStyle = {
+      top: `${rectTop}px`,
+      left: '0px',
+      width: '100%', // Full width
+      height: `${rectHeight}px`,
+    };
+  }
+
+  getSelectedVertices(): Vertex[] {
+    // Calculate the start and end indices based on the Y coordinates and vertical spacing
+    const startIndex = Math.floor(this.startY / this.vertexHeight);
+    const endIndex = Math.floor(this.endY / this.vertexHeight);
+
+    // Ensure indices are within bounds
+    const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
+    const maxIndex = Math.min(
+      Math.max(startIndex, endIndex),
+      this.vertexList.length - 1
+    );
+
+    // Return the list of vertices in the selected range
+    return this.vertexList.slice(minIndex, maxIndex + 1);
+  }
+
+ 
 }

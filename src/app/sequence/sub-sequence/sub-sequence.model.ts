@@ -40,6 +40,11 @@ export enum VIS_TECHNIQUE {
   TEP = 'TEP',
 }
 
+export enum SEP_STRIPE{
+  START = 'START',
+  END = 'END'
+}
+
 
 export enum VERTEXT_ORDERING {
   'HC' = 'HC',

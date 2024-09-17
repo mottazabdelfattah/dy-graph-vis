@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { COLOR_SCHEME, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { COLOR_SCHEME, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -25,6 +25,7 @@ export class ControlPanelComponent implements OnInit{
   lineRenderingMethods = Object.values(LINE_RENDERING_MODE);
   colorSchemeList = Object.values(COLOR_SCHEME);
   colorEncodingList = Object.values(LINE_COLOR_ENCODING);
+  SEPStackingOptions = Object.values(SEP_STRIPE);
 
   PARTITIONING_METHOD = PARTITIONING_METHOD;
   LINE_RENDERING_MODE = LINE_RENDERING_MODE;
@@ -49,7 +50,8 @@ export class ControlPanelComponent implements OnInit{
       edgeFreqRangeMin: [this.edgeFreqRangeValues[0]], // Initialize tepRangeMin
       edgeFreqRangeMax: [this.edgeFreqRangeValues[1]], // Initialize tepRangeMax
       tepBackgroundOpacity:[0.1],
-      threshold: [0.5]
+      threshold: [0.5],
+      sepStripeOp:[SEP_STRIPE.START]
     });
 
   }

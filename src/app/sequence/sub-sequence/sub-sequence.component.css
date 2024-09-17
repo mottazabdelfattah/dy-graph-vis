@@ -58,3 +58,22 @@
     z-index: 1000; /* Ensure the line is above other elements */
     pointer-events: none; /* Ignore pointer events */
   }
+
+
+  .selection-info {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    z-index: 10;
+  }
+  
+  .selection-rectangle {
+    position: absolute;
+    background-color: rgba(0, 0, 255, 0.2); /* Transparent blue */
+    border: 1px solid blue;
+    z-index: 2000;
+    pointer-events: none; /* Ignore pointer events */
+  }
