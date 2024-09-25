@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { COLOR_SCHEME, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { COLOR_SCHEME, EDGE_FILTERING, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -26,10 +26,12 @@ export class ControlPanelComponent implements OnInit{
   colorSchemeList = Object.values(COLOR_SCHEME);
   colorEncodingList = Object.values(LINE_COLOR_ENCODING);
   SEPStackingOptions = Object.values(SEP_STRIPE);
+  edgeFilteringOptions = Object.values(EDGE_FILTERING);
 
   PARTITIONING_METHOD = PARTITIONING_METHOD;
   LINE_RENDERING_MODE = LINE_RENDERING_MODE;
   VIS_TECHNIQUE = VIS_TECHNIQUE;
+  EDGE_FILTERING = EDGE_FILTERING;
 
   constructor(private fb: FormBuilder){
     this.controlForm = this.fb.group({
@@ -51,7 +53,8 @@ export class ControlPanelComponent implements OnInit{
       edgeFreqRangeMax: [this.edgeFreqRangeValues[1]], // Initialize tepRangeMax
       tepBackgroundOpacity:[0.1],
       threshold: [0.5],
-      sepStripeOp:[SEP_STRIPE.START]
+      sepStripeOp:[SEP_STRIPE.START],
+      edgeFiltering: [EDGE_FILTERING.BY_SELECTED_SRC]
     });
 
   }

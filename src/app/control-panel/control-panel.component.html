@@ -150,6 +150,18 @@
         </span>
       </div>
     </div>
+    <!-- edgeFiltering -->
+    <div class="form-group">
+      <label for="edgeFiltering">Filter Edges by Selected Vertices:</label>
+      <select id="edgeFiltering" formControlName="edgeFiltering">
+        <option
+          *ngFor="let filtering of edgeFilteringOptions"
+          [value]="filtering"
+        >
+          {{ filtering }}
+        </option>
+      </select>
+    </div>
 
     <!-- Visualization Settings Group -->
     <div class="settings-group">

@@ -71,9 +71,9 @@ export class SequenceService {
 
     for (let i = 1; i < rootSub.graphs.length; i++) {
       const currentTimepoint = rootSub.graphs[i];
-      
+
       // get pairwise distances between currentTimepoint and all prev points in current_cluster
-      const distances:number[] = [];
+      const distances: number[] = [];
       currentSub.graphs.forEach((g) => {
         distances.push(currentTimepoint.dist[g.id - 1]);
       });
@@ -231,7 +231,7 @@ export class SequenceService {
         rootSub.graphs.sort((a, b) => a.id - b.id);
         break;
       case SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED:
-      case SEQUENCE_ORDERING_METHOD.TOPOLOGY_WEIGHTED_BASED:
+        //case SEQUENCE_ORDERING_METHOD.TOPOLOGY_WEIGHTED_BASED:
         rootSub.graphs.sort((a, b) => a.hcOrder - b.hcOrder);
         break;
     }
@@ -264,5 +264,26 @@ export class SequenceService {
     });
 
     return aggEdges;
+  }
+
+  getEdgeCountPerVertex(
+    edges: { edge: Edge; frq: number }[]
+  ): Map<number, number> {
+    const vertexEdgeCount: Map<number, number> = new Map();
+    edges.forEach((tuple: { edge: Edge; frq: number }) => {
+      // Increment the count for src
+      vertexEdgeCount.set(
+        tuple.edge.src,
+        (vertexEdgeCount.get(tuple.edge.src) || 0) + tuple.frq
+      );
+
+      // Increment the count for target
+      vertexEdgeCount.set(
+        tuple.edge.target,
+        (vertexEdgeCount.get(tuple.edge.target) || 0) + tuple.frq
+      );
+    });
+
+    return vertexEdgeCount;
   }
 }

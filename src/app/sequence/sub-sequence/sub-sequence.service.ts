@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  EDGE_FILTERING,
   LINE_COLOR_ENCODING,
   SEP_STRIPE,
   SubSequence,
@@ -9,23 +10,48 @@ import { Edge, Graph, Vertex } from './graph/graph.model';
 import { Line } from './graph/line.model';
 import { UtilService } from '../../common/util.service';
 
+
 @Injectable({ providedIn: 'root' })
 export class SubSequenceService {
   constructor(private utilService: UtilService) {}
 
   filterAggEdges(
     subseq: SubSequence,
+    edgeFilteringOption: EDGE_FILTERING,
     aggEdgeMinFreq: number,
     aggEdgeMaxFreq: number,
     selectedVertices: Vertex[]
   ) {
-    // filterAggEdges
+    // filterAggEdges by freq
     subseq.aggEdgesFiltered = subseq.aggEdges.filter(
       (agg) =>
         (agg.frq / subseq.graphs.length) * 100 >= aggEdgeMinFreq &&
-        (agg.frq / subseq.graphs.length) * 100 <= aggEdgeMaxFreq &&
-        (selectedVertices.length === 0 || selectedVertices.some(vertex => vertex.id === agg.edge.src))
+        (agg.frq / subseq.graphs.length) * 100 <= aggEdgeMaxFreq
     );
+    switch (edgeFilteringOption) {
+      case EDGE_FILTERING.BY_SELECTED_SRC:
+        subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter(
+          (agg) =>
+            selectedVertices.length === 0 ||
+            selectedVertices.some((vertex) => vertex.id === agg.edge.src)
+        );
+        break;
+      case EDGE_FILTERING.BY_SELECTED_TAR:
+        subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter(
+          (agg) =>
+            selectedVertices.length === 0 ||
+            selectedVertices.some((vertex) => vertex.id === agg.edge.target)
+        );
+        break;
+      case EDGE_FILTERING.BY_SELECTED_SRC_TAR:
+        subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter(
+          (agg) =>
+            selectedVertices.length === 0 ||
+            (selectedVertices.some((vertex) => vertex.id === agg.edge.src) &&
+              selectedVertices.some((vertex) => vertex.id === agg.edge.target))
+        );
+        break;
+    }
   }
 
   updateGraphLines(
@@ -348,6 +374,9 @@ export class SubSequenceService {
   ): Line {
     let srcIdx = vertexList.findIndex((x) => x.id === e.src);
     let tarIdx = vertexList.findIndex((x) => x.id === e.target);
+
+    if(srcIdx ===-1 || tarIdx===-1)
+      console.log('vertex not found');
 
     const x1 = 0 + xOffset;
     const y1 = srcIdx !== -1 ? srcIdx * scaleY : 0;

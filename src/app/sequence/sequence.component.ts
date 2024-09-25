@@ -8,6 +8,7 @@ import {
 import { SubSequenceComponent } from './sub-sequence/sub-sequence.component';
 import {
   COLOR_SCHEME,
+  EDGE_FILTERING,
   EDGE_ORDERING,
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
@@ -19,7 +20,7 @@ import {
   VIS_TECHNIQUE,
 } from './sub-sequence/sub-sequence.model';
 import { SequenceService } from './sequence.service';
-import { Vertex } from './sub-sequence/graph/graph.model';
+import { Edge, Vertex } from './sub-sequence/graph/graph.model';
 import { DataService } from '../data.services';
 import { firstValueFrom } from 'rxjs';
 
@@ -45,17 +46,18 @@ export class SequenceComponent implements OnChanges, OnInit {
   visTechnique = VIS_TECHNIQUE.MSV;
   stripeWidth = 1;
   vertexHeight = 1;
-  lineWidth= 1;
+  lineWidth = 1;
   renderingMode = LINE_RENDERING_MODE.BLENDING;
   blendingFactor = 0.5;
   colorScheme = COLOR_SCHEME.GRAY_SCALE;
   colorEncoding = LINE_COLOR_ENCODING.DENSITY;
   vertexOrdering = VERTEXT_ORDERING.HC;
   edgeOrdering = EDGE_ORDERING.FREQUENCY;
-  tepBackgroundOpacity= 0.1;
-  edgeFreqRangeMin=20;
-  edgeFreqRangeMax=80;
+  tepBackgroundOpacity = 0.1;
+  edgeFreqRangeMin = 20;
+  edgeFreqRangeMax = 80;
   sepStripeOp = SEP_STRIPE.START;
+  edgeFiltering = EDGE_FILTERING.BY_SELECTED_SRC;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
@@ -83,7 +85,7 @@ export class SequenceComponent implements OnChanges, OnInit {
           console.error('Error loading dataset:', error);
           return; // Optionally halt further execution if dataset loading fails
         }
-        
+
       }
 
       // which changes trigger sort
@@ -101,30 +103,33 @@ export class SequenceComponent implements OnChanges, OnInit {
         previousSettings?.partitioning !== currentSettings.partitioning ||
         (previousSettings?.intervals !== currentSettings.intervals &&
           this.partitioningMethod === PARTITIONING_METHOD.UNIFORM) ||
-          (previousSettings?.threshold !== currentSettings.threshold &&
-            this.partitioningMethod !== PARTITIONING_METHOD.UNIFORM)||
-        previousSettings?.sequenceOrder !==
-          currentSettings.sequenceOrder
+        (previousSettings?.threshold !== currentSettings.threshold &&
+          this.partitioningMethod !== PARTITIONING_METHOD.UNIFORM) ||
+        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder
       ) {
-        this.repartition(currentSettings.partitioning, currentSettings.intervals, currentSettings.threshold);
+        this.repartition(
+          currentSettings.partitioning,
+          currentSettings.intervals,
+          currentSettings.threshold
+        );
       }
 
       // update other settings
       this.visTechnique = currentSettings.visualization;
       this.stripeWidth = currentSettings.stripeWidth;
       this.vertexHeight = currentSettings.vertexHeight;
-      this.lineWidth= currentSettings.lineWidth;
+      this.lineWidth = currentSettings.lineWidth;
       this.renderingMode = currentSettings.lineRendering;
       this.blendingFactor = currentSettings.blendingFactor;
       this.colorScheme = currentSettings.colorScheme;
-      this.colorEncoding=currentSettings.colorEncoding;
-      this.vertexOrdering=currentSettings.vertexOrdering;
-      this.tepBackgroundOpacity=currentSettings.tepBackgroundOpacity;
-      this.edgeOrdering=currentSettings.edgeOrdering;
-      this.sepStripeOp=currentSettings.sepStripeOp;
+      this.colorEncoding = currentSettings.colorEncoding;
+      this.vertexOrdering = currentSettings.vertexOrdering;
+      this.tepBackgroundOpacity = currentSettings.tepBackgroundOpacity;
+      this.edgeOrdering = currentSettings.edgeOrdering;
+      this.sepStripeOp = currentSettings.sepStripeOp;
       this.edgeFreqRangeMin = currentSettings.edgeFreqRangeMin;
       this.edgeFreqRangeMax = currentSettings.edgeFreqRangeMax;
-      
+      this.edgeFiltering = currentSettings.edgeFiltering;
     }
   }
 
@@ -146,8 +151,41 @@ export class SequenceComponent implements OnChanges, OnInit {
         this.jsonEdges,
         this.jsonProps
       );
-      this.vertexList = this.sequenceService.getVertexList(this.jsonVertices);
+
+      // Filter the jsonVertices array based on the top x% vertex IDs
+      const aggEdges = this.sequenceService.getSubSequenceAggregateEdges(this.initialSub);
+      const topXPercentVertexIds = this.getTopXPercentVertices(aggEdges, 40);
+      const filteredVertices = this.jsonVertices.filter((vertex: any) =>
+        topXPercentVertexIds.includes(vertex.id)
+      );
+      this.vertexList = this.sequenceService.getVertexList(filteredVertices);
+      const vertexIds = new Set(this.vertexList.map(vertex => vertex.id));
+
+      // filter graph edges accordingly
+      this.initialSub.graphs.forEach((g)=>{
+        const filtered = g.edges.filter((e) => 
+            vertexIds.has(e.src) && vertexIds.has(e.target)
+        );
+        g.edges = filtered;
+      })
     }
+  }
+
+  private getTopXPercentVertices(aggEdges:{ edge: Edge; frq: number }[], x: number): number[] {
+    
+    const vertexEdgeCount: Map<number, number> =
+      this.sequenceService.getEdgeCountPerVertex(aggEdges);
+    // Convert the Map to an array of [vertex, count] pairs
+    const vertexArray = Array.from(vertexEdgeCount.entries());
+
+    // Sort the array by the edge count in descending order
+    vertexArray.sort((a, b) => b[1] - a[1]);
+
+    // Calculate how many vertices are in the top 10%
+    const topPercentageCount = Math.ceil(vertexArray.length * (x / 100));
+
+    // Return an array of vertex IDs that are in the top 10%
+    return vertexArray.slice(0, topPercentageCount).map(([vertex]) => vertex);
   }
 
   private sort(sortingMethod: SEQUENCE_ORDERING_METHOD) {
@@ -160,7 +198,11 @@ export class SequenceComponent implements OnChanges, OnInit {
     }
   }
 
-  private repartition(partitioningMethod: PARTITIONING_METHOD, intervals:number, threshold:number) {
+  private repartition(
+    partitioningMethod: PARTITIONING_METHOD,
+    intervals: number,
+    threshold: number
+  ) {
     this.partitioningMethod = partitioningMethod;
     this.uniformIntervals = intervals;
     this.partitioningThreshold = threshold;

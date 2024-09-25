@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import {
   COLOR_SCHEME,
+  EDGE_FILTERING,
   EDGE_ORDERING,
   LINE_COLOR_ENCODING,
   LINE_RENDERING_MODE,
@@ -52,6 +53,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) edgeFreqRangeMin!: number;
   @Input({ required: true }) edgeFreqRangeMax!: number;
   @Input({ required: true }) sepStripeOp!: SEP_STRIPE;
+  @Input({ required: true }) edgeFilteringOption!: EDGE_FILTERING;
 
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
@@ -96,8 +98,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
-     // Add click event listener to the document to handle clicks outside the canvas
-     document.addEventListener('click', this.handleDocumentClick.bind(this));
+    // Add click event listener to the document to handle clicks outside the canvas
+    document.addEventListener('click', this.handleDocumentClick.bind(this));
   }
 
   ngAfterViewInit(): void {
@@ -170,17 +172,14 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  
-
   handleDocumentClick(event: MouseEvent) {
     const canvas = this.canvas.nativeElement;
     const rect = canvas.getBoundingClientRect();
-    const isClickInsideCanvas = (
+    const isClickInsideCanvas =
       event.clientX >= rect.left &&
       event.clientX <= rect.right &&
       event.clientY >= rect.top &&
-      event.clientY <= rect.bottom
-    );
+      event.clientY <= rect.bottom;
 
     if (!isClickInsideCanvas) {
       this.resetSelection();
@@ -232,10 +231,15 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  private filterAggregatedEdges(){
-    this.subSeqService.filterAggEdges(this.subSeq, this.edgeFreqRangeMin, this.edgeFreqRangeMax, this.selectedVerticesSubject.value);
+  private filterAggregatedEdges() {
+    this.subSeqService.filterAggEdges(
+      this.subSeq,
+      this.edgeFilteringOption,
+      this.edgeFreqRangeMin,
+      this.edgeFreqRangeMax,
+      this.selectedVerticesSubject.value
+    );
   }
-
 
   exportCanvas(): void {
     const canvasElement = this.canvas.nativeElement;
@@ -346,6 +350,4 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     // Return the list of vertices in the selected range
     return this.vertexList.slice(minIndex, maxIndex + 1);
   }
-
- 
 }

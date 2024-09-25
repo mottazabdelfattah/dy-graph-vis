@@ -18,7 +18,7 @@ export enum LINE_COLOR_ENCODING {
 export enum SEQUENCE_ORDERING_METHOD {
   TIME = 'TIME',
   TOPOLOGY_BASED = 'TOPOLOGY_BASED',
-  TOPOLOGY_WEIGHTED_BASED = 'TOPOLOGY_WEIGHTED_BASED',
+  // TOPOLOGY_WEIGHTED_BASED = 'TOPOLOGY_WEIGHTED_BASED',
 }
 
 export enum PARTITIONING_METHOD {
@@ -41,8 +41,14 @@ export enum VIS_TECHNIQUE {
 }
 
 export enum SEP_STRIPE{
-  START = 'START',
-  END = 'END'
+  START = 'First stripe',
+  END = 'Last stripe'
+}
+
+export enum EDGE_FILTERING{
+  BY_SELECTED_SRC = 'By source vertices',
+  BY_SELECTED_TAR = 'By target vertices',
+  BY_SELECTED_SRC_TAR = 'By source and target vertices',
 }
 
 
