@@ -1,4 +1,4 @@
-import {ElementRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { Line } from '../sequence/sub-sequence/graph/line.model';
 import {
   GRAY_SCALE_COLOR_SCHEME,
@@ -20,14 +20,10 @@ export class CanvasDrawerService {
   private canvas!: HTMLCanvasElement;
   private http!: HttpClient;
 
-  
-
   constructor(canvasElement: ElementRef<HTMLCanvasElement>, http: HttpClient) {
     this.http = http;
     this.canvas = canvasElement.nativeElement;
     this.context = this.canvas.getContext('2d', { willReadFrequently: true })!;
-
-    
   }
 
   drawLinesBackEnd(
@@ -63,6 +59,14 @@ export class CanvasDrawerService {
     } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
       let batchSize = lines.length;
       const batches = this.createBatches(lines, batchSize);
+      const arrayLength = canvasWidth * canvasHeight;
+      const float32ArraySize = arrayLength * Float32Array.BYTES_PER_ELEMENT;
+
+      let pixelDensityMap = new Float32Array(arrayLength);
+      let pixelValMap = new Float32Array(arrayLength);
+      let pixelOpacityMap = new Float32Array(arrayLength);
+      let pixelHitCountMap = new Int32Array(arrayLength);
+
       const requests = batches.map((batch) =>
         this.getPixelDensityMap(
           batch,
@@ -76,36 +80,26 @@ export class CanvasDrawerService {
 
       forkJoin(requests).subscribe(
         (responses: ArrayBuffer[]) => {
-          const arrayLength = canvasWidth * canvasHeight;
-          const float32ArraySize = arrayLength * Float32Array.BYTES_PER_ELEMENT;
-          // const int32ArraySize = arrayLength * Int32Array.BYTES_PER_ELEMENT;
-
-          let pixelDensityMap = new Float32Array(arrayLength);
-          let pixelValMap = new Float32Array(arrayLength);
-          let pixelOpacityMap = new Float32Array(arrayLength);
-          let pixelHitCountMap = new Int32Array(arrayLength);
-
           responses.forEach((response) => {
 
-            // Divide the response into three separate buffers
-            const pixelDensityMapBuffer = response.slice(0, float32ArraySize);
-            const pixelValMapBuffer = response.slice(
-              float32ArraySize,
-              float32ArraySize * 2
-            );
-            const pixelOpacityMapBuffer = response.slice(
-              float32ArraySize * 2,
-              float32ArraySize * 3
-            );
-            const pixelHitCountMapBuffer = response.slice(float32ArraySize * 3);
-
-            // Convert the buffers back to typed arrays
-            pixelDensityMap = new Float32Array(pixelDensityMapBuffer);
-            pixelValMap = new Float32Array(pixelValMapBuffer);
-            pixelOpacityMap = new Float32Array(pixelOpacityMapBuffer);
-            pixelHitCountMap = new Int32Array(pixelHitCountMapBuffer);
-
+            console.log('response is back');
             
+            pixelDensityMap = new Float32Array(response, 0, arrayLength);
+            pixelValMap = new Float32Array(
+              response,
+              arrayLength * 4,
+              arrayLength
+            );
+            pixelOpacityMap = new Float32Array(
+              response,
+              arrayLength * 8,
+              arrayLength
+            );
+            pixelHitCountMap = new Int32Array(
+              response,
+              arrayLength * 12,
+              arrayLength
+            );
           });
           const pixelMap =
             colorEncoding === LINE_COLOR_ENCODING.DENSITY
@@ -129,7 +123,7 @@ export class CanvasDrawerService {
     lineWidth: number
   ): Observable<ArrayBuffer> {
     const url = 'http://localhost:3000/calculate-density';
-
+    
     return this.http.post(
       url,
       {
@@ -157,7 +151,6 @@ export class CanvasDrawerService {
     });
   }
 
-
   private averagePixelMap(
     pixelValMap: Float32Array,
     pixelHitCountMap: Int32Array
@@ -170,11 +163,12 @@ export class CanvasDrawerService {
     return finalPixelMap;
   }
 
-  private scalePixelMap(pixelValMap: Float32Array){
+  private scalePixelMap(pixelValMap: Float32Array) {
     const maxPixelVal = this.findMaxDensity(pixelValMap);
     let finalPixelMap = new Float32Array(pixelValMap.length);
     for (let i = 0; i < pixelValMap.length; i++) {
-      finalPixelMap[i] = Math.log10(pixelValMap[i] + 1.0) / Math.log10(maxPixelVal + 1.0); 
+      finalPixelMap[i] =
+        Math.log10(pixelValMap[i] + 1.0) / Math.log10(maxPixelVal + 1.0);
     }
 
     return finalPixelMap;
@@ -188,7 +182,7 @@ export class CanvasDrawerService {
     const width = this.canvas.width;
     const height = this.canvas.height;
     const imageData = this.context.createImageData(width, height);
-    
+
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const index = (y * width + x) * 4;
@@ -216,14 +210,11 @@ export class CanvasDrawerService {
     intensity: number,
     colorScheme: any[]
   ): { r: number; g: number; b: number } {
-    
-    const idx = Math.floor(intensity * (colorScheme.length-1));
+    const idx = Math.floor(intensity * (colorScheme.length - 1));
     const color = colorScheme[idx];
-    
+
     return color;
   }
-
-  
 
   private findMaxDensity(pixelDensityMap: Float32Array): number {
     let max = 0;

@@ -250,17 +250,22 @@ export class SubSequenceService {
     }
 
     // draw the rep. graph of only one graph exists in the seq
-    if (subseqLength > 1) {
-      subSeq.graphs.forEach((g: Graph, idx) => {
+        if (subseqLength > 1) {
+      for (let i = 0; i < subSeq.graphs.length; i++) {
+        const g = subSeq.graphs[i];
+        const idx = i;
+        const currentStripeXOffset = stripesXOffset + idx * stripeWidth;
         const filteredEdges = this.filterEdges(
           g.edges,
           subSeq.aggEdgesFiltered
         );
-        filteredEdges.forEach((e: Edge) => {
+
+        for (let j = 0; j < filteredEdges.length; j++) {
+          const e = filteredEdges[j];
           const line = this.getLine(
             e,
             vertexList,
-            stripesXOffset + idx * stripeWidth,
+            currentStripeXOffset,
             bpWidth,
             vertexHeight,
             foregroundAlpha
@@ -268,10 +273,10 @@ export class SubSequenceService {
 
           this.cutOffLinesSEP(line, stripePos, stripeWidth);
           lines.push(line);
-        });
-      });
+        };
+      };
     }
-
+    
     // representative graph
     subSeq.aggEdgesFiltered.forEach((tuple) => {
       const line = this.getLine(
@@ -426,12 +431,13 @@ export class SubSequenceService {
     return maxSlope;
   }
 
-  private filterEdges(edges: Edge[], aggEdges: { edge: Edge; frq: number }[]) {
-    return edges.filter((edge) =>
-      aggEdges.some(
-        (tuple) =>
-          tuple.edge.src === edge.src && tuple.edge.target === edge.target
-      )
+  private filterEdges(edges: Edge[], aggEdges: { edge: Edge; frq: number }[]): Edge[] {
+    // Preprocess aggEdges into a Set for O(1) lookups
+    const aggEdgesSet = new Set<string>(
+      aggEdges.map(tuple => `${tuple.edge.src}->${tuple.edge.target}`)
     );
+  
+    // Filter edges using the Set
+    return edges.filter(edge => aggEdgesSet.has(`${edge.src}->${edge.target}`));
   }
 }

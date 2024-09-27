@@ -154,7 +154,7 @@ export class SequenceComponent implements OnChanges, OnInit {
 
       // Filter the jsonVertices array based on the top x% vertex IDs
       const aggEdges = this.sequenceService.getSubSequenceAggregateEdges(this.initialSub);
-      const topXPercentVertexIds = this.getTopXPercentVertices(aggEdges, 40);
+      const topXPercentVertexIds = this.getTopXPercentVertices(aggEdges, 100);
       const filteredVertices = this.jsonVertices.filter((vertex: any) =>
         topXPercentVertexIds.includes(vertex.id)
       );

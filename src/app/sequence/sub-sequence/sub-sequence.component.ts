@@ -91,7 +91,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       changes['vertexHeight']
     ) {
       this.updateCanvasSize();
-      this.RedrawCanvas();
+      //this.RedrawCanvas();
     } else {
       this.RedrawCanvas();
     }
@@ -99,7 +99,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     // Add click event listener to the document to handle clicks outside the canvas
-    document.addEventListener('click', this.handleDocumentClick.bind(this));
+    document.addEventListener('dblclick', this.handleDocumentClick.bind(this));
   }
 
   ngAfterViewInit(): void {
@@ -129,13 +129,13 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
-    document.removeEventListener('click', this.handleDocumentClick.bind(this));
+    document.removeEventListener('dblclick', this.handleDocumentClick.bind(this));
   }
 
-  private RedrawCanvas() {
+  private async RedrawCanvas() {
     this.sortVertices();
     this.filterAggregatedEdges();
-    const lines: Line[] = this.subSeqService.updateGraphLines(
+        const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
       this.subSeq,
       this.vertexList,
@@ -147,7 +147,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.tepBackgroundOpacity,
       this.sepStripeOp
     );
-
+    
     // draw lines
     if (this.canvasDrawerService) {
       this.canvasDrawerService.drawLinesBackEnd(
@@ -157,7 +157,6 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         this.colorEncoding,
         this.colorScheme
       );
-
       // labels
       this.labels = [];
       this.subSeq.graphs.forEach((g: Graph, idx) => {
@@ -196,7 +195,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     clearTimeout(this.resizeTimeout);
     this.resizeTimeout = setTimeout(() => {
       this.RedrawCanvas(); // Only redraw after resize settles
-    }, 200); // Delay to ensure resize is finished
+    }, 1); // Delay to ensure resize is finished
   }
 
   private updateCanvasSize() {
