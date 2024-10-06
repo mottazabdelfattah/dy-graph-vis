@@ -20,14 +20,26 @@ export class SubSequenceService {
     edgeFilteringOption: EDGE_FILTERING,
     aggEdgeMinFreq: number,
     aggEdgeMaxFreq: number,
-    selectedVertices: Vertex[]
+    selectedVertices: Vertex[],
   ) {
-    // filterAggEdges by freq
-    subseq.aggEdgesFiltered = subseq.aggEdges.filter(
-      (agg) =>
-        (agg.frq / subseq.graphs.length) * 100 >= aggEdgeMinFreq &&
-        (agg.frq / subseq.graphs.length) * 100 <= aggEdgeMaxFreq
+    
+    // Filter aggEdges based on whether they are in the excluded set
+    const excludedEdgesSet = new Set(
+      subseq.excludedAggEdges.map(exEdge => `${exEdge.edge.src}-${exEdge.edge.target}`)
     );
+    subseq.aggEdgesFiltered  = subseq.aggEdges.filter(aggEdge =>
+      !excludedEdgesSet.has(`${aggEdge.edge.src}-${aggEdge.edge.target}`)
+    );
+
+
+    // filterAggEdges by freq
+    const graphCount = subseq.graphs.length;
+    const freqMultiplier = 100 / graphCount;
+
+    subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter((agg) => {
+      const percentageFreq = agg.frq * freqMultiplier; // Calculate once
+      return percentageFreq >= aggEdgeMinFreq && percentageFreq <= aggEdgeMaxFreq;
+    });
     switch (edgeFilteringOption) {
       case EDGE_FILTERING.BY_SELECTED_SRC:
         subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter(

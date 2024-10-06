@@ -10,6 +10,7 @@ import {
   inject,
 } from '@angular/core';
 import {
+  CANVAS_SELECTION_MODE,
   COLOR_SCHEME,
   EDGE_FILTERING,
   EDGE_ORDERING,
@@ -21,7 +22,7 @@ import {
   VIS_TECHNIQUE,
 } from './sub-sequence.model';
 import { GraphComponent } from './graph/graph.component';
-import { Graph, Vertex } from './graph/graph.model';
+import { Edge, Graph, Vertex } from './graph/graph.model';
 import { SubSequenceService } from './sub-sequence.service';
 import { Line } from './graph/line.model';
 import { CanvasDrawerService } from '../../common/canvas-drawer.service';
@@ -54,7 +55,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) edgeFreqRangeMax!: number;
   @Input({ required: true }) sepStripeOp!: SEP_STRIPE;
   @Input({ required: true }) edgeFilteringOption!: EDGE_FILTERING;
+  @Input({ required: true }) canvasSelectionMode!: CANVAS_SELECTION_MODE;
 
+  CANVAS_SELECTION_MODE = CANVAS_SELECTION_MODE;
   private http = inject(HttpClient);
   private canvasDrawerService!: CanvasDrawerService;
   private subSeqService = inject(SubSequenceService);
@@ -76,9 +79,13 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   private selectedVerticesSubject = new BehaviorSubject<Vertex[]>([]);
   selectedVertices$ = this.selectedVerticesSubject.asObservable(); // Expose it as an Observable
+  selectedTimepoints: Graph[] = [];
   isSelecting: boolean = false; // To track if selection is in progress
   startY: number = 0; // Initial Y position when mouse is pressed
   endY: number = 0; // Final Y position when mouse is released
+  startX: number = 0; // Initial X position when mouse is pressed
+  endX: number = 0; // Final X position when mouse is released
+
   selectionStyle: any = {}; // Style binding for the selection rectangle
 
   constructor() {}
@@ -189,6 +196,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     this.isSelecting = false;
     this.selectionStyle = {};
     this.selectedVerticesSubject.next([]); // Clear selected vertices
+    this.selectedTimepoints = [];
   }
 
   private handleCanvasResize() {
@@ -236,7 +244,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.edgeFilteringOption,
       this.edgeFreqRangeMin,
       this.edgeFreqRangeMax,
-      this.selectedVerticesSubject.value
+      this.selectedVerticesSubject.value,
     );
   }
 
@@ -284,6 +292,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     // Handle selection during mouse movement
     if (this.isSelecting) {
       this.endY = mouseY; // Update the end Y coordinate
+      this.endX = mouseX;
       this.updateSelectionRectangle(); // Dynamically update the selection rectangle
     }
   }
@@ -292,25 +301,38 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     const canvas = this.canvas.nativeElement;
     const rect = canvas.getBoundingClientRect();
     const mouseY = event.clientY - rect.top; // Get mouse Y position relative to the canvas
+    const mouseX = event.clientX - rect.left; // Get mouse X position relative to the canvas
 
     this.isSelecting = true;
     this.startY = mouseY;
     this.endY = mouseY; // Initialize endY to the startY for now
+    this.startX = mouseX;
+    this.endX = mouseX; // Initialize endX to the startX for now
   }
 
   onMouseUp(event: MouseEvent) {
     const canvas = this.canvas.nativeElement;
     const rect = canvas.getBoundingClientRect();
     const mouseY = event.clientY - rect.top;
+    const mouseX = event.clientX - rect.left;
 
     this.isSelecting = false;
     this.endY = mouseY; // Set the final end Y coordinate
+    this.endX = mouseX; // Set the final end Y coordinate
 
-    // Get selected vertices based on the selection range
-    const selectedVertices = this.getSelectedVertices();
+    
+    if(this.canvasSelectionMode===CANVAS_SELECTION_MODE.VERTICES){
+      // Get selected vertices based on the selection range
+      const selectedVertices = this.getSelectedVertices();
+      // Update the BehaviorSubject to notify subscribers
+      this.selectedVerticesSubject.next(selectedVertices);
+    }else if(this.canvasSelectionMode===CANVAS_SELECTION_MODE.TIMEPOINTS){
+      const selectedTimepoints = this.getSelectedTimepoints();
+      this.selectedTimepoints = selectedTimepoints;
+    }
+    
 
-    // Update the BehaviorSubject to notify subscribers
-    this.selectedVerticesSubject.next(selectedVertices);
+    
 
     // Hide the selection rectangle
     this.selectionStyle = {};
@@ -323,15 +345,28 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   updateSelectionRectangle() {
     const rectTop = Math.min(this.startY, this.endY); // Top of the selection
+    const rectLeft= Math.min(this.startX, this.endX); // left of the selection
     const rectHeight = Math.abs(this.endY - this.startY); // Height of the selection
+    const rectWidth = Math.abs(this.endX - this.startX); // Width of the selection
+    
 
     // Update the selection rectangle's style dynamically
-    this.selectionStyle = {
-      top: `${rectTop}px`,
-      left: '0px',
-      width: '100%', // Full width
-      height: `${rectHeight}px`,
-    };
+    if(this.canvasSelectionMode === CANVAS_SELECTION_MODE.VERTICES){
+      this.selectionStyle = {
+        top: `${rectTop}px`,
+        left: '0px',
+        width: '100%', // Full width
+        height: `${rectHeight}px`,
+      };
+    }else if(this.canvasSelectionMode === CANVAS_SELECTION_MODE.TIMEPOINTS){
+      this.selectionStyle = {
+        top: '0px',
+        left: `${rectLeft}px`,
+        width: `${rectWidth}px`,
+        height: '100%', // Full height
+      };
+    }
+  
   }
 
   getSelectedVertices(): Vertex[] {
@@ -348,5 +383,21 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
     // Return the list of vertices in the selected range
     return this.vertexList.slice(minIndex, maxIndex + 1);
+  }
+
+  getSelectedTimepoints(): Graph[] {
+    // Calculate the start and end indices based on the Y coordinates and vertical spacing
+    const startIndex = Math.floor(this.startX / this.stripeWidth);
+    const endIndex = Math.floor(this.endX / this.stripeWidth);
+
+    // Ensure indices are within bounds
+    const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
+    const maxIndex = Math.min(
+      Math.max(startIndex, endIndex),
+      this.subSeq.graphs.length - 1
+    );
+
+    // Return the list of vertices in the selected range
+    return this.subSeq.graphs.slice(minIndex, maxIndex + 1);
   }
 }

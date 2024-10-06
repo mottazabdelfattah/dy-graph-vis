@@ -48,21 +48,17 @@
 <div *ngIf="isSelecting" [ngStyle]="selectionStyle" class="selection-rectangle"></div>
 
 <!-- Display selected vertices below the canvas -->
-<div *ngIf="(selectedVertices$ | async) as selectedVertices" class="selection-info">
+<div *ngIf="canvasSelectionMode===CANVAS_SELECTION_MODE.VERTICES && (selectedVertices$ | async) as selectedVertices" class="selection-info">
   {{ 'Selection:' }}
   <ng-container *ngFor="let vertex of selectedVertices; let last = last">
     {{ vertex.name }}<ng-container *ngIf="!last">, </ng-container>
   </ng-container>
 </div>
-<!-- Overlay Container for Labels -->
-  <!-- <div class="labels-container">
-    <div
-      *ngFor="let label of labels"
-      class="label"
-      [style.left.px]="label.positionX"
-      [style.top.px]="0"
-    >
-      {{ label.text }}
-    </div>
-  </div> -->
+<div *ngIf="canvasSelectionMode===CANVAS_SELECTION_MODE.TIMEPOINTS" class="selection-info">
+  {{ 'Selection:' }}
+  <ng-container *ngFor="let g of selectedTimepoints; let last = last">
+    {{ g.name }}<ng-container *ngIf="!last">, </ng-container>
+  </ng-container>
+</div>
+
 </div>

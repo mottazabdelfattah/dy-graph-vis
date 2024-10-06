@@ -51,6 +51,10 @@ export enum EDGE_FILTERING{
   BY_SELECTED_SRC_TAR = 'By source and target vertices',
 }
 
+export enum CANVAS_SELECTION_MODE{
+  VERTICES = 'VERTICES',
+  TIMEPOINTS = 'TIMEPOINTS'
+}
 
 export enum VERTEXT_ORDERING {
   'HC' = 'HC',
@@ -75,6 +79,7 @@ export class SubSequence {
   graphs: Graph[];
   aggEdges: {edge :Edge, frq: number}[];
   aggEdgesFiltered: {edge :Edge, frq: number}[];
+  excludedAggEdges: {edge :Edge, frq: number}[];
   // minEdgeWeight: number;
   maxEdgeWeight: number;
 
@@ -84,6 +89,7 @@ export class SubSequence {
     this.graphs = [];
     this.aggEdges=[];
     this.aggEdgesFiltered=[];
+    this.excludedAggEdges=[];
     this.maxEdgeWeight = 0;
     // this.minEdgeWeight = 0;
   }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { COLOR_SCHEME, EDGE_FILTERING, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { CANVAS_SELECTION_MODE, COLOR_SCHEME, EDGE_FILTERING, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -27,6 +27,8 @@ export class ControlPanelComponent implements OnInit{
   colorEncodingList = Object.values(LINE_COLOR_ENCODING);
   SEPStackingOptions = Object.values(SEP_STRIPE);
   edgeFilteringOptions = Object.values(EDGE_FILTERING);
+  canvasSelectionOptions = Object.values(CANVAS_SELECTION_MODE);
+  
 
   PARTITIONING_METHOD = PARTITIONING_METHOD;
   LINE_RENDERING_MODE = LINE_RENDERING_MODE;
@@ -54,7 +56,9 @@ export class ControlPanelComponent implements OnInit{
       tepBackgroundOpacity:[0.1],
       threshold: [0.5],
       sepStripeOp:[SEP_STRIPE.START],
-      edgeFiltering: [EDGE_FILTERING.BY_SELECTED_SRC]
+      edgeFiltering: [EDGE_FILTERING.BY_SELECTED_SRC],
+      canvasSelectionMode: [CANVAS_SELECTION_MODE.VERTICES],
+      diffMode: [false]
     });
 
   }
@@ -84,18 +88,7 @@ export class ControlPanelComponent implements OnInit{
       this.edgeFreqRangeValues[1] = value;
     });
 
-    // this.controlForm.get('partitioning')?.valueChanges.subscribe(value => {
-    //   if (value !== PARTITIONING_METHOD.UNIFORM) {
-    //     this.controlForm.get('intervals')?.setValue(1);
-    //   }
-    // });
-
-    // this.controlForm.get('lineRendering')?.valueChanges.subscribe(value => {
-    //   if (value !== LINE_RENDERING_MODE.BLENDING) {
-    //     this.controlForm.get('blendingFactor')?.setValue(0.5);
-    //   }
-    // });
-
+    
     
     this.setupDebounce(); // Debounced subscription to form changes
   }
@@ -112,4 +105,6 @@ export class ControlPanelComponent implements OnInit{
       this.edgeFreqRangeValues[1] = +max;
     }
   }
+
+  
 }

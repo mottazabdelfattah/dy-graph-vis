@@ -1,12 +1,17 @@
-.sequence-container {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    gap: 10px; /* Optional: space between items */
-    overflow-x: auto; /* Enables horizontal scrolling if content overflows */
-    position: relative; /* Ensures positioning context for child elements */
-  }
-  
-  .sub-sequence-item {
-    position: relative; /* Required for absolute positioning of children */
-    margin: 5px;
-  }
+/* Main container that holds all the canvases and buttons */
+.canvas-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow canvases to wrap to the next line when no space */
+  justify-content: flex-start; /* Align canvases to the left */
+  gap: 2px; /* Space between each canvas and button */
+}
+
+/* Each canvas and its corresponding button */
+.sub-sequence-container {
+  display: flex;
+  align-items: center; /* Center the button vertically between canvases */
+  gap: 2px; /* Space between canvas and button */
+}
+
+
+

@@ -81,7 +81,6 @@ export class SequenceService {
       const sum = distances.reduce((acc, curr) => acc + curr, 0); // Sum all numbers
       const avgDistance = sum / distances.length;
 
-
       if (avgDistance > threshold) {
         //Start a new cluster
         subSequences.push(currentSub);
@@ -285,5 +284,35 @@ export class SequenceService {
     });
 
     return vertexEdgeCount;
+  }
+
+  // Optimized function to find intersection based on the edge property
+  findOptimizedIntersection(
+    aggEdges1: { edge: Edge; frq: number }[],
+    aggEdges2: { edge: Edge; frq: number }[]
+  ): { edge: Edge; frq: number }[] {
+    // Create a map to store aggEdges1 with their edge key
+    const edgeMap = new Map<string, { edge: Edge; frq: number }>();
+
+    // Populate the map with aggEdges1
+    aggEdges1.forEach((ae1) => {
+      const key = this.getEdgeKey(ae1.edge);
+      edgeMap.set(key, ae1);
+    });
+
+    // Iterate over aggEdges2 and find common edges
+    const intersection: { edge: Edge; frq: number }[] = [];
+    aggEdges2.forEach((ae2) => {
+      const key = this.getEdgeKey(ae2.edge);
+      if (edgeMap.has(key)) {
+        intersection.push(edgeMap.get(key)!); // Add the matching edge from aggEdges1
+      }
+    });
+
+    return intersection;
+  }
+
+  private getEdgeKey(edge: Edge): string {
+    return `${edge.src}-${edge.target}`;
   }
 }

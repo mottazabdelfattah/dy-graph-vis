@@ -163,6 +163,29 @@
       </select>
     </div>
 
+    <!-- edgeFiltering -->
+    <div class="form-group">
+      <label for="canvasSelectionMode">Selection Mode:</label>
+      <select id="canvasSelectionMode" formControlName="canvasSelectionMode">
+        <option
+          *ngFor="let mode of canvasSelectionOptions"
+          [value]="mode"
+        >
+          {{ mode }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Difference button between adjacent canvases -->
+    <div class="form-group">
+      <label for="diffMode">Diff. Mode:</label>
+      <label class="switch">
+        <input id="diffMode" type="checkbox" formControlName="diffMode" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  
+
     <!-- Visualization Settings Group -->
     <div class="settings-group">
       <h3>Visualization Settings</h3>

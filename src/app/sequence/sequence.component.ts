@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { SubSequenceComponent } from './sub-sequence/sub-sequence.component';
 import {
+  CANVAS_SELECTION_MODE,
   COLOR_SCHEME,
   EDGE_FILTERING,
   EDGE_ORDERING,
@@ -23,11 +24,13 @@ import { SequenceService } from './sequence.service';
 import { Edge, Vertex } from './sub-sequence/graph/graph.model';
 import { DataService } from '../data.services';
 import { firstValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sequence',
   standalone: true,
-  imports: [SubSequenceComponent],
+  imports: [SubSequenceComponent, CommonModule, FormsModule],
   templateUrl: './sequence.component.html',
   styleUrl: './sequence.component.css',
 })
@@ -41,7 +44,6 @@ export class SequenceComponent implements OnChanges, OnInit {
   partitioningMethod = PARTITIONING_METHOD.UNIFORM;
   sequenceOrderMethod = SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED;
   uniformIntervals = 1;
-
 
   visTechnique = VIS_TECHNIQUE.MSV;
   stripeWidth = 1;
@@ -58,10 +60,14 @@ export class SequenceComponent implements OnChanges, OnInit {
   edgeFreqRangeMax = 80;
   sepStripeOp = SEP_STRIPE.START;
   edgeFiltering = EDGE_FILTERING.BY_SELECTED_SRC;
+  canvasSelectionMode = CANVAS_SELECTION_MODE.TIMEPOINTS;
+  isDiffMode = false;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
   vertexList: Vertex[] = [];
+  // isDiffMode: boolean = false; 
+  selectedSubs: boolean[] = []; // Track which canvases are selected
 
   constructor(
     private sequenceService: SequenceService,
@@ -85,14 +91,12 @@ export class SequenceComponent implements OnChanges, OnInit {
           console.error('Error loading dataset:', error);
           return; // Optionally halt further execution if dataset loading fails
         }
-
       }
 
       // which changes trigger sort
       if (
         previousSettings?.dataset !== currentSettings.dataset ||
-        previousSettings?.sequenceOrder !==
-          currentSettings.sequenceOrder
+        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder
       ) {
         this.sort(currentSettings.sequenceOrder);
       }
@@ -114,6 +118,18 @@ export class SequenceComponent implements OnChanges, OnInit {
         );
       }
 
+      if( previousSettings?.dataset !== currentSettings.dataset ||
+        previousSettings?.partitioning !== currentSettings.partitioning ||
+        (previousSettings?.intervals !== currentSettings.intervals &&
+          this.partitioningMethod === PARTITIONING_METHOD.UNIFORM) ||
+        (previousSettings?.threshold !== currentSettings.threshold &&
+          this.partitioningMethod !== PARTITIONING_METHOD.UNIFORM) ||
+        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder||
+        previousSettings?.diffMode !== currentSettings.diffMode){
+          
+        this.toggleDifference(currentSettings.diffMode);
+      }
+
       // update other settings
       this.visTechnique = currentSettings.visualization;
       this.stripeWidth = currentSettings.stripeWidth;
@@ -130,6 +146,7 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.edgeFreqRangeMin = currentSettings.edgeFreqRangeMin;
       this.edgeFreqRangeMax = currentSettings.edgeFreqRangeMax;
       this.edgeFiltering = currentSettings.edgeFiltering;
+      this.canvasSelectionMode = currentSettings.canvasSelectionMode;
     }
   }
 
@@ -153,26 +170,30 @@ export class SequenceComponent implements OnChanges, OnInit {
       );
 
       // Filter the jsonVertices array based on the top x% vertex IDs
-      const aggEdges = this.sequenceService.getSubSequenceAggregateEdges(this.initialSub);
+      const aggEdges = this.sequenceService.getSubSequenceAggregateEdges(
+        this.initialSub
+      );
       const topXPercentVertexIds = this.getTopXPercentVertices(aggEdges, 100);
       const filteredVertices = this.jsonVertices.filter((vertex: any) =>
         topXPercentVertexIds.includes(vertex.id)
       );
       this.vertexList = this.sequenceService.getVertexList(filteredVertices);
-      const vertexIds = new Set(this.vertexList.map(vertex => vertex.id));
+      const vertexIds = new Set(this.vertexList.map((vertex) => vertex.id));
 
       // filter graph edges accordingly
-      this.initialSub.graphs.forEach((g)=>{
-        const filtered = g.edges.filter((e) => 
-            vertexIds.has(e.src) && vertexIds.has(e.target)
+      this.initialSub.graphs.forEach((g) => {
+        const filtered = g.edges.filter(
+          (e) => vertexIds.has(e.src) && vertexIds.has(e.target)
         );
         g.edges = filtered;
-      })
+      });
     }
   }
 
-  private getTopXPercentVertices(aggEdges:{ edge: Edge; frq: number }[], x: number): number[] {
-    
+  private getTopXPercentVertices(
+    aggEdges: { edge: Edge; frq: number }[],
+    x: number
+  ): number[] {
     const vertexEdgeCount: Map<number, number> =
       this.sequenceService.getEdgeCountPerVertex(aggEdges);
     // Convert the Map to an array of [vertex, count] pairs
@@ -213,12 +234,45 @@ export class SequenceComponent implements OnChanges, OnInit {
         this.partitioningThreshold,
         this.uniformIntervals
       );
-
+      this.selectedSubs = new Array(this.subList.length).fill(false);
+    }
+  }
+  toggleDifference(diffMode: boolean) {
+    this.isDiffMode = diffMode;
+    if (!this.isDiffMode) {
+      this.resetSelectedSubs(); // Reset selected canvases to original state
+    } else {
+      this.computeDifference(); // Compute and subtract intersection from selected canvases
     }
   }
 
-  
+  resetSelectedSubs() {
+    this.selectedSubs.forEach((selected, index) => {
+      if (selected) {
+        this.subList[index] = { ...this.subList[index], excludedAggEdges: [] };
+      }
+    });
+  }
+  computeDifference() {
+    const selectedIndices = this.selectedSubs
+      .map((selected, index) => (selected ? index : -1))
+      .filter(index => index !== -1);
 
+    if (selectedIndices.length < 2) {
+      console.warn('Select at least two canvases to compute the difference');
+      return;
+    }
 
-  
+    // Find the intersection of aggEdges across all subs
+    let intersection = this.subList[selectedIndices[0]].aggEdges;
+    for (let i = 1; i < selectedIndices.length; i++) {
+      intersection = this.sequenceService.findOptimizedIntersection(intersection, this.subList[selectedIndices[i]].aggEdges);
+    }
+
+    // exclude the intersection from each selected subs
+    selectedIndices.forEach(index => {
+      this.subList[index] = { ...this.subList[index], excludedAggEdges: intersection };
+    });
+
+  }
 }

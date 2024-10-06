@@ -1,24 +1,31 @@
-<div>
-  @for(sub of subList; track $index){
-  <app-sub-sequence
-    [subSeq]="sub"
-    [vertexList]="vertexList"
-    [stripeWidth]="stripeWidth"
-    [vertexHeight]="vertexHeight"
-    [visTechnique]="visTechnique"
-    [lineWidth]="lineWidth"
-    [renderingMode]="renderingMode"
-    [blendingFactor]="blendingFactor"
-    [colorScheme]="colorScheme"
-    [colorEncoding]="colorEncoding"
-    [vertexOrdering]="vertexOrdering"
-    [edgeOrdering]="edgeOrdering"
-    [tepBackgroundOpacity]="tepBackgroundOpacity"
-    [edgeFreqRangeMin]="edgeFreqRangeMin"
-    [edgeFreqRangeMax]="edgeFreqRangeMax"
-    [sepStripeOp]="sepStripeOp"
-    [edgeFilteringOption]="edgeFiltering"
-    class="sub-sequence-item"
-  ></app-sub-sequence>
-  }
+<div class="canvas-container">
+  
+  <div
+    *ngFor="let sub of subList; let i = index"
+    class="sub-sequence-container"
+  >
+  <!-- Checkbox to select the canvas for comparison -->
+  <input type="checkbox" [(ngModel)]="selectedSubs[i]" />
+    <app-sub-sequence
+      [subSeq]="sub"
+      [vertexList]="vertexList"
+      [stripeWidth]="stripeWidth"
+      [vertexHeight]="vertexHeight"
+      [visTechnique]="visTechnique"
+      [lineWidth]="lineWidth"
+      [renderingMode]="renderingMode"
+      [blendingFactor]="blendingFactor"
+      [colorScheme]="colorScheme"
+      [colorEncoding]="colorEncoding"
+      [vertexOrdering]="vertexOrdering"
+      [edgeOrdering]="edgeOrdering"
+      [tepBackgroundOpacity]="tepBackgroundOpacity"
+      [edgeFreqRangeMin]="edgeFreqRangeMin"
+      [edgeFreqRangeMax]="edgeFreqRangeMax"
+      [sepStripeOp]="sepStripeOp"
+      [edgeFilteringOption]="edgeFiltering"
+      [canvasSelectionMode]="canvasSelectionMode"
+    ></app-sub-sequence>
+    
+  </div>
 </div>
