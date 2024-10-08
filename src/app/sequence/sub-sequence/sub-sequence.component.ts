@@ -81,12 +81,15 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   selectedVertices$ = this.selectedVerticesSubject.asObservable(); // Expose it as an Observable
   selectedTimepoints: Graph[] = [];
   isSelecting: boolean = false; // To track if selection is in progress
+  selections: { startX: number; endX: number; startY: number; endY: number }[] =
+    [];
   startY: number = 0; // Initial Y position when mouse is pressed
   endY: number = 0; // Final Y position when mouse is released
   startX: number = 0; // Initial X position when mouse is pressed
   endX: number = 0; // Final X position when mouse is released
 
   selectionStyle: any = {}; // Style binding for the selection rectangle
+  isCtrlPressed: boolean = false; // Track the Ctrl key state
 
   constructor() {}
 
@@ -107,6 +110,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
     // Add click event listener to the document to handle clicks outside the canvas
     document.addEventListener('dblclick', this.handleDocumentClick.bind(this));
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    document.addEventListener('keyup', this.handleKeyUp.bind(this));
   }
 
   ngAfterViewInit(): void {
@@ -136,13 +141,32 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
-    document.removeEventListener('dblclick', this.handleDocumentClick.bind(this));
+    document.removeEventListener(
+      'dblclick',
+      this.handleDocumentClick.bind(this)
+    );
+    document.removeEventListener('keydown', this.handleKeyDown.bind(this));
+    document.removeEventListener('keyup', this.handleKeyUp.bind(this));
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.ctrlKey) {
+      this.isCtrlPressed = true; // Mark Ctrl as pressed
+    }
+  }
+
+  handleKeyUp(event: KeyboardEvent) {
+    if (event.key === 'Control') {
+      this.isCtrlPressed = false; // Mark Ctrl as released
+      this.performSelection();
+      this.selectionStyle = {};
+    }
   }
 
   private async RedrawCanvas() {
     this.sortVertices();
     this.filterAggregatedEdges();
-        const lines: Line[] = this.subSeqService.updateGraphLines(
+    const lines: Line[] = this.subSeqService.updateGraphLines(
       this.visTechnique,
       this.subSeq,
       this.vertexList,
@@ -154,7 +178,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.tepBackgroundOpacity,
       this.sepStripeOp
     );
-    
+
     // draw lines
     if (this.canvasDrawerService) {
       this.canvasDrawerService.drawLinesBackEnd(
@@ -194,6 +218,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   resetSelection() {
     this.isSelecting = false;
+    this.selections = [];
     this.selectionStyle = {};
     this.selectedVerticesSubject.next([]); // Clear selected vertices
     this.selectedTimepoints = [];
@@ -244,7 +269,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.edgeFilteringOption,
       this.edgeFreqRangeMin,
       this.edgeFreqRangeMax,
-      this.selectedVerticesSubject.value,
+      this.selectedVerticesSubject.value
     );
   }
 
@@ -291,8 +316,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
     // Handle selection during mouse movement
     if (this.isSelecting) {
-      this.endY = mouseY; // Update the end Y coordinate
-      this.endX = mouseX;
+      this.selections[this.selections.length - 1].endX = mouseX;
+      this.selections[this.selections.length - 1].endY = mouseY;
       this.updateSelectionRectangle(); // Dynamically update the selection rectangle
     }
   }
@@ -308,6 +333,19 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     this.endY = mouseY; // Initialize endY to the startY for now
     this.startX = mouseX;
     this.endX = mouseX; // Initialize endX to the startX for now
+
+    // reset selections if Ctrl is not pressed
+    if (!event.ctrlKey) {
+      this.selections = []; // Clear previous selections
+    }
+
+    // Initialize a new selection rectangle
+    this.selections.push({
+      startX: this.startX,
+      startY: this.startY,
+      endX: this.startX,
+      endY: this.startY,
+    });
   }
 
   onMouseUp(event: MouseEvent) {
@@ -320,19 +358,13 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     this.endY = mouseY; // Set the final end Y coordinate
     this.endX = mouseX; // Set the final end Y coordinate
 
-    
-    if(this.canvasSelectionMode===CANVAS_SELECTION_MODE.VERTICES){
-      // Get selected vertices based on the selection range
-      const selectedVertices = this.getSelectedVertices();
-      // Update the BehaviorSubject to notify subscribers
-      this.selectedVerticesSubject.next(selectedVertices);
-    }else if(this.canvasSelectionMode===CANVAS_SELECTION_MODE.TIMEPOINTS){
-      const selectedTimepoints = this.getSelectedTimepoints();
-      this.selectedTimepoints = selectedTimepoints;
-    }
-    
+    // Finalize the end position of the last selection
+    this.selections[this.selections.length - 1].endX = mouseX;
+    this.selections[this.selections.length - 1].endY = mouseY;
 
-    
+    if (!this.isCtrlPressed) {
+      this.performSelection();
+    }
 
     // Hide the selection rectangle
     this.selectionStyle = {};
@@ -343,61 +375,77 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     this.tooltipVisibleX = false;
   }
 
-  updateSelectionRectangle() {
-    const rectTop = Math.min(this.startY, this.endY); // Top of the selection
-    const rectLeft= Math.min(this.startX, this.endX); // left of the selection
-    const rectHeight = Math.abs(this.endY - this.startY); // Height of the selection
-    const rectWidth = Math.abs(this.endX - this.startX); // Width of the selection
-    
-
-    // Update the selection rectangle's style dynamically
-    if(this.canvasSelectionMode === CANVAS_SELECTION_MODE.VERTICES){
-      this.selectionStyle = {
-        top: `${rectTop}px`,
-        left: '0px',
-        width: '100%', // Full width
-        height: `${rectHeight}px`,
-      };
-    }else if(this.canvasSelectionMode === CANVAS_SELECTION_MODE.TIMEPOINTS){
-      this.selectionStyle = {
-        top: '0px',
-        left: `${rectLeft}px`,
-        width: `${rectWidth}px`,
-        height: '100%', // Full height
-      };
+  performSelection() {
+    if (this.canvasSelectionMode === CANVAS_SELECTION_MODE.VERTICES) {
+      // Get selected vertices based on the selection range
+      const selectedVertices = this.getSelectedVertices();
+      // Update the BehaviorSubject to notify subscribers
+      this.selectedVerticesSubject.next(selectedVertices);
+    } else if (this.canvasSelectionMode === CANVAS_SELECTION_MODE.TIMEPOINTS) {
+      const selectedTimepoints = this.getSelectedTimepoints();
+      this.selectedTimepoints = selectedTimepoints;
     }
-  
+  }
+
+  updateSelectionRectangle() {
+    // Update the selection rectangle's style dynamically
+    if (this.canvasSelectionMode === CANVAS_SELECTION_MODE.VERTICES) {
+      this.selectionStyle = this.selections.map((selection) => ({
+        top: `${Math.min(selection.startY, selection.endY)}px`,
+        left: '0px',
+        width: '100%',
+        height: `${Math.abs(selection.endY - selection.startY)}px`,
+      }));
+    } else if (this.canvasSelectionMode === CANVAS_SELECTION_MODE.TIMEPOINTS) {
+      this.selectionStyle = this.selections.map((selection) => ({
+        top: '0px',
+        left: `${Math.min(selection.startX, selection.endX)}px`,
+        width: `${Math.abs(selection.endX - selection.startX)}px`,
+        height: '100%',
+      }));
+    }
   }
 
   getSelectedVertices(): Vertex[] {
-    // Calculate the start and end indices based on the Y coordinates and vertical spacing
-    const startIndex = Math.floor(this.startY / this.vertexHeight);
-    const endIndex = Math.floor(this.endY / this.vertexHeight);
+    let selectedVertices: Vertex[] = [];
+    for (const selection of this.selections) {
+      // Calculate the start and end indices based on the Y coordinates and vertical spacing
+      const startIndex = Math.floor(selection.startY / this.vertexHeight);
+      const endIndex = Math.floor(selection.endY / this.vertexHeight);
 
-    // Ensure indices are within bounds
-    const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
-    const maxIndex = Math.min(
-      Math.max(startIndex, endIndex),
-      this.vertexList.length - 1
-    );
+      // Ensure indices are within bounds
+      const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
+      const maxIndex = Math.min(
+        Math.max(startIndex, endIndex),
+        this.vertexList.length - 1
+      );
+      selectedVertices = selectedVertices.concat(
+        this.vertexList.slice(minIndex, maxIndex + 1)
+      );
+    }
 
-    // Return the list of vertices in the selected range
-    return this.vertexList.slice(minIndex, maxIndex + 1);
+    return selectedVertices;
   }
 
   getSelectedTimepoints(): Graph[] {
-    // Calculate the start and end indices based on the Y coordinates and vertical spacing
-    const startIndex = Math.floor(this.startX / this.stripeWidth);
-    const endIndex = Math.floor(this.endX / this.stripeWidth);
+    let selectedGraphs: Graph[] = [];
 
-    // Ensure indices are within bounds
-    const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
-    const maxIndex = Math.min(
-      Math.max(startIndex, endIndex),
-      this.subSeq.graphs.length - 1
-    );
+    for (const selection of this.selections) {
+      // Calculate the start and end indices based on the Y coordinates and vertical spacing
+      const startIndex = Math.floor(selection.startX / this.stripeWidth);
+      const endIndex = Math.floor(selection.endX / this.stripeWidth);
 
-    // Return the list of vertices in the selected range
-    return this.subSeq.graphs.slice(minIndex, maxIndex + 1);
+      // Ensure indices are within bounds
+      const minIndex = Math.max(Math.min(startIndex, endIndex), 0);
+      const maxIndex = Math.min(
+        Math.max(startIndex, endIndex),
+        this.subSeq.graphs.length - 1
+      );
+      selectedGraphs = selectedGraphs.concat(
+        this.subSeq.graphs.slice(minIndex, maxIndex + 1)
+      );
+    }
+
+    return selectedGraphs;
   }
 }

@@ -45,7 +45,11 @@
   ></div>
 
   <!-- CSS-based selection rectangle -->
-<div *ngIf="isSelecting" [ngStyle]="selectionStyle" class="selection-rectangle"></div>
+<!-- <div *ngIf="isSelecting" [ngStyle]="selectionStyle" class="selection-rectangle"></div> -->
+<!-- Loop through selections and apply styles from the selectionStyle array -->
+<div *ngFor="let selection of selections; let i = index" 
+[ngStyle]="selectionStyle[i]" 
+class="selection-rectangle"></div>
 
 <!-- Display selected vertices below the canvas -->
 <div *ngIf="canvasSelectionMode===CANVAS_SELECTION_MODE.VERTICES && (selectedVertices$ | async) as selectedVertices" class="selection-info">
