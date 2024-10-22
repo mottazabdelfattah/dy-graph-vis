@@ -58,7 +58,8 @@ export class ControlPanelComponent implements OnInit{
       sepStripeOp:[SEP_STRIPE.START],
       edgeFiltering: [EDGE_FILTERING.BY_SELECTED_SRC],
       canvasSelectionMode: [CANVAS_SELECTION_MODE.VERTICES],
-      diffMode: [false]
+      diffMode: [false],
+      isManPartitioning: [false]
     });
 
   }

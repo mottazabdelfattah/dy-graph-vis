@@ -77,3 +77,23 @@
     z-index: 2000;
     pointer-events: none; /* Ignore pointer events */
   }
+
+  .split-button {
+    position: absolute;
+    z-index: 10;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px; /* Match this with your icon width */
+    height: 12px; /* Match this with your icon height */
+    
+}
+
+.split-button img {
+  width: 12px; /* Adjust the icon size */
+  height: 12px;
+}

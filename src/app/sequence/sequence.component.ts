@@ -62,6 +62,7 @@ export class SequenceComponent implements OnChanges, OnInit {
   edgeFiltering = EDGE_FILTERING.BY_SELECTED_SRC;
   canvasSelectionMode = CANVAS_SELECTION_MODE.TIMEPOINTS;
   isDiffMode = false;
+  isManPartitioning = false;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
@@ -147,6 +148,7 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.edgeFreqRangeMax = currentSettings.edgeFreqRangeMax;
       this.edgeFiltering = currentSettings.edgeFiltering;
       this.canvasSelectionMode = currentSettings.canvasSelectionMode;
+      this.isManPartitioning = currentSettings.isManPartitioning;
     }
   }
 
@@ -169,6 +171,8 @@ export class SequenceComponent implements OnChanges, OnInit {
         this.jsonProps
       );
 
+      
+
       // Filter the jsonVertices array based on the top x% vertex IDs
       const aggEdges = this.sequenceService.getSubSequenceAggregateEdges(
         this.initialSub
@@ -188,6 +192,8 @@ export class SequenceComponent implements OnChanges, OnInit {
         g.edges = filtered;
       });
     }
+
+    this.LogAvgDensity();
   }
 
   private getTopXPercentVertices(
@@ -274,5 +280,25 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.subList[index] = { ...this.subList[index], excludedAggEdges: intersection };
     });
 
+  }
+
+  LogAvgDensity(){
+    const densities: number[] = [];
+    this.initialSub.graphs.forEach((g)=>{
+      densities.push(g.edges.length/this.vertexList.length);
+    })
+    const sum = densities.reduce((acc, curr) => acc + curr, 0); // Sum all numbers
+    const Density = sum / densities.length;
+    console.log(`vertices:${this.vertexList.length}`);
+    console.log(`timepoints:${this.initialSub.graphs.length}`);
+    console.log(`avg density:${Density}`);
+    
+  }
+  
+
+  handleSplitAction(subSplitIndex: number, subIndex: number) {
+    // console.log(`subIndex=${subIndex} and subSplitIndex=${subSplitIndex}`);
+    this.sequenceService.refinePartitioning(this.subList, subIndex, subSplitIndex);
+    this.selectedSubs = new Array(this.subList.length).fill(false);
   }
 }

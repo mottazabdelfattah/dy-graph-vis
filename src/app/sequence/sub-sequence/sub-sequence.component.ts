@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewChild,
   inject,
@@ -38,6 +40,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('canvasElement') canvas!: ElementRef<HTMLCanvasElement>;
+  @Output() splitAction = new EventEmitter<number>();
   @Input({ required: true }) subSeq!: SubSequence;
   @Input({ required: true }) vertexList!: Vertex[];
   @Input({ required: true }) stripeWidth!: number;
@@ -56,6 +59,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) sepStripeOp!: SEP_STRIPE;
   @Input({ required: true }) edgeFilteringOption!: EDGE_FILTERING;
   @Input({ required: true }) canvasSelectionMode!: CANVAS_SELECTION_MODE;
+  @Input({ required: true }) isManPartitioning!: boolean;
 
   CANVAS_SELECTION_MODE = CANVAS_SELECTION_MODE;
   private http = inject(HttpClient);
@@ -90,6 +94,11 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
 
   selectionStyle: any = {}; // Style binding for the selection rectangle
   isCtrlPressed: boolean = false; // Track the Ctrl key state
+
+  showSplitButton = false;
+  splitButtonPosition = { x: 0, y: 0 };
+  splitButtonDimensions = { width: 12, height: 12 }; // Set your button dimensions
+  subSplitIndex = -1;
 
   constructor() {}
 
@@ -310,8 +319,19 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       this.tooltipTextX = this.subSeq.graphs[graphIndex].name;
       this.tooltipX = mouseX; // X tooltip aligned with mouse X position
       this.tooltipVisibleX = true;
+
+      // handle the position of split button
+      if (this.isManPartitioning) {
+        this.subSplitIndex = graphIndex;
+        this.splitButtonPosition.x =
+          event.clientX - rect.left - this.splitButtonDimensions.width / 2;
+        this.splitButtonPosition.y =
+          event.clientY - rect.top - this.splitButtonDimensions.height / 2;
+        this.showSplitButton = true;
+      }
     } else {
       this.tooltipVisibleX = false;
+      this.showSplitButton = false;
     }
 
     // Handle selection during mouse movement
@@ -373,6 +393,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   onMouseLeave() {
     this.tooltipVisibleY = false;
     this.tooltipVisibleX = false;
+    this.showSplitButton = false;
   }
 
   performSelection() {
@@ -447,5 +468,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     return selectedGraphs;
+  }
+
+  onSplitButtonClick() {
+    this.splitAction.emit(this.subSplitIndex);
   }
 }

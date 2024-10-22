@@ -12,6 +12,26 @@ import { UtilService } from '../common/util.service';
 export class SequenceService {
   constructor(private utilService: UtilService) {}
 
+  refinePartitioning(subseqList: SubSequence[], subIndex: number, subSplitIndex: number){
+    if(subIndex>=0 && subIndex < subseqList.length && subSplitIndex>=0 && subSplitIndex < subseqList[subIndex].graphs.length){
+      // Get the selected sub-object
+      const selectedSub = subseqList[subIndex];
+
+      // replace the existing sub-object with two new ones
+      subseqList.splice(subIndex, 1, 
+          { ...selectedSub, graphs: selectedSub.graphs.slice(0, subSplitIndex) }, // New sub-object for the first part
+          { ...selectedSub, graphs: selectedSub.graphs.slice(subSplitIndex) } // New sub-object for the second part
+      );
+
+      const newFirstSub = subseqList[subIndex]; 
+      const newSecondSub = subseqList[subIndex + 1]; 
+
+      newFirstSub.aggEdges = this.getSubSequenceAggregateEdges(newFirstSub);
+      newSecondSub.aggEdges = this.getSubSequenceAggregateEdges(newSecondSub);
+    }
+    
+  }
+
   filterSubSequenceAggregateEdges(
     subseqList: SubSequence[],
     aggEdgeMinFreq: number,

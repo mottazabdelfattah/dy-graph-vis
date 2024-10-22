@@ -59,9 +59,17 @@
       </select>
     </div>
 
+    <!-- Difference button between adjacent canvases -->
+    <div class="form-group">
+      <label for="isManPartitioning">Manual Partitioning:</label>
+      <label class="switch">
+        <input id="isManPartitioning" type="checkbox" formControlName="isManPartitioning" />
+        <span class="slider round"></span>
+      </label>
+    </div>
     <!-- Partitioning -->
     <div class="form-group">
-      <label for="partitioning">Partitioning:</label>
+      <label for="partitioning">Auto Partitioning:</label>
       <select id="partitioning" formControlName="partitioning">
         <option
           *ngFor="let partition of partitioningMethods"

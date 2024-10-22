@@ -9,16 +9,30 @@
   </button>
 
   <!-- Canvas Element -->
-  <canvas
-    #canvasElement
-    [width]="subSeq.width"
-    [height]="subSeq.height"
-    style="border: 1px solid black; background-color: white"
+  <div
     (mousemove)="onMouseMove($event)"
     (mouseleave)="onMouseLeave()"
-    (mousedown)="onMouseDown($event)" 
-    (mouseup)="onMouseUp($event)" 
-  ></canvas>
+    style="position: relative"
+  >
+    <canvas
+      #canvasElement
+      [width]="subSeq.width"
+      [height]="subSeq.height"
+      style="border: 1px solid black; background-color: white"
+      (mousedown)="onMouseDown($event)"
+      (mouseup)="onMouseUp($event)"
+    ></canvas>
+    <button
+      *ngIf="showSplitButton"
+      (click)="onSplitButtonClick()"
+      [style.left.px]="splitButtonPosition.x"
+      [style.top.px]="splitButtonPosition.y"
+      class="split-button"
+    >
+      <img src="split-icon.png" alt="split" />
+    </button>
+  </div>
+
   <!-- Tooltip for Y-axis (vertices) -->
   <div
     *ngIf="tooltipVisibleY"
@@ -45,24 +59,34 @@
   ></div>
 
   <!-- CSS-based selection rectangle -->
-<!-- <div *ngIf="isSelecting" [ngStyle]="selectionStyle" class="selection-rectangle"></div> -->
-<!-- Loop through selections and apply styles from the selectionStyle array -->
-<div *ngFor="let selection of selections; let i = index" 
-[ngStyle]="selectionStyle[i]" 
-class="selection-rectangle"></div>
+  <!-- <div *ngIf="isSelecting" [ngStyle]="selectionStyle" class="selection-rectangle"></div> -->
+  <!-- Loop through selections and apply styles from the selectionStyle array -->
+  <div
+    *ngFor="let selection of selections; let i = index"
+    [ngStyle]="selectionStyle[i]"
+    class="selection-rectangle"
+  ></div>
 
-<!-- Display selected vertices below the canvas -->
-<div *ngIf="canvasSelectionMode===CANVAS_SELECTION_MODE.VERTICES && (selectedVertices$ | async) as selectedVertices" class="selection-info">
-  {{ 'Selection:' }}
-  <ng-container *ngFor="let vertex of selectedVertices; let last = last">
-    {{ vertex.name }}<ng-container *ngIf="!last">, </ng-container>
-  </ng-container>
-</div>
-<div *ngIf="canvasSelectionMode===CANVAS_SELECTION_MODE.TIMEPOINTS" class="selection-info">
-  {{ 'Selection:' }}
-  <ng-container *ngFor="let g of selectedTimepoints; let last = last">
-    {{ g.name }}<ng-container *ngIf="!last">, </ng-container>
-  </ng-container>
-</div>
-
+  <!-- Display selected vertices below the canvas -->
+  <div
+    *ngIf="
+      canvasSelectionMode === CANVAS_SELECTION_MODE.VERTICES &&
+      (selectedVertices$ | async) as selectedVertices
+    "
+    class="selection-info"
+  >
+    {{ "Selection:" }}
+    <ng-container *ngFor="let vertex of selectedVertices; let last = last">
+      {{ vertex.name }}<ng-container *ngIf="!last">, </ng-container>
+    </ng-container>
+  </div>
+  <div
+    *ngIf="canvasSelectionMode === CANVAS_SELECTION_MODE.TIMEPOINTS"
+    class="selection-info"
+  >
+    {{ "Selection:" }}
+    <ng-container *ngFor="let g of selectedTimepoints; let last = last">
+      {{ g.name }}<ng-container *ngIf="!last">, </ng-container>
+    </ng-container>
+  </div>
 </div>

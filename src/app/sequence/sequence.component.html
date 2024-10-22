@@ -25,6 +25,8 @@
       [sepStripeOp]="sepStripeOp"
       [edgeFilteringOption]="edgeFiltering"
       [canvasSelectionMode]="canvasSelectionMode"
+      [isManPartitioning]="isManPartitioning"
+      (splitAction)="handleSplitAction($event, i)"
     ></app-sub-sequence>
     
   </div>
