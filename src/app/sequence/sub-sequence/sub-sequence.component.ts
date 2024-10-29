@@ -470,6 +470,12 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     return selectedGraphs;
   }
 
+  // Method to get the vertex name by its ID
+  getVertexName(vertexId: number): string | undefined {
+    const vertex = this.vertexList.find(v => v.id === vertexId);
+    return vertex ? vertex.name : undefined; // Return the name or undefined if not found
+  }
+
   onSplitButtonClick() {
     this.splitAction.emit(this.subSplitIndex);
   }

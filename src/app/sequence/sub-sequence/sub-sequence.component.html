@@ -76,8 +76,11 @@
     class="selection-info"
   >
     {{ "Selection:" }}
-    <ng-container *ngFor="let vertex of selectedVertices; let last = last">
-      {{ vertex.name }}<ng-container *ngIf="!last">, </ng-container>
+    <ng-container *ngIf="selectedVertices.length > 0">
+      <ng-container *ngFor="let e of subSeq.aggEdgesFiltered; let last = last">
+        <br />
+        {{ getVertexName(e.edge.src) }} → {{ getVertexName(e.edge.target)}}
+      </ng-container>
     </ng-container>
   </div>
   <div
