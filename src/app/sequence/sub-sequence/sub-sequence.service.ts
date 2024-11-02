@@ -10,7 +10,6 @@ import { Edge, Graph, Vertex } from './graph/graph.model';
 import { Line } from './graph/line.model';
 import { UtilService } from '../../common/util.service';
 
-
 @Injectable({ providedIn: 'root' })
 export class SubSequenceService {
   constructor(private utilService: UtilService) {}
@@ -20,17 +19,18 @@ export class SubSequenceService {
     edgeFilteringOption: EDGE_FILTERING,
     aggEdgeMinFreq: number,
     aggEdgeMaxFreq: number,
-    selectedVertices: Vertex[],
+    selectedVertices: Vertex[]
   ) {
-    
     // Filter aggEdges based on whether they are in the excluded set
     const excludedEdgesSet = new Set(
-      subseq.excludedAggEdges.map(exEdge => `${exEdge.edge.src}-${exEdge.edge.target}`)
+      subseq.excludedAggEdges.map(
+        (exEdge) => `${exEdge.edge.src}-${exEdge.edge.target}`
+      )
     );
-    subseq.aggEdgesFiltered  = subseq.aggEdges.filter(aggEdge =>
-      !excludedEdgesSet.has(`${aggEdge.edge.src}-${aggEdge.edge.target}`)
+    subseq.aggEdgesFiltered = subseq.aggEdges.filter(
+      (aggEdge) =>
+        !excludedEdgesSet.has(`${aggEdge.edge.src}-${aggEdge.edge.target}`)
     );
-
 
     // filterAggEdges by freq
     const graphCount = subseq.graphs.length;
@@ -38,7 +38,9 @@ export class SubSequenceService {
 
     subseq.aggEdgesFiltered = subseq.aggEdgesFiltered.filter((agg) => {
       const percentageFreq = agg.frq * freqMultiplier; // Calculate once
-      return percentageFreq >= aggEdgeMinFreq && percentageFreq <= aggEdgeMaxFreq;
+      return (
+        percentageFreq >= aggEdgeMinFreq && percentageFreq <= aggEdgeMaxFreq
+      );
     });
     switch (edgeFilteringOption) {
       case EDGE_FILTERING.BY_SELECTED_SRC:
@@ -262,7 +264,7 @@ export class SubSequenceService {
     }
 
     // draw the rep. graph of only one graph exists in the seq
-        if (subseqLength > 1) {
+    if (subseqLength > 1) {
       for (let i = 0; i < subSeq.graphs.length; i++) {
         const g = subSeq.graphs[i];
         const idx = i;
@@ -285,10 +287,10 @@ export class SubSequenceService {
 
           this.cutOffLinesSEP(line, stripePos, stripeWidth);
           lines.push(line);
-        };
-      };
+        }
+      }
     }
-    
+
     // representative graph
     subSeq.aggEdgesFiltered.forEach((tuple) => {
       const line = this.getLine(
@@ -392,8 +394,7 @@ export class SubSequenceService {
     let srcIdx = vertexList.findIndex((x) => x.id === e.src);
     let tarIdx = vertexList.findIndex((x) => x.id === e.target);
 
-    if(srcIdx ===-1 || tarIdx===-1)
-      console.log('vertex not found');
+    if (srcIdx === -1 || tarIdx === -1) console.log('vertex not found');
 
     const x1 = 0 + xOffset;
     const y1 = srcIdx !== -1 ? srcIdx * scaleY : 0;
@@ -443,13 +444,18 @@ export class SubSequenceService {
     return maxSlope;
   }
 
-  private filterEdges(edges: Edge[], aggEdges: { edge: Edge; frq: number }[]): Edge[] {
+  private filterEdges(
+    edges: Edge[],
+    aggEdges: { edge: Edge; frq: number }[]
+  ): Edge[] {
     // Preprocess aggEdges into a Set for O(1) lookups
     const aggEdgesSet = new Set<string>(
-      aggEdges.map(tuple => `${tuple.edge.src}->${tuple.edge.target}`)
+      aggEdges.map((tuple) => `${tuple.edge.src}->${tuple.edge.target}`)
     );
-  
+
     // Filter edges using the Set
-    return edges.filter(edge => aggEdgesSet.has(`${edge.src}->${edge.target}`));
+    return edges.filter((edge) =>
+      aggEdgesSet.has(`${edge.src}->${edge.target}`)
+    );
   }
 }

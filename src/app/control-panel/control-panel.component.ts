@@ -39,7 +39,7 @@ export class ControlPanelComponent implements OnInit{
     this.controlForm = this.fb.group({
       dataset: ['sipri'],
       visualization: '',
-      sequenceOrder: [SEQUENCE_ORDERING_METHOD.TIME],
+      sequenceOrder: [SEQUENCE_ORDERING_METHOD.TIME_ASC],
       partitioning: [PARTITIONING_METHOD.UNIFORM],
       intervals: [1],
       vertexOrdering: [VERTEXT_ORDERING.HC],

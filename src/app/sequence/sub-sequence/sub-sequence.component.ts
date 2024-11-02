@@ -111,6 +111,7 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
     ) {
       this.updateCanvasSize();
       //this.RedrawCanvas();
+      // console.log(`subseq aggDensity:${this.subSeq.aggEdges.length/this.vertexList.length}`);
     } else {
       this.RedrawCanvas();
     }

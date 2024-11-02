@@ -246,8 +246,11 @@ export class SequenceService {
     sortingMethod: SEQUENCE_ORDERING_METHOD
   ) {
     switch (sortingMethod) {
-      case SEQUENCE_ORDERING_METHOD.TIME:
+      case SEQUENCE_ORDERING_METHOD.TIME_ASC:
         rootSub.graphs.sort((a, b) => a.id - b.id);
+        break;
+      case SEQUENCE_ORDERING_METHOD.TIME_DESC:
+        rootSub.graphs.sort((a, b) => b.id - a.id);
         break;
       case SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED:
         //case SEQUENCE_ORDERING_METHOD.TOPOLOGY_WEIGHTED_BASED:

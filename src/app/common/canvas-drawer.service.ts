@@ -140,7 +140,7 @@ export class CanvasDrawerService {
 
   private drawLinesRaw(lines: Line[], lineWidth: number): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
-    this.context.strokeStyle = 'black';
+    this.context.strokeStyle = 'gray';
     this.context.lineWidth = lineWidth;
 
     lines.forEach((line: Line) => {
@@ -188,6 +188,7 @@ export class CanvasDrawerService {
         const index = (y * width + x) * 4;
         const pixelVal = pixelMap[y * width + x];
         const localAlpha = pixeOpacityMap[y * width + x];
+        
 
         const foreColor = this.mapDensityToColor(pixelVal, colorScheme);
         if (foreColor) {
