@@ -14,11 +14,13 @@ import {
 } from '../sequence/sub-sequence/sub-sequence.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
+import { environment } from '../../environments/environment'; 
 
 export class CanvasDrawerService {
   private context!: CanvasRenderingContext2D;
   private canvas!: HTMLCanvasElement;
   private http!: HttpClient;
+  private apiUrl = environment.apiUrl; // Use the environment variable
 
   constructor(canvasElement: ElementRef<HTMLCanvasElement>, http: HttpClient) {
     this.http = http;
@@ -122,7 +124,7 @@ export class CanvasDrawerService {
     colorEncoding: LINE_COLOR_ENCODING,
     lineWidth: number
   ): Observable<ArrayBuffer> {
-    const url = 'http://localhost:3000/calculate-density';
+    const url = this.apiUrl;
     
     return this.http.post(
       url,
