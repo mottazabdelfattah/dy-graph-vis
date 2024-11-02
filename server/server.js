@@ -6,7 +6,7 @@ const path = require('path');  // Import path module
 const app = express();
 const PORT = 3000;
 
-const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-9ab7a56pl-mottazabdelfattahs-projects.vercel.app'];
+const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
 app.use(cors({ origin: allowedOrigins }));
 app.use(bodyParser.json({ limit: "300mb" }));
 // Serve Angular app
