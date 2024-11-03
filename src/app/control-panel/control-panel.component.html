@@ -1,203 +1,36 @@
 <div class="control-panel">
+  <h2 class="control-panel-title">DY-GRAPH-VIS</h2>
   <form [formGroup]="controlForm">
-    <!-- Dataset Selection -->
-    <div class="form-group">
-      <label for="dataset">Dataset:</label>
-      <select id="dataset" formControlName="dataset">
-        <option *ngFor="let dataset of datasets" [value]="dataset">
-          {{ dataset }}
-        </option>
-      </select>
-    </div>
+    <!-- Dataset Selection Section -->
+    <div class="section">
+      <h3 class="section-title">Dataset Selection</h3>
 
-    <!-- Visualization Technique -->
-    <div class="form-group">
-      <label for="visualization">Visualization Technique:</label>
-      <select id="visualization" formControlName="visualization">
-        <option
-          *ngFor="let technique of visualizationTechniques"
-          [value]="technique"
-        >
-          {{ technique }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Vertex Ordering -->
-    <div class="form-group">
-      <label for="vertexOrdering">Vertex Ordering:</label>
-      <select id="vertexOrdering" formControlName="vertexOrdering">
-        <option
-          *ngFor="let ordering of vertexOrderingMethods"
-          [value]="ordering"
-        >
-          {{ ordering }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Edge Ordering -->
-    <!-- <div class="form-group">
-      <label for="edgeOrdering">Edge Ordering:</label>
-      <select id="edgeOrdering" formControlName="edgeOrdering">
-        <option
-          *ngFor="let ordering of edgeOrderingMethods"
-          [value]="ordering"
-        >
-          {{ ordering }}
-        </option>
-      </select>
-    </div> -->
-
-    <!-- Sequence Ordering -->
-    <div class="form-group">
-      <label for="sequenceOrder">Sequence Ordering:</label>
-      <select id="sequenceOrder" formControlName="sequenceOrder">
-        <option *ngFor="let method of sequenceOrderingMethods" [value]="method">
-          {{ method }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Difference button between adjacent canvases -->
-    <div class="form-group">
-      <label for="isManPartitioning">Manual Partitioning:</label>
-      <label class="switch">
-        <input id="isManPartitioning" type="checkbox" formControlName="isManPartitioning" />
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <!-- Partitioning -->
-    <div class="form-group">
-      <label for="partitioning">Auto Partitioning:</label>
-      <select id="partitioning" formControlName="partitioning">
-        <option
-          *ngFor="let partition of partitioningMethods"
-          [value]="partition"
-        >
-          {{ partition }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Number of Intervals -->
-    <div
-      class="form-group"
-      *ngIf="
-        controlForm.get('partitioning')?.value === PARTITIONING_METHOD.UNIFORM
-      "
-    >
-      <label for="intervals">No. of Intervals:</label>
-      <input
-        type="range"
-        id="intervals"
-        formControlName="intervals"
-        min="1"
-        max="100"
-        (blur)="onSettingsChange(controlForm.value)"
-      />
-      <span>{{ controlForm.get("intervals")?.value }}</span>
-    </div>
-
-    <!-- partitioning distance threshold of Intervals -->
-    <div
-      class="form-group"
-      *ngIf="
-        controlForm.get('partitioning')?.value ===
-          PARTITIONING_METHOD.DISTANCE_TO_PREVIOUS_POINT ||
-        controlForm.get('partitioning')?.value ===
-          PARTITIONING_METHOD.AVERAGE_PAIRWISE_DISTANCE
-      "
-    >
-      <label for="threshold">Distance Threshold:</label>
-      <input
-        type="range"
-        id="threshold"
-        formControlName="threshold"
-        min="0"
-        max="1"
-        step="0.01"
-        (blur)="onSettingsChange(controlForm.value)"
-      />
-      <span>{{ controlForm.get("threshold")?.value }}</span>
-    </div>
-
-    <!-- Aggregated Edges Frequency -->
-    <div class="form-group">
-      <label for="edgeFreqRangeMin">Filter Edges By Frequency</label>
-      <div>
-        <input
-          type="range"
-          id="edgeFreqRangeMin"
-          formControlName="edgeFreqRangeMin"
-          [min]="0"
-          [max]="100"
-          [step]="1"
-          (input)="updateRange()"
-          (blur)="onSettingsChange(controlForm.value)"
-          #rangeMin
-        />
-        <input
-          type="range"
-          id="edgeFreqRangeMax"
-          formControlName="edgeFreqRangeMax"
-          [min]="0"
-          [max]="100"
-          [step]="1"
-          (input)="updateRange()"
-          (blur)="onSettingsChange(controlForm.value)"
-          #rangeMax
-        />
-
-        <span>
-          {{
-            controlForm.get("edgeFreqRangeMax")?.value -
-              controlForm.get("edgeFreqRangeMin")?.value +
-              "%"
-          }}
-        </span>
+      <div class="form-group">
+        <label for="dataset">Dataset:</label>
+        <select id="dataset" formControlName="dataset">
+          <option *ngFor="let dataset of datasets" [value]="dataset">
+            {{ dataset }}
+          </option>
+        </select>
       </div>
     </div>
-    <!-- edgeFiltering -->
-    <div class="form-group">
-      <label for="edgeFiltering">Filter Edges by Selected Vertices:</label>
-      <select id="edgeFiltering" formControlName="edgeFiltering">
-        <option
-          *ngFor="let filtering of edgeFilteringOptions"
-          [value]="filtering"
-        >
-          {{ filtering }}
-        </option>
-      </select>
-    </div>
-
-    <!-- edgeFiltering -->
-    <div class="form-group">
-      <label for="canvasSelectionMode">Selection Mode:</label>
-      <select id="canvasSelectionMode" formControlName="canvasSelectionMode">
-        <option
-          *ngFor="let mode of canvasSelectionOptions"
-          [value]="mode"
-        >
-          {{ mode }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Difference button between adjacent canvases -->
-    <div class="form-group">
-      <label for="diffMode">Diff. Mode:</label>
-      <label class="switch">
-        <input id="diffMode" type="checkbox" formControlName="diffMode" />
-        <span class="slider round"></span>
-      </label>
-    </div>
-  
 
     <!-- Visualization Settings Group -->
-    <div class="settings-group">
-      <h3>Visualization Settings</h3>
+    <div class="section">
+      <h3 class="section-title">Visualization Settings</h3>
 
+      <!-- Visualization Technique -->
+      <div class="form-group">
+        <label for="visualization">Technique:</label>
+        <select id="visualization" formControlName="visualization">
+          <option
+            *ngFor="let technique of visualizationTechniques"
+            [value]="technique"
+          >
+            {{ technique }}
+          </option>
+        </select>
+      </div>
       <!-- Color Scheme -->
       <div class="form-group">
         <label for="colorScheme">Color Scheme:</label>
@@ -293,21 +126,21 @@
         />
         <span>{{ controlForm.get("vertexHeight")?.value }}</span>
       </div>
-    </div>
-    <!-- TEP Specific Settings -->
-    <div
-      class="settings-group"
-      [ngStyle]="{
-        display:
-          controlForm.get('visualization')?.value === VIS_TECHNIQUE.TEP
-            ? 'block'
-            : 'none'
-      }"
-    >
-      <h3>TEP Settings</h3>
 
-      <div class="form-group">
-        <label for="tepBackgroundOpacity">Background Lines Opacity:</label>
+      <!-- TEP Specific Settings -->
+
+      <div
+        class="form-group"
+        [ngStyle]="{
+          display:
+            controlForm.get('visualization')?.value === VIS_TECHNIQUE.TEP
+              ? 'block'
+              : 'none'
+        }"
+      >
+        <label for="tepBackgroundOpacity"
+          >Background Lines Opacity (TEP):</label
+        >
         <input
           type="range"
           id="tepBackgroundOpacity"
@@ -319,30 +152,207 @@
         />
         <span>{{ controlForm.get("tepBackgroundOpacity")?.value }}</span>
       </div>
-    </div>
-    <!-- SEP Specific Settings -->
-    <div
-      class="settings-group"
-      [ngStyle]="{
-        display:
-          controlForm.get('visualization')?.value === VIS_TECHNIQUE.SEP
-            ? 'block'
-            : 'none'
-      }"
-    >
-      <h3>SEP Settings</h3>
 
-      <div class="form-group">
-        <label for="sepStackingOption">Stacking Option:</label>
+      <!-- SEP Specific Settings -->
+      <div
+        class="form-group"
+        [ngStyle]="{
+          display:
+            controlForm.get('visualization')?.value === VIS_TECHNIQUE.SEP
+              ? 'block'
+              : 'none'
+        }"
+      >
+        <label for="sepStackingOption">Stacking Option (SEP):</label>
         <select id="sepStackingOption" formControlName="sepStripeOp">
-          <option
-            *ngFor="let op of SEPStackingOptions"
-            [value]="op"
-          >
+          <option *ngFor="let op of SEPStackingOptions" [value]="op">
             {{ op }}
           </option>
         </select>
       </div>
     </div>
+
+    <!-- Vertex Ordering -->
+    <div class="section">
+      <h3 class="section-title">Ordering and Partitioning</h3>
+      <div class="form-group">
+        <label for="vertexOrdering">Vertex Ordering:</label>
+        <select id="vertexOrdering" formControlName="vertexOrdering">
+          <option
+            *ngFor="let ordering of vertexOrderingMethods"
+            [value]="ordering"
+          >
+            {{ ordering }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Edge Ordering -->
+      <!-- <div class="form-group">
+      <label for="edgeOrdering">Edge Ordering:</label>
+      <select id="edgeOrdering" formControlName="edgeOrdering">
+        <option
+          *ngFor="let ordering of edgeOrderingMethods"
+          [value]="ordering"
+        >
+          {{ ordering }}
+        </option>
+      </select>
+    </div> -->
+
+      <!-- Sequence Ordering -->
+      <div class="form-group">
+        <label for="sequenceOrder">Sequence Ordering:</label>
+        <select id="sequenceOrder" formControlName="sequenceOrder">
+          <option
+            *ngFor="let method of sequenceOrderingMethods"
+            [value]="method"
+          >
+            {{ method }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Difference button between adjacent canvases -->
+      <div class="form-group">
+        <label for="isManPartitioning">Manual Partitioning:</label>
+        <label class="switch">
+          <input
+            id="isManPartitioning"
+            type="checkbox"
+            formControlName="isManPartitioning"
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <!-- Partitioning -->
+      <div class="form-group">
+        <label for="partitioning">Auto Partitioning:</label>
+        <select id="partitioning" formControlName="partitioning">
+          <option
+            *ngFor="let partition of partitioningMethods"
+            [value]="partition"
+          >
+            {{ partition }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Number of Intervals -->
+      <div
+        class="form-group"
+        *ngIf="
+          controlForm.get('partitioning')?.value === PARTITIONING_METHOD.UNIFORM
+        "
+      >
+        <label for="intervals">No. of Intervals:</label>
+        <input
+          type="range"
+          id="intervals"
+          formControlName="intervals"
+          min="1"
+          max="100"
+          (blur)="onSettingsChange(controlForm.value)"
+        />
+        <span>{{ controlForm.get("intervals")?.value }}</span>
+      </div>
+
+      <!-- partitioning distance threshold of Intervals -->
+      <div
+        class="form-group"
+        *ngIf="
+          controlForm.get('partitioning')?.value ===
+            PARTITIONING_METHOD.DISTANCE_TO_PREVIOUS_POINT ||
+          controlForm.get('partitioning')?.value ===
+            PARTITIONING_METHOD.AVERAGE_PAIRWISE_DISTANCE
+        "
+      >
+        <label for="threshold">Distance Threshold:</label>
+        <input
+          type="range"
+          id="threshold"
+          formControlName="threshold"
+          min="0"
+          max="1"
+          step="0.01"
+          (blur)="onSettingsChange(controlForm.value)"
+        />
+        <span>{{ controlForm.get("threshold")?.value }}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Selection and Filtering</h3>
+
+      <!-- selection  -->
+      <div class="form-group">
+        <label for="canvasSelectionMode">Selection Mode:</label>
+        <select id="canvasSelectionMode" formControlName="canvasSelectionMode">
+          <option *ngFor="let mode of canvasSelectionOptions" [value]="mode">
+            {{ mode }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="edgeFiltering">Filter Edges Where Selected Vertices:</label>
+        <select id="edgeFiltering" formControlName="edgeFiltering">
+          <option
+            *ngFor="let filtering of edgeFilteringOptions"
+            [value]="filtering"
+          >
+            {{ filtering }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Aggregated Edges Frequency -->
+      <div class="form-group">
+        <label for="edgeFreqRangeMin">Filter Edges By Frequency</label>
+        <div>
+          <input
+            type="range"
+            id="edgeFreqRangeMin"
+            formControlName="edgeFreqRangeMin"
+            [min]="0"
+            [max]="100"
+            [step]="1"
+            (input)="updateRange()"
+            (blur)="onSettingsChange(controlForm.value)"
+            #rangeMin
+          />
+          <input
+            type="range"
+            id="edgeFreqRangeMax"
+            formControlName="edgeFreqRangeMax"
+            [min]="0"
+            [max]="100"
+            [step]="1"
+            (input)="updateRange()"
+            (blur)="onSettingsChange(controlForm.value)"
+            #rangeMax
+          />
+
+          <span>
+            {{
+              controlForm.get("edgeFreqRangeMax")?.value -
+                controlForm.get("edgeFreqRangeMin")?.value +
+                "%"
+            }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Difference button between adjacent canvases -->
+      <div class="form-group" style="display: none">
+        <label for="diffMode">Diff. Mode:</label>
+        <label class="switch">
+          <input id="diffMode" type="checkbox" formControlName="diffMode" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+    
   </form>
 </div>

@@ -16,8 +16,8 @@ export enum LINE_COLOR_ENCODING {
 }
 
 export enum SEQUENCE_ORDERING_METHOD {
-  TIME_ASC = 'TIME_ASC',
-  TIME_DESC = 'TIME_DESC',
+  TIME_ASC = 'GRAPH_ID_ASC',
+  TIME_DESC = 'GRAPH_ID_DESC',
   TOPOLOGY_BASED = 'TOPOLOGY_BASED',
   // TOPOLOGY_WEIGHTED_BASED = 'TOPOLOGY_WEIGHTED_BASED',
 }
@@ -42,19 +42,19 @@ export enum VIS_TECHNIQUE {
 }
 
 export enum SEP_STRIPE{
-  START = 'First stripe',
-  END = 'Last stripe'
+  START = 'FORWARD',
+  END = 'BACKWARD'
 }
 
 export enum EDGE_FILTERING{
-  BY_SELECTED_SRC = 'By source vertices',
-  BY_SELECTED_TAR = 'By target vertices',
-  BY_SELECTED_SRC_TAR = 'By source and target vertices',
+  BY_SELECTED_SRC = 'ACT AS SOURCE',
+  BY_SELECTED_TAR = 'ACT AS TARGET',
+  BY_SELECTED_SRC_TAR = 'ACT AS SOURCE AND TARGET',
 }
 
 export enum CANVAS_SELECTION_MODE{
-  VERTICES = 'VERTICES',
-  TIMEPOINTS = 'TIMEPOINTS'
+  VERTICES = 'VERTICES (Y-AXIS)',
+  TIMEPOINTS = 'GRAPHS (X-AXIS)'
 }
 
 export enum VERTEXT_ORDERING {

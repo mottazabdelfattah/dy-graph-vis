@@ -8,9 +8,10 @@
   .control-panel-container {
     /*width: 25%;  25% of the screen width */
     background-color: #f0f0f0; /* Optional: for better visual separation */
-    padding: 16px;
+    /* padding: 16px; */
     box-sizing: border-box;
-    border-right: 1px solid #ccc; /* Optional: Adds a divider */
+    /* border-right: 1px solid #ccc;  */
+    height: fit-content;
   }
   
   .sequence-container {

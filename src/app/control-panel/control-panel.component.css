@@ -1,6 +1,13 @@
+.control-panel-title {
+  text-align: center; /* Center the title */
+  font-size: 16px; /* Adjust the font size */
+  margin-bottom: 16px; /* Space between title and form */
+  color: #333; /* Change color if needed */
+}
+
 .control-panel {
     font-family: 'Roboto', sans-serif;
-    padding: 8px; /* Reduced padding */
+    padding: 16px; /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 8px;
     max-width: 320px;
@@ -120,4 +127,55 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.section {
+  margin-bottom: 20px; /* Space between sections */
+  padding: 12px; /* Padding inside sections */
+  border: 1px solid #e0e0e0; /* Light border around sections */
+  border-radius: 6px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color */
+}
+
+.section-title {
+  font-weight: 600; /* Bold title */
+  margin-bottom: 8px; /* Space below section title */
+  font-size: 14px; /* Adjust title size */
+  color: #555; /* Title color */
+}
+
+
+.form-group select {
+  appearance: none; /* Remove default styling */
+  -webkit-appearance: none; /* Remove default styling for Safari */
+  -moz-appearance: none; /* Remove default styling for Firefox */
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px; /* Add padding for better spacing */
+  font-size: 12px; /* Font size */
+  width: 100%; /* Full width */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.form-group select:focus {
+  border-color: #2196F3; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+.form-group select:hover {
+  border-color: #888; /* Change border color on hover */
+}
+
+.form-group {
+  position: relative; /* Position relative for custom arrow */
+}
+
+/* Custom Arrow Using Background */
+.form-group select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><polygon points="0,0 5,5 10,0" fill="%23333"/></svg>'); /* Triangle Arrow */
+  background-repeat: no-repeat; /* Prevent repeat */
+  background-position: right 10px center; /* Position arrow */
+  background-size: 10px; /* Size of the arrow */
 }
