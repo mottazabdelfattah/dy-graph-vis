@@ -6,12 +6,15 @@ const path = require('path');  // Import path module
 const app = express();
 const PORT = 3000;
 
-const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
-app.use(cors({ origin: allowedOrigins }));
+//const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json({ limit: "300mb" }));
 // Serve Angular app
-app.use(express.static(path.join(__dirname, '../dist/dy-graph-vis')));
+app.use(express.static(path.join(__dirname, '../dist/dy-graph-vis/browser')));
 
+app.get('/*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../dist/dy-graph-vis/browser/index.html'));
+})
 
 function plotDensity(
   pixelDensityMap,
@@ -354,5 +357,5 @@ app.post("/calculate-density", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port:${PORT}`);
 });
