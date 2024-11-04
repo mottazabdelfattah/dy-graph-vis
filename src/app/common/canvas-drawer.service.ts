@@ -43,9 +43,9 @@ export class CanvasDrawerService {
       case COLOR_SCHEME.MULTI_HUE:
         colorScheme = MULTI_HUE_COLOR_SCHEME;
         break;
-      case COLOR_SCHEME.PLASMA_WHITE_BACKGROUND:
-        colorScheme = PLASMA_WHITE_BACKGROUND_COLOR_SCHEME;
-        break;
+      // case COLOR_SCHEME.PLASMA_WHITE_BACKGROUND:
+      //   colorScheme = PLASMA_WHITE_BACKGROUND_COLOR_SCHEME;
+      //   break;
       case COLOR_SCHEME.PLASMA_CROPPED:
         colorScheme = PLASMA_CROPPED_COLOR_SCHEME;
         break;

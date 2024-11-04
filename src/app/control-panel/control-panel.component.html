@@ -33,16 +33,23 @@
       </div>
       <!-- Color Scheme -->
       <div class="form-group">
-        <label for="colorScheme">Color Scheme:</label>
-        <select id="colorScheme" formControlName="colorScheme">
-          <option
-            *ngFor="let colorScheme of colorSchemeList"
-            [value]="colorScheme"
-          >
-            {{ colorScheme }}
-          </option>
-        </select>
+        <label>Color Scheme: {{ selectedColorScheme}}</label> 
+        <div class="custom-select" (click)="toggleDropdown()">
+          <div class="selected-option">
+              <img [src]="selectedColorScheme+'.png'" alt="{{ selectedColorScheme }}" class="selected-image" *ngIf="selectedColorScheme" />
+              
+              <span class="arrow"></span> <!-- Arrow for dropdown -->
+          </div>
+          @if(dropdownOpen){
+            <ul class="options">
+              <li *ngFor="let colorScheme of colorSchemeList" (click)="selectColorScheme($event,colorScheme)">
+                  <img [src]="colorScheme+'.png'" alt="{{ colorScheme }}" class="option-image" />
+              </li>
+          </ul>
+          }
+          
       </div>
+    </div>
 
       <!-- Color Encoding -->
       <div class="form-group">

@@ -179,3 +179,64 @@ input:checked + .slider:before {
   background-position: right 10px center; /* Position arrow */
   background-size: 10px; /* Size of the arrow */
 }
+
+
+
+
+/* Color Scheme Dropdownmenu */
+.custom-select {
+  position: relative;
+  width: 100%; /* Full width */
+}
+
+.selected-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between image and arrow */
+  padding: 10px;
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  background-color: #fff; /* Background color */
+}
+
+
+
+.options {
+  position: absolute;
+  top: 100%; /* Position below the selected option */
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #fff; /* Background color */
+  display: flex;
+  flex-direction: column; /* Vertical stacking */
+  z-index: 1000; /* Stack above other elements */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  list-style-type: none; /* Remove default list styling */
+}
+
+.options li {
+  display: flex;
+  align-items: center; /* Center vertically */
+  padding: 10px;
+  cursor: pointer; /* Pointer cursor */
+}
+
+.options li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.arrow {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><polygon points="0,0 5,5 10,0" fill="%23333"/></svg>'); /* Triangle Arrow */
+  background-repeat: no-repeat; /* Prevent repeat */
+  background-size: 10px; /* Size of the arrow */
+  width: 10px;
+  height:10px;
+}
+
+.selected-image {
+  margin-right: 5px;
+}

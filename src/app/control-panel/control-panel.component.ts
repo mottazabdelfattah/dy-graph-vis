@@ -35,6 +35,11 @@ export class ControlPanelComponent implements OnInit{
   VIS_TECHNIQUE = VIS_TECHNIQUE;
   EDGE_FILTERING = EDGE_FILTERING;
 
+  selectedColorScheme = COLOR_SCHEME.GRAY_SCALE;
+     
+
+  dropdownOpen = false;
+
   constructor(private fb: FormBuilder){
     this.controlForm = this.fb.group({
       dataset: ['sipri'],
@@ -105,6 +110,17 @@ export class ControlPanelComponent implements OnInit{
       this.edgeFreqRangeValues[0] = +min;
       this.edgeFreqRangeValues[1] = +max;
     }
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selectColorScheme(event: MouseEvent, colorSchemeName: COLOR_SCHEME) {
+    event.stopPropagation(); // Prevent the click from bubbling up to the parent
+    this.selectedColorScheme = colorSchemeName;
+    this.controlForm.get('colorScheme')?.setValue(colorSchemeName); // Set the form value
+    this.dropdownOpen = false; // Close the dropdown
   }
 
   
