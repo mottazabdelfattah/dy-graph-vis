@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Abdelaal
+    given-names: Moataz
+    orcid: https://orcid.org/0000-0003-4630-7916
+title: "DY-GRAPH-VIS"
+version: 1.0.0
+identifiers:
+  - type: doi
+    value: 10.18419/darus-4198
+date-released: 2024-11-04
