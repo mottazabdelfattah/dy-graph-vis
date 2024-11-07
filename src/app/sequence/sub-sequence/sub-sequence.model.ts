@@ -29,7 +29,7 @@ export enum PARTITIONING_METHOD {
 }
 
 export enum LINE_RENDERING_MODE {
-  NONE = 'NONE',
+  NONE = 'CANVAS RENDERING',
   BLENDING = 'BLENDING',
   // SPLATTING = 'SPLATTING',
 }
@@ -65,6 +65,12 @@ export enum VERTEXT_ORDERING {
 export enum  EDGE_ORDERING {
   'FREQUENCY' = 'FREQUENCY',
   'WEIGHT' = 'WEIGHT'
+}
+
+export enum SCALEING_OPTION {
+  LINEAR = 'LINEAR',
+  LOG = 'LOGARITHMIC',
+  
 }
 
 export interface DataItem {

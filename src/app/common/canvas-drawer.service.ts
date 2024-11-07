@@ -14,7 +14,7 @@ import {
 } from '../sequence/sub-sequence/sub-sequence.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { environment } from '../../environments/environment'; 
+import { environment } from '../../environments/environment';
 
 export class CanvasDrawerService {
   private context!: CanvasRenderingContext2D;
@@ -57,7 +57,7 @@ export class CanvasDrawerService {
     }
 
     if (renderingMode === LINE_RENDERING_MODE.NONE) {
-      this.drawLinesRaw(lines, lineWidth);
+      this.drawLinesRaw(lines, lineWidth, colorEncoding, colorScheme);
     } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
       let batchSize = lines.length;
       const batches = this.createBatches(lines, batchSize);
@@ -83,9 +83,8 @@ export class CanvasDrawerService {
       forkJoin(requests).subscribe(
         (responses: ArrayBuffer[]) => {
           responses.forEach((response) => {
-
             console.log('response is back');
-            
+
             pixelDensityMap = new Float32Array(response, 0, arrayLength);
             pixelValMap = new Float32Array(
               response,
@@ -125,7 +124,7 @@ export class CanvasDrawerService {
     lineWidth: number
   ): Observable<ArrayBuffer> {
     const url = this.apiUrl;
-    
+
     return this.http.post(
       url,
       {
@@ -140,17 +139,37 @@ export class CanvasDrawerService {
     );
   }
 
-  private drawLinesRaw(lines: Line[], lineWidth: number): void {
+  private drawLinesRaw(
+    lines: Line[],
+    lineWidth: number,
+    colorEncoding: LINE_COLOR_ENCODING,
+    colorScheme: any[]
+  ): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
-    this.context.strokeStyle = 'gray';
     this.context.lineWidth = lineWidth;
+    if (colorEncoding === LINE_COLOR_ENCODING.EDGE_WEIGHT) {
+      lines.sort((a, b) => a.val - b.val);
+    } else if (colorEncoding === LINE_COLOR_ENCODING.LINE_SLOPE) {
+      lines.sort((a, b) => a.normalizedSlope - b.normalizedSlope);
+    }
 
     lines.forEach((line: Line) => {
+      let val = 0.5;
+      if (colorEncoding ===LINE_COLOR_ENCODING.EDGE_WEIGHT) {
+        val = line.val;
+      } else if (colorEncoding === LINE_COLOR_ENCODING.LINE_SLOPE) {
+        val = line.normalizedSlope;
+      }
+      const foreColor = this.mapDensityToColor(val, colorScheme);
+      this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`; 
+      this.context.globalAlpha = line.opacity;
       this.context.beginPath();
       this.context.moveTo(line.x1, line.y1);
       this.context.lineTo(line.x2, line.y2);
       this.context.stroke();
     });
+
+    this.context.globalAlpha = 1.0; // Resetting to default
   }
 
   private averagePixelMap(
@@ -190,7 +209,6 @@ export class CanvasDrawerService {
         const index = (y * width + x) * 4;
         const pixelVal = pixelMap[y * width + x];
         const localAlpha = pixeOpacityMap[y * width + x];
-        
 
         const foreColor = this.mapDensityToColor(pixelVal, colorScheme);
         if (foreColor) {
