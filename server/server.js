@@ -4,11 +4,27 @@ const bodyParser = require("body-parser");
 const path = require('path');  // Import path module
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
-app.use(cors({ origin: '*' }));
+const corsOptions = {
+  origin: '*', // Adjust this in production to specific domains
+  optionsSuccessStatus: 200, // For older browsers
+  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Private-Network'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+};
+
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "300mb" }));
+
+// Respond to preflight requests
+app.options('*', (req, res) => {
+  res.set('Access-Control-Allow-Private-Network', 'true');
+  res.sendStatus(204); // No content
+});
+
+
 // Serve Angular app
 app.use(express.static(path.join(__dirname, '../dist/dy-graph-vis/browser')));
 
