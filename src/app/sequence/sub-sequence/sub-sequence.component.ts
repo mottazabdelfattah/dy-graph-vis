@@ -112,8 +112,6 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
       changes['vertexHeight']
     ) {
       this.updateCanvasSize();
-      //this.RedrawCanvas();
-      // console.log(`subseq aggDensity:${this.subSeq.aggEdges.length/this.vertexList.length}`);
     } else {
       this.RedrawCanvas();
     }
@@ -260,6 +258,10 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         this.bpWidth,
         this.stripeWidth * this.subSeq.graphs.length
       );
+      if(this.subSeq.width <= this.bpWidth){
+        this.RedrawCanvas();
+      }
+      
     } else if (this.visTechnique === VIS_TECHNIQUE.MSV) {
       this.subSeq.width = this.stripeWidth * this.subSeq.graphs.length;
     }
