@@ -1,6 +1,6 @@
 // src/environments/environment.ts
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:3000/calculate-density' // Local development API
+    apiUrl: 'http://dy-graph-vis.vercel.app/calculate-density' // Local development API
   };
   
