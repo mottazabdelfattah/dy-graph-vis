@@ -299,9 +299,9 @@ export class SequenceComponent implements OnChanges, OnInit {
     })
     const sum = densities.reduce((acc, curr) => acc + curr, 0); // Sum all numbers
     const Density = sum / densities.length;
-    console.log(`vertices:${this.vertexList.length}`);
-    console.log(`timepoints:${this.initialSub.graphs.length}`);
-    console.log(`avg density:${Density}`);
+    // console.log(`vertices:${this.vertexList.length}`);
+    // console.log(`timepoints:${this.initialSub.graphs.length}`);
+    // console.log(`avg density:${Density}`);
     
   }
   
