@@ -202,7 +202,7 @@ export class SequenceService {
       return acc;
     }, {} as Record<string, DataItem[]>);
 
-    //console.log(groupedData);
+    
     for (const [time, items] of Object.entries(groupedData) as [
       string,
       DataItem[]

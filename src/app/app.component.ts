@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SequenceComponent } from './sequence/sequence.component';
-import { DataService } from './data.services';
 
 @Component({
   selector: 'app-root',
