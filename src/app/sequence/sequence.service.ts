@@ -243,18 +243,15 @@ export class SequenceService {
 
   sortSubSequence(
     rootSub: SubSequence,
-    sortingMethod: SEQUENCE_ORDERING_METHOD
+    sortingMethod: SEQUENCE_ORDERING_METHOD,
+    isAsc: boolean
   ) {
     switch (sortingMethod) {
-      case SEQUENCE_ORDERING_METHOD.TIME_ASC:
-        rootSub.graphs.sort((a, b) => a.id - b.id);
-        break;
-      case SEQUENCE_ORDERING_METHOD.TIME_DESC:
-        rootSub.graphs.sort((a, b) => b.id - a.id);
+      case SEQUENCE_ORDERING_METHOD.TIME:
+        rootSub.graphs.sort((a, b) => isAsc?a.id - b.id:b.id - a.id);
         break;
       case SEQUENCE_ORDERING_METHOD.TOPOLOGY_BASED:
-        //case SEQUENCE_ORDERING_METHOD.TOPOLOGY_WEIGHTED_BASED:
-        rootSub.graphs.sort((a, b) => a.hcOrder - b.hcOrder);
+        rootSub.graphs.sort((a, b) => isAsc?a.hcOrder - b.hcOrder: b.hcOrder - a.hcOrder);
         break;
     }
   }

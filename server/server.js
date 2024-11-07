@@ -18,7 +18,6 @@ app.get('/*', (req, res)=>{
 
 function plotDensity(
   pixelDensityMap,
-  pixelHitCountMap,
   pixelValMap,
   pixelOpacityMap,
   canvasWidth,
@@ -35,11 +34,9 @@ function plotDensity(
     y >= 0 &&
     y < pixelDensityMap.length / canvasWidth
   ) {
-    //console.log(`intensity=${intensity} and alpha=${alpha}`);
     const index = Math.floor(y) * canvasWidth + Math.floor(x);
     pixelDensityMap[index] += intensity;
-    pixelHitCountMap[index]++;
-    pixelValMap[index] += w;
+    pixelValMap[index] = (w*aAlpha) + pixelValMap[index] * (1.0 - aAlpha);
     pixelOpacityMap[index] = aAlpha + pixelOpacityMap[index] * (1.0 - aAlpha);
   }
 }
@@ -47,7 +44,6 @@ function plotDensity(
 // Xiaolin Wu's line algorithm implementation
 function wuLine(
   pixelDensityMap,
-  pixelHitCountMap,
   pixelValMap,
   pixelOpacityMap,
   canvasWidth,
@@ -79,7 +75,6 @@ function wuLine(
   if (steep) {
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -91,7 +86,6 @@ function wuLine(
     );
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -104,7 +98,6 @@ function wuLine(
   } else {
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -116,7 +109,6 @@ function wuLine(
     );
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -137,7 +129,6 @@ function wuLine(
   if (steep) {
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -149,7 +140,6 @@ function wuLine(
     );
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -162,7 +152,6 @@ function wuLine(
   } else {
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -174,7 +163,6 @@ function wuLine(
     );
     plotDensity(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -189,7 +177,6 @@ function wuLine(
     if (steep) {
       plotDensity(
         pixelDensityMap,
-        pixelHitCountMap,
         pixelValMap,
         pixelOpacityMap,
         canvasWidth,
@@ -201,7 +188,6 @@ function wuLine(
       );
       plotDensity(
         pixelDensityMap,
-        pixelHitCountMap,
         pixelValMap,
         pixelOpacityMap,
         canvasWidth,
@@ -214,7 +200,6 @@ function wuLine(
     } else {
       plotDensity(
         pixelDensityMap,
-        pixelHitCountMap,
         pixelValMap,
         pixelOpacityMap,
         canvasWidth,
@@ -226,7 +211,6 @@ function wuLine(
       );
       plotDensity(
         pixelDensityMap,
-        pixelHitCountMap,
         pixelValMap,
         pixelOpacityMap,
         canvasWidth,
@@ -244,7 +228,6 @@ function wuLine(
 // Draw parallel lines to achieve the desired line width
 function drawThickLine(
   pixelDensityMap,
-  pixelHitCountMap,
   pixelValMap,
   pixelOpacityMap,
   canvasWidth,
@@ -260,7 +243,6 @@ function drawThickLine(
     // Draw a thin line with Wu's line algorithm
     wuLine(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -289,7 +271,6 @@ function drawThickLine(
       const yOffset = i * offsetY;
       wuLine(
         pixelDensityMap,
-        pixelHitCountMap,
         pixelValMap,
         pixelOpacityMap,
         canvasWidth,
@@ -307,18 +288,10 @@ function drawThickLine(
 app.post("/calculate-density", (req, res) => {
   const { lines, canvasWidth, canvasHeight, colorEncoding, lineWidth } =
     req.body;
-  //console.log(`canvasWidth:${canvasWidth}, canvasHeight:${canvasHeight}, colorEncoding: ${colorEncoding}, lineWidth:${lineWidth}, alpha:${alpha}`);
-  // console.log(colorEncoding === "EDGE_WEIGHT");
+  
   const pixelDensityMap = new Float32Array(canvasWidth * canvasHeight);
   const pixelValMap = new Float32Array(canvasWidth * canvasHeight);
   const pixelOpacityMap = new Float32Array(canvasWidth * canvasHeight);
-  const pixelHitCountMap = new Int32Array(canvasWidth * canvasHeight);
-
-  if (colorEncoding === "EDGE_WEIGHT") {
-    lines.sort((a, b) => a.val - b.val);
-  } else if (colorEncoding === "LINE_SLOPE") {
-    lines.sort((a, b) => b.normalizedSlope - a.normalizedSlope);
-  }
 
   lines.forEach((line) => {
     const alpha = line.opacity;
@@ -330,7 +303,6 @@ app.post("/calculate-density", (req, res) => {
     }
     drawThickLine(
       pixelDensityMap,
-      pixelHitCountMap,
       pixelValMap,
       pixelOpacityMap,
       canvasWidth,
@@ -348,7 +320,6 @@ app.post("/calculate-density", (req, res) => {
     Buffer.from(pixelDensityMap.buffer),
     Buffer.from(pixelValMap.buffer),
     Buffer.from(pixelOpacityMap.buffer),
-    Buffer.from(pixelHitCountMap.buffer),
   ]);
 
   // Set content type to indicate binary data

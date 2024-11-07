@@ -17,13 +17,13 @@ import {
   EDGE_FILTERING,
   EDGE_ORDERING,
   LINE_COLOR_ENCODING,
+  LINE_ORDERING,
   LINE_RENDERING_MODE,
   SEP_STRIPE,
   SubSequence,
   VERTEXT_ORDERING,
   VIS_TECHNIQUE,
 } from './sub-sequence.model';
-import { GraphComponent } from './graph/graph.component';
 import { Edge, Graph, Vertex } from './graph/graph.model';
 import { SubSequenceService } from './sub-sequence.service';
 import { Line } from './graph/line.model';
@@ -34,7 +34,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-sub-sequence',
   standalone: true,
-  imports: [GraphComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './sub-sequence.component.html',
   styleUrl: './sub-sequence.component.css',
 })
@@ -60,6 +60,8 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({ required: true }) edgeFilteringOption!: EDGE_FILTERING;
   @Input({ required: true }) canvasSelectionMode!: CANVAS_SELECTION_MODE;
   @Input({ required: true }) isManPartitioning!: boolean;
+  @Input({ required: true }) lineOrdering!: LINE_ORDERING;
+  @Input({ required: true }) isLineOrderingAscending!: boolean;
 
   CANVAS_SELECTION_MODE = CANVAS_SELECTION_MODE;
   private http = inject(HttpClient);
@@ -196,7 +198,9 @@ export class SubSequenceComponent implements OnInit, AfterViewInit, OnChanges {
         this.lineWidth,
         this.renderingMode,
         this.colorEncoding,
-        this.colorScheme
+        this.colorScheme,
+        this.lineOrdering,
+        this.isLineOrderingAscending
       );
       // labels
       this.labels = [];

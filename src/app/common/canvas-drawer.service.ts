@@ -9,8 +9,11 @@ import {
 } from '../variables';
 import {
   COLOR_SCHEME,
+  EDGE_ORDERING,
   LINE_COLOR_ENCODING,
+  LINE_ORDERING,
   LINE_RENDERING_MODE,
+  SCALEING_OPTION,
 } from '../sequence/sub-sequence/sub-sequence.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
@@ -33,7 +36,9 @@ export class CanvasDrawerService {
     lineWidth: number = 1.0,
     renderingMode: LINE_RENDERING_MODE,
     colorEncoding: LINE_COLOR_ENCODING,
-    colorSchemeName: COLOR_SCHEME
+    colorSchemeName: COLOR_SCHEME,
+    lineOrdering: LINE_ORDERING,
+    isLineOrderingAscending: boolean
   ): void {
     const canvasWidth = this.canvas.width;
     const canvasHeight = this.canvas.height;
@@ -43,9 +48,6 @@ export class CanvasDrawerService {
       case COLOR_SCHEME.MULTI_HUE:
         colorScheme = MULTI_HUE_COLOR_SCHEME;
         break;
-      // case COLOR_SCHEME.PLASMA_WHITE_BACKGROUND:
-      //   colorScheme = PLASMA_WHITE_BACKGROUND_COLOR_SCHEME;
-      //   break;
       case COLOR_SCHEME.PLASMA_CROPPED:
         colorScheme = PLASMA_CROPPED_COLOR_SCHEME;
         break;
@@ -56,9 +58,12 @@ export class CanvasDrawerService {
         colorScheme = INFERNO_CROPPED_COLOR_SCHEME;
     }
 
-    if (renderingMode === LINE_RENDERING_MODE.NONE) {
+    // order lines
+    this.sortLines(lines, lineOrdering, isLineOrderingAscending);
+
+    if (renderingMode === LINE_RENDERING_MODE.COLORING_BLENDING) {
       this.drawLinesRaw(lines, lineWidth, colorEncoding, colorScheme);
-    } else if (renderingMode === LINE_RENDERING_MODE.BLENDING) {
+    } else if (renderingMode === LINE_RENDERING_MODE.BLENDING_COLORING) {
       let batchSize = lines.length;
       const batches = this.createBatches(lines, batchSize);
       const arrayLength = canvasWidth * canvasHeight;
@@ -67,7 +72,6 @@ export class CanvasDrawerService {
       let pixelDensityMap = new Float32Array(arrayLength);
       let pixelValMap = new Float32Array(arrayLength);
       let pixelOpacityMap = new Float32Array(arrayLength);
-      let pixelHitCountMap = new Int32Array(arrayLength);
 
       const requests = batches.map((batch) =>
         this.getPixelDensityMap(
@@ -83,7 +87,6 @@ export class CanvasDrawerService {
       forkJoin(requests).subscribe(
         (responses: ArrayBuffer[]) => {
           responses.forEach((response) => {
-            console.log('response is back');
 
             pixelDensityMap = new Float32Array(response, 0, arrayLength);
             pixelValMap = new Float32Array(
@@ -96,16 +99,11 @@ export class CanvasDrawerService {
               arrayLength * 8,
               arrayLength
             );
-            pixelHitCountMap = new Int32Array(
-              response,
-              arrayLength * 12,
-              arrayLength
-            );
           });
           const pixelMap =
             colorEncoding === LINE_COLOR_ENCODING.DENSITY
-              ? this.scalePixelMap(pixelDensityMap)
-              : this.averagePixelMap(pixelValMap, pixelHitCountMap);
+              ? this.scalePixelMap(pixelDensityMap, SCALEING_OPTION.LOG)
+              : pixelValMap; 
           this.drawPixelMap(pixelMap, pixelOpacityMap, colorScheme);
         },
         (error) => {
@@ -147,21 +145,16 @@ export class CanvasDrawerService {
   ): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas before drawing
     this.context.lineWidth = lineWidth;
-    if (colorEncoding === LINE_COLOR_ENCODING.EDGE_WEIGHT) {
-      lines.sort((a, b) => a.val - b.val);
-    } else if (colorEncoding === LINE_COLOR_ENCODING.LINE_SLOPE) {
-      lines.sort((a, b) => a.normalizedSlope - b.normalizedSlope);
-    }
 
     lines.forEach((line: Line) => {
       let val = 0.5;
-      if (colorEncoding ===LINE_COLOR_ENCODING.EDGE_WEIGHT) {
+      if (colorEncoding === LINE_COLOR_ENCODING.EDGE_WEIGHT) {
         val = line.val;
       } else if (colorEncoding === LINE_COLOR_ENCODING.LINE_SLOPE) {
         val = line.normalizedSlope;
       }
       const foreColor = this.mapDensityToColor(val, colorScheme);
-      this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`; 
+      this.context.strokeStyle = `rgb(${foreColor.r}, ${foreColor.g}, ${foreColor.b})`;
       this.context.globalAlpha = line.opacity;
       this.context.beginPath();
       this.context.moveTo(line.x1, line.y1);
@@ -172,24 +165,20 @@ export class CanvasDrawerService {
     this.context.globalAlpha = 1.0; // Resetting to default
   }
 
-  private averagePixelMap(
-    pixelValMap: Float32Array,
-    pixelHitCountMap: Int32Array
-  ): Float32Array {
-    let finalPixelMap = new Float32Array(pixelValMap.length);
-    for (let i = 0; i < pixelValMap.length; i++) {
-      finalPixelMap[i] =
-        pixelHitCountMap[i] > 0 ? pixelValMap[i] / pixelHitCountMap[i] : 0;
-    }
-    return finalPixelMap;
-  }
+  
 
-  private scalePixelMap(pixelValMap: Float32Array) {
+  private scalePixelMap(pixelValMap: Float32Array, scaler: SCALEING_OPTION) {
     const maxPixelVal = this.findMaxDensity(pixelValMap);
     let finalPixelMap = new Float32Array(pixelValMap.length);
-    for (let i = 0; i < pixelValMap.length; i++) {
-      finalPixelMap[i] =
-        Math.log10(pixelValMap[i] + 1.0) / Math.log10(maxPixelVal + 1.0);
+    if (scaler === SCALEING_OPTION.LOG) {
+      for (let i = 0; i < pixelValMap.length; i++) {
+        finalPixelMap[i] =
+          Math.log10(pixelValMap[i] + 1.0) / Math.log10(maxPixelVal + 1.0);
+      }
+    } else if (scaler === SCALEING_OPTION.LINEAR && maxPixelVal > 0) {
+      for (let i = 0; i < pixelValMap.length; i++) {
+        finalPixelMap[i] = pixelValMap[i] / maxPixelVal;
+      }
     }
 
     return finalPixelMap;
@@ -267,5 +256,27 @@ export class CanvasDrawerService {
     const newB = Math.round(rgb.b * opacity + background.b * (1 - opacity));
 
     return { r: newR, g: newG, b: newB };
+  }
+
+  sortLines(lines: Line[], lineOrdering: LINE_ORDERING, isAsc: boolean) {
+    switch (lineOrdering) {
+      case LINE_ORDERING.LENGTH:
+        lines.sort((a, b) => {
+          const lengthA = Math.sqrt((a.x2 - a.x1) ** 2 + (a.y2 - a.y1) ** 2);
+          const lengthB = Math.sqrt((b.x2 - b.x1) ** 2 + (b.y2 - b.y1) ** 2);
+          return isAsc ? lengthA - lengthB : lengthB - lengthA;
+        });
+        break;
+      case LINE_ORDERING.EDGE_WEIGHT:
+        lines.sort((a, b) => (isAsc ? a.val - b.val : b.val - a.val));
+        break;
+      case LINE_ORDERING.SLOPE:
+        lines.sort((a, b) =>
+          isAsc
+            ? a.normalizedSlope - b.normalizedSlope
+            : b.normalizedSlope - a.normalizedSlope
+        );
+        break;
+    }
   }
 }

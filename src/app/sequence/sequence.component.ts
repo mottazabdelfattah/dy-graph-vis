@@ -12,6 +12,7 @@ import {
   EDGE_FILTERING,
   EDGE_ORDERING,
   LINE_COLOR_ENCODING,
+  LINE_ORDERING,
   LINE_RENDERING_MODE,
   PARTITIONING_METHOD,
   SEP_STRIPE,
@@ -49,20 +50,23 @@ export class SequenceComponent implements OnChanges, OnInit {
   stripeWidth = 1;
   vertexHeight = 1;
   lineWidth = 1;
-  renderingMode = LINE_RENDERING_MODE.BLENDING;
+  renderingMode = LINE_RENDERING_MODE.BLENDING_COLORING;
   blendingFactor = 0.5;
-  colorScheme = COLOR_SCHEME.GRAY_SCALE;
+  colorScheme = COLOR_SCHEME.INFERNO_CROPPED;
   colorEncoding = LINE_COLOR_ENCODING.DENSITY;
   vertexOrdering = VERTEXT_ORDERING.HC;
   edgeOrdering = EDGE_ORDERING.FREQUENCY;
   tepBackgroundOpacity = 0.1;
-  edgeFreqRangeMin = 20;
-  edgeFreqRangeMax = 80;
+  edgeFreqRangeMin = 0;
+  edgeFreqRangeMax = 100;
   sepStripeOp = SEP_STRIPE.START;
   edgeFiltering = EDGE_FILTERING.BY_SELECTED_SRC;
   canvasSelectionMode = CANVAS_SELECTION_MODE.TIMEPOINTS;
   isDiffMode = false;
   isManPartitioning = false;
+  lineOrdering = LINE_ORDERING.LENGTH;
+  isLineOrderingAscending = true;
+  isSeqOrderingAscending = true;
 
   initialSub: SubSequence = new SubSequence();
   subList: SubSequence[] = [];
@@ -97,9 +101,10 @@ export class SequenceComponent implements OnChanges, OnInit {
       // which changes trigger sort
       if (
         previousSettings?.dataset !== currentSettings.dataset ||
-        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder
+        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder ||
+        previousSettings?.isSeqOrderingAscending !== currentSettings.isSeqOrderingAscending
       ) {
-        this.sort(currentSettings.sequenceOrder);
+        this.sort(currentSettings.sequenceOrder, currentSettings.isSeqOrderingAscending);
       }
 
       // which changes trigger repartition
@@ -110,7 +115,8 @@ export class SequenceComponent implements OnChanges, OnInit {
           this.partitioningMethod === PARTITIONING_METHOD.UNIFORM) ||
         (previousSettings?.threshold !== currentSettings.threshold &&
           this.partitioningMethod !== PARTITIONING_METHOD.UNIFORM) ||
-        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder
+        previousSettings?.sequenceOrder !== currentSettings.sequenceOrder ||
+        previousSettings?.isSeqOrderingAscending !== currentSettings.isSeqOrderingAscending
       ) {
         this.repartition(
           currentSettings.partitioning,
@@ -149,6 +155,8 @@ export class SequenceComponent implements OnChanges, OnInit {
       this.edgeFiltering = currentSettings.edgeFiltering;
       this.canvasSelectionMode = currentSettings.canvasSelectionMode;
       this.isManPartitioning = currentSettings.isManPartitioning;
+      this.lineOrdering = currentSettings.lineOrdering;
+      this.isLineOrderingAscending = currentSettings.isLineOrderingAscending;
     }
   }
 
@@ -215,12 +223,14 @@ export class SequenceComponent implements OnChanges, OnInit {
     return vertexArray.slice(0, topPercentageCount).map(([vertex]) => vertex);
   }
 
-  private sort(sortingMethod: SEQUENCE_ORDERING_METHOD) {
+  private sort(sortingMethod: SEQUENCE_ORDERING_METHOD, isAsc:boolean) {
     this.sequenceOrderMethod = sortingMethod;
+    this.isSeqOrderingAscending = isAsc;
     if (this.initialSub.graphs.length > 0) {
       this.sequenceService.sortSubSequence(
         this.initialSub,
-        this.sequenceOrderMethod
+        this.sequenceOrderMethod,
+        this.isSeqOrderingAscending
       );
     }
   }

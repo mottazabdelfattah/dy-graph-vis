@@ -77,6 +77,29 @@
         </select>
       </div>
 
+
+      <!-- Line Ordering -->
+      <div class="form-group">
+        <label for="lineOrdering">Line Ordering:</label>
+        <div class="ordering-container">
+          <select id="lineOrdering" formControlName="lineOrdering" class="ordering-dropdown">
+            <option
+              *ngFor="let order of lineOrderingMethods"
+              [value]="order"
+            >
+              {{ order }}
+            </option>
+          </select>
+          <button (click)="toggleLineOrderingDirection()" class="btn btn-primary" class="ordering-button">
+            <span *ngIf="isLineOrderingAscending"><i class="fas fa-sort-amount-up"></i></span>
+            <span *ngIf="!isLineOrderingAscending"><i class="fas fa-sort-amount-up-alt"></i></span>
+          </button>
+        </div>
+        
+      </div>
+
+      
+
       <!-- Blending Factor -->
       <div class="form-group">
         <label for="blendingFactor">Blending Factor (Alpha):</label>
@@ -210,14 +233,21 @@
       <!-- Sequence Ordering -->
       <div class="form-group">
         <label for="sequenceOrder">Sequence Ordering:</label>
-        <select id="sequenceOrder" formControlName="sequenceOrder">
-          <option
-            *ngFor="let method of sequenceOrderingMethods"
-            [value]="method"
-          >
-            {{ method }}
-          </option>
-        </select>
+        <div class="ordering-container">
+          <select id="sequenceOrder" formControlName="sequenceOrder" class="ordering-dropdown">
+            <option
+              *ngFor="let method of sequenceOrderingMethods"
+              [value]="method"
+            >
+              {{ method }}
+            </option>
+          </select>
+          <button (click)="toggleSeqOrderingDirection()" class="ordering-button">
+            <span *ngIf="isSeqOrderingAscending"><i class="fas fa-sort-amount-up"></i></span>
+            <span *ngIf="!isSeqOrderingAscending"><i class="fas fa-sort-amount-up-alt"></i></span>
+          </button>
+        </div>
+        
       </div>
 
       <!-- Difference button between adjacent canvases -->

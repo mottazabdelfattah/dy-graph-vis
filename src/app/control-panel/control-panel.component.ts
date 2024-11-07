@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CANVAS_SELECTION_MODE, COLOR_SCHEME, EDGE_FILTERING, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
+import { CANVAS_SELECTION_MODE, COLOR_SCHEME, EDGE_FILTERING, EDGE_ORDERING, LINE_COLOR_ENCODING, LINE_ORDERING, LINE_RENDERING_MODE, PARTITIONING_METHOD, SEP_STRIPE, SEQUENCE_ORDERING_METHOD, VERTEXT_ORDERING, VIS_TECHNIQUE } from '../sequence/sub-sequence/sub-sequence.model';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class ControlPanelComponent implements OnInit{
   @Output() settingsChanged = new EventEmitter<any>(); // Emit form changes
 
   controlForm: FormGroup;
-  edgeFreqRangeValues: number[] = [20, 80]; // Default values for the range slider
+  edgeFreqRangeValues: number[] = [0, 100]; // Default values for the range slider
   datasets = ['sipri', 'flight', 'wgcobertura', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6'];
   visualizationTechniques = Object.values(VIS_TECHNIQUE); // Converts enum to array of values
   sequenceOrderingMethods = Object.values(SEQUENCE_ORDERING_METHOD);
@@ -28,6 +28,7 @@ export class ControlPanelComponent implements OnInit{
   SEPStackingOptions = Object.values(SEP_STRIPE);
   edgeFilteringOptions = Object.values(EDGE_FILTERING);
   canvasSelectionOptions = Object.values(CANVAS_SELECTION_MODE);
+  lineOrderingMethods = Object.values(LINE_ORDERING);
   
 
   PARTITIONING_METHOD = PARTITIONING_METHOD;
@@ -35,23 +36,24 @@ export class ControlPanelComponent implements OnInit{
   VIS_TECHNIQUE = VIS_TECHNIQUE;
   EDGE_FILTERING = EDGE_FILTERING;
 
-  selectedColorScheme = COLOR_SCHEME.GRAY_SCALE;
+  selectedColorScheme = COLOR_SCHEME.INFERNO_CROPPED;
      
 
   dropdownOpen = false;
-
+  isLineOrderingAscending = true;
+  isSeqOrderingAscending = true;
   constructor(private fb: FormBuilder){
     this.controlForm = this.fb.group({
       dataset: ['sipri'],
       visualization: '',
-      sequenceOrder: [SEQUENCE_ORDERING_METHOD.TIME_ASC],
+      sequenceOrder: [SEQUENCE_ORDERING_METHOD.TIME],
       partitioning: [PARTITIONING_METHOD.UNIFORM],
       intervals: [1],
       vertexOrdering: [VERTEXT_ORDERING.HC],
       edgeOrdering:[EDGE_ORDERING.FREQUENCY],
-      colorScheme: COLOR_SCHEME.GRAY_SCALE,
+      colorScheme: COLOR_SCHEME.INFERNO_CROPPED,
       colorEncoding: LINE_COLOR_ENCODING.DENSITY,
-      lineRendering: [LINE_RENDERING_MODE.BLENDING],
+      lineRendering: [LINE_RENDERING_MODE.BLENDING_COLORING],
       blendingFactor: [0.5],
       lineWidth: [1],
       stripeWidth: [1],
@@ -64,7 +66,10 @@ export class ControlPanelComponent implements OnInit{
       edgeFiltering: [EDGE_FILTERING.BY_SELECTED_SRC],
       canvasSelectionMode: [CANVAS_SELECTION_MODE.VERTICES],
       diffMode: [false],
-      isManPartitioning: [false]
+      isManPartitioning: [false],
+      lineOrdering:[LINE_ORDERING.LENGTH],
+      isLineOrderingAscending:[true],
+      isSeqOrderingAscending:[true],
     });
 
   }
@@ -122,6 +127,17 @@ export class ControlPanelComponent implements OnInit{
     this.controlForm.get('colorScheme')?.setValue(colorSchemeName); // Set the form value
     this.dropdownOpen = false; // Close the dropdown
   }
+
+  toggleLineOrderingDirection() {
+    this.isLineOrderingAscending = !this.isLineOrderingAscending; // Toggle between true and false
+    this.controlForm.get('isLineOrderingAscending')?.setValue(this.isLineOrderingAscending); // Set the form value
+  }
+
+  toggleSeqOrderingDirection() {
+    this.isSeqOrderingAscending = !this.isSeqOrderingAscending; // Toggle between true and false
+    this.controlForm.get('isSeqOrderingAscending')?.setValue(this.isSeqOrderingAscending); // Set the form value
+  }
+
 
   
 }

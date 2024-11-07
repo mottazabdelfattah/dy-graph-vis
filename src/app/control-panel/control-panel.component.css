@@ -240,3 +240,21 @@ input:checked + .slider:before {
 .selected-image {
   margin-right: 5px;
 }
+
+
+
+.ordering-container {
+  display: flex; /* Use flexbox to align items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.ordering-dropdown {
+  margin-right: 10px; /* Space between the dropdown and the button */
+  padding: 5px; /* Padding for better appearance */
+}
+
+.ordering-button {
+  padding: 5px; /* Padding for the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
