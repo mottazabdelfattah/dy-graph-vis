@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "server/server.js", "use": "@vercel/node" },
+      { "src": "dist/dy-graph-vis/browser/**", "use": "@vercel/static" }
+    ],
+    "routes": [
+      { "src": "/calculate-density", "dest": "/server/server.js" },
+      { "src": "/(.*)", "dest": "/dist/dy-graph-vis/browser/index.html" }
+    ]
+  }
+  
