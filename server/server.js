@@ -6,14 +6,14 @@ const path = require('path');  // Import path module
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
-const corsOptions = {
-  origin: allowedOrigins, // Adjust this in production to specific domains
-  optionsSuccessStatus: 200, // For older browsers
-  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Private-Network'],
-  methods: ['GET', 'POST', 'OPTIONS'],
-};
-
+// const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
+// const corsOptions = {
+//   origin: allowedOrigins, // Adjust this in production to specific domains
+//   optionsSuccessStatus: 200, // For older browsers
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Private-Network'],
+//   methods: ['GET', 'POST', 'OPTIONS'],
+// };
+app.use(cors({ origin: '*' }));
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "300mb" }));
