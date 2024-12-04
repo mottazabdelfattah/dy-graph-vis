@@ -6,9 +6,9 @@ const path = require('path');  // Import path module
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//const allowedOrigins = ['http://localhost:4200', ''];
+const allowedOrigins = ['http://localhost:4200', 'https://dy-graph-vis.vercel.app/'];
 const corsOptions = {
-  origin: 'https://dy-graph-vis.vercel.app/', // Adjust this in production to specific domains
+  origin: allowedOrigins, // Adjust this in production to specific domains
   optionsSuccessStatus: 200, // For older browsers
   allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Private-Network'],
   methods: ['GET', 'POST', 'OPTIONS'],
